@@ -70,6 +70,15 @@
       color: var(--navy); background: var(--olive); text-decoration: none; transition: opacity 0.15s;
     }
     .header-cta:hover { opacity: 0.85; }
+    .header-sponsor { display: inline-flex; align-items: center; gap: 0.45rem; text-decoration: none; opacity: 0.92; transition: opacity 0.15s; }
+    .header-sponsor:hover { opacity: 1; }
+    .hs-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(237,232,218,0.5); }
+    .hs-name { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--olive); line-height: 1; }
+    .header-sponsor img { width: 19px; height: 19px; border-radius: 5px; background: #fff; padding: 2px; }
+    @media (max-width: 640px) {
+      .hs-label { display: none; }
+      .header-logo .ll { display: none; }
+    }
 
     /* ── HERO ── */
     .hero {
@@ -227,7 +236,12 @@
 <body>
 
   <header>
-    <a href="index.html" class="header-logo">MOI · <b>LA LISTA</b></a>
+    <a href="index.html" class="header-logo">MOI<span class="ll"> · <b>LA LISTA</b></span></a>
+    <a class="header-sponsor" href="https://www.wallbit.io/es?gad_source=1&amp;gad_campaignid=22752697607&amp;gbraid=0AAAAA-1U6VdZcmHYGsovEas8rWyf_-uo-" target="_blank" rel="noopener">
+      <span class="hs-label">Auspiciado por</span>
+      <img src="https://www.google.com/s2/favicons?domain=wallbit.io&amp;sz=128" alt="Wallbit">
+      <span class="hs-name">Wallbit</span>
+    </a>
     <a href="index.html" class="header-cta">El método PVP →</a>
   </header>
 
