@@ -1,14 +1,729 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trabajo remoto en dólares desde Bolivia — La Lista</title>
-  <link rel="canonical" href="lista.html">
-  <meta http-equiv="refresh" content="0; url=lista.html">
-  <script>location.replace("lista.html" + location.hash);</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moi — Todo lo que comparto, en un solo lugar</title>
+
+  <!-- SEO & sharing -->
+  <meta name="description" content="Las listas, las guías y las herramientas que menciono en los videos. Trabajo remoto, finanzas y sistemas con IA. Gratis, sin registro.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Moi — Todo lo que comparto, en un solo lugar">
+  <meta property="og:description" content="Las listas, las guías y las herramientas que menciono en los videos. Gratis, sin registro.">
+  <meta property="og:url" content="https://moiwalter.github.io/pvp-web/">
+  <meta property="og:image" content="https://moiwalter.github.io/pvp-web/hero.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Moi — Todo lo que comparto, en un solo lugar">
+  <meta name="twitter:description" content="Las listas, las guías y las herramientas que menciono en los videos. Gratis, sin registro.">
+  <meta name="twitter:image" content="https://moiwalter.github.io/pvp-web/hero.webp">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23192A56'/><text x='50%25' y='54%25' font-family='Georgia,serif' font-size='17' font-weight='700' fill='%23F7D794' text-anchor='middle' dominant-baseline='middle'>M</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0B0B09;
+      --cream:   #EDE8DA;
+      --olive:   #F7D794;   /* champagne */
+      --rose:    #EDA6A3;   /* dusty rose */
+      /* el azul es exclusivo del tile de Wallbit — ver .c-wallbit */
+
+      --ink:       #0B0B09;
+      --tc:        #EDE8DA;
+      --tc-soft:   rgba(237,232,218,0.62);
+      --tc-mute:   rgba(237,232,218,0.42);
+      --tc-faint:  rgba(237,232,218,0.28);
+
+      --surface:      rgba(237,232,218,0.04);
+      --surface-up:   rgba(237,232,218,0.065);
+      --line:         rgba(237,232,218,0.10);
+      --line-strong:  rgba(247,215,148,0.45);
+
+      --radius: 18px;
+      --gap:    1.35rem;
+      --wrap:   1180px;
+      --pad-x:  clamp(1.5rem, 8vw, 7rem);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--black);
+      color: var(--tc);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; border-radius: 4px; }
+
+    /* ─────────── HEADER ─────────── */
+    .site-head {
+      position: fixed; inset: 0 0 auto 0; z-index: 300;
+      height: 52px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 3rem);
+      background: rgba(11,11,9,0.96);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(237,232,218,0.07);
+    }
+    .head-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--tc-mute); text-decoration: none;
+    }
+    .head-logo b { color: var(--olive); font-weight: 400; }
+    .head-cta {
+      font-family: 'Space Mono', monospace; font-weight: 700;
+      font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 7px 17px; border-radius: 100px;
+      color: var(--ink); background: var(--olive);
+      text-decoration: none; transition: opacity 0.15s;
+    }
+    .head-cta:hover { opacity: 0.85; }
+
+    /* ─────────── PROFILE / HERO ─────────── */
+    .profile {
+      max-width: var(--wrap); margin: 0 auto;
+      padding: clamp(6.5rem, 16vh, 9.5rem) var(--pad-x) clamp(2.5rem, 6vh, 3.5rem);
+    }
+    .profile-id { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .avatar {
+      width: 58px; height: 58px; flex: 0 0 58px;
+      border-radius: 15px; background: rgba(247,215,148,0.12);
+      border: 1px solid rgba(247,215,148,0.45);
+      display: grid; place-items: center;
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
+      font-size: 2rem; line-height: 1; color: var(--olive);
+      box-shadow: 0 0 30px -8px rgba(247,215,148,0.35);
+    }
+    .profile-name {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
+      font-size: 1.75rem; line-height: 1.1; color: var(--cream);
+    }
+    .profile-role {
+      font-family: 'Space Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--tc-mute);
+      margin-top: 0.35rem;
+    }
+    .profile h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.08;
+      letter-spacing: -0.02em; color: var(--cream);
+      max-width: 20ch; margin-bottom: 1.35rem; text-wrap: balance;
+    }
+    .profile h1 em { color: var(--olive); font-style: normal; }
+    .profile-sub {
+      font-size: clamp(1.02rem, 2vw, 1.15rem); line-height: 1.8;
+      color: var(--tc-soft); max-width: 58ch;
+    }
+
+    /* ─────────── SECTION ─────────── */
+    .zone { max-width: var(--wrap); margin: 0 auto; padding: clamp(2rem,5vh,3rem) var(--pad-x); }
+    .zone-head {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin-bottom: 1.6rem; flex-wrap: wrap;
+    }
+    .zone-title {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
+      font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--cream);
+    }
+    .zone-state {
+      font-family: 'Space Mono', monospace; font-size: 0.58rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--rose);
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .zone-state::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--rose); flex: 0 0 5px;
+    }
+    .zone-state.pending { color: var(--tc-faint); }
+    .zone-state.pending::before { background: var(--tc-faint); }
+
+    /* ─────────── GRID ─────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(196px, auto);
+      gap: var(--gap);
+    }
+
+    /* ─────────── TILE ─────────── */
+    .tile {
+      position: relative; overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.5rem;
+      display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+      /* each property gets the duration it actually needs */
+      transition: border-color 0.2s ease-in-out,
+                  background   0.2s cubic-bezier(.43,.01,.29,1),
+                  transform    0.24s cubic-bezier(.43,.01,.29,1),
+                  box-shadow   0.2s ease-in-out;
+    }
+    /* elevation is a bevel, not a drop shadow: a 1px highlight on the top edge */
+    .tile::before {
+      content: ''; position: absolute; inset: 0; z-index: 3;
+      border-radius: inherit; pointer-events: none;
+      box-shadow: inset 0 1px 0 rgba(237,232,218,0.07);
+    }
+    a.tile:hover, a.tile:focus-visible {
+      border-color: var(--line-strong);
+      background: var(--surface-up);
+      transform: translateY(-3px);
+    }
+    /* press reads as material response, not animation */
+    a.tile:active { transform: translateY(-1px) scale(0.988); }
+    a.tile:hover .tile-go, a.tile:focus-visible .tile-go { opacity: 1; transform: translateX(3px); }
+
+    .tile-top {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 0.7rem; margin-bottom: 1.1rem;
+    }
+    .tile-top.solo { justify-content: flex-end; }
+    .tile-mark {
+      width: 36px; height: 36px; flex: 0 0 36px;
+      border-radius: 9px; background: rgba(237,232,218,0.08);
+      border: 1px solid var(--line);
+      display: grid; place-items: center;
+      font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700;
+      color: var(--olive);
+    }
+    .tile-mark img { width: 100%; height: 100%; border-radius: 8px; background: #fff; padding: 5px; object-fit: contain; }
+
+    .tile-name {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
+      font-size: 1.5rem; line-height: 1.1; color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+    .tile-desc {
+      font-size: 0.94rem; line-height: 1.62; color: var(--tc-soft);
+      flex: 1; max-width: 46ch;
+    }
+    /* a peek at what's actually inside the resource */
+    .tile-peek { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+    .tile-peek span {
+      font-family: 'Space Mono', monospace; font-size: 0.54rem;
+      letter-spacing: 0.05em; color: var(--tc-mute);
+      border: 1px solid rgba(237,232,218,0.16);
+      padding: 4px 9px; border-radius: 100px; white-space: nowrap;
+    }
+    .tile-peek .more { border-color: transparent; color: var(--tc-faint); }
+    .tile-foot {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0.8rem; margin-top: 1.2rem;
+    }
+    .tile-meta {
+      font-family: 'Space Mono', monospace; font-size: 0.56rem;
+      letter-spacing: 0.06em; color: var(--tc-mute);
+      font-variant-numeric: tabular-nums;
+    }
+    .tile-go {
+      font-family: 'Space Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--olive);
+      opacity: 0.65; transition: opacity 0.18s ease, transform 0.18s ease;
+      white-space: nowrap;
+    }
+
+    /* state chips — tell you if you can use it right now */
+    .chip {
+      font-family: 'Space Mono', monospace; font-size: 0.5rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      padding: 4px 9px; border-radius: 100px; white-space: nowrap;
+    }
+    .chip.free   { background: var(--olive); color: var(--ink); }
+    .chip.source { background: var(--rose);  color: var(--ink); }
+    .chip.live   { background: transparent; color: var(--olive); border: 1px solid rgba(247,215,148,0.4); }
+    .chip.soon   { background: transparent; color: var(--tc-faint); border: 1px solid rgba(237,232,218,0.16); }
+    .chip-row { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
+
+    /* ─── span variants ─── */
+    /* radius grows with the tile so the corners LOOK equally curved at every size */
+    .t-feature { grid-column: span 2; grid-row: span 2; border-radius: 26px; }
+    .t-wide    { grid-column: span 2; border-radius: 22px; }
+    .t-full    { grid-column: 1 / -1; border-radius: 22px; }
+
+    /* ─── el tile grande ─── */
+    .t-feature { padding: 2rem 1.9rem; }
+    .t-feature .tile-name { font-size: clamp(2rem, 4vw, 2.9rem); margin-bottom: 0.8rem; }
+    .t-feature .tile-desc { font-size: 1.02rem; max-width: 34ch; flex: 0 1 auto; }
+    .t-feature .tile-foot { margin-top: auto; padding-top: 1.4rem; }
+    /* el grabado del video, impreso en la esquina */
+    .t-feature::after {
+      content: ''; position: absolute; right: -12%; bottom: -6%;
+      width: 64%; aspect-ratio: 3 / 2;
+      background: url('hero.webp') center/cover no-repeat;
+      opacity: 0.2; mix-blend-mode: luminosity;
+      -webkit-mask-image: radial-gradient(ellipse at 70% 80%, #000 20%, transparent 72%);
+              mask-image: radial-gradient(ellipse at 70% 80%, #000 20%, transparent 72%);
+      pointer-events: none;
+    }
+    .t-feature > * { position: relative; z-index: 1; }
+
+    /* ─── tiles de color ───────────────────────────────────────────
+       El color vive en el borde, la marca y un halo tenue desde la esquina.
+       Nada de rellenos planos: sobre fondo oscuro se ven baratos y pelean
+       con la tipografía. La intensidad baja con la jerarquía. ── */
+    .c-champagne {
+      background:
+        radial-gradient(130% 100% at 12% 0%, rgba(247,215,148,0.13), transparent 62%),
+        var(--surface);
+      border-color: rgba(247,215,148,0.36);
+      box-shadow: 0 0 60px -26px rgba(247,215,148,0.55);
+    }
+    a.c-champagne:hover, a.c-champagne:focus-visible {
+      border-color: rgba(247,215,148,0.75);
+      background:
+        radial-gradient(130% 100% at 12% 0%, rgba(247,215,148,0.19), transparent 62%),
+        var(--surface-up);
+    }
+    .c-champagne .tile-mark {
+      color: var(--olive); background: rgba(247,215,148,0.12);
+      border-color: rgba(247,215,148,0.32);
+    }
+    .c-champagne .tile-peek span { border-color: rgba(247,215,148,0.24); }
+
+    /* ─── Wallbit: el único azul de la página ─── */
+    .c-wallbit {
+      background:
+        radial-gradient(130% 100% at 12% 0%, rgba(35,136,255,0.15), transparent 62%),
+        var(--surface);
+      border-color: rgba(35,136,255,0.34);
+    }
+    a.c-wallbit:hover, a.c-wallbit:focus-visible {
+      border-color: rgba(35,136,255,0.7);
+      background:
+        radial-gradient(130% 100% at 12% 0%, rgba(35,136,255,0.21), transparent 62%),
+        var(--surface-up);
+    }
+    .c-wallbit .tile-mark { background: #fff; border-color: rgba(35,136,255,0.4); padding: 5px; }
+    .c-wallbit .tile-go   { color: #4FA3FF; }
+    .c-wallbit .chip.wallbit { background: #2388FF; color: #fff; }
+
+    /* ─── "pronto" tiles are not interactive ─── */
+    .t-soon { opacity: 0.55; }
+    .t-soon .tile-name { color: var(--tc-soft); }
+
+    /* ─────────── AD SLOT (externo, marcado) ─────────── */
+    .ad-slot { max-width: var(--wrap); margin: 0 auto; padding: clamp(1.5rem,4vh,2.25rem) var(--pad-x); }
+    .ad {
+      position: relative;
+      background: var(--cream); color: var(--ink);
+      border-radius: 22px; padding: clamp(1.6rem,4vw,2.1rem);
+      display: flex; align-items: center; gap: clamp(1.1rem,3vw,2rem); flex-wrap: wrap;
+      text-decoration: none;
+      transition: transform 0.24s cubic-bezier(.43,.01,.29,1), box-shadow 0.2s ease-in-out;
+    }
+    .ad:hover, .ad:focus-visible { transform: translateY(-3px); box-shadow: 0 14px 40px -18px rgba(0,0,0,0.8); }
+    .ad:active { transform: translateY(-1px) scale(0.994); }
+    .ad-label {
+      position: absolute; top: 13px; right: 18px;
+      font-family: 'Space Mono', monospace; font-size: 0.5rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: rgba(11,11,9,0.38);
+      display: flex; align-items: center; gap: 0.45rem;
+    }
+    .ad-label::before {
+      content: ''; width: 4px; height: 4px; border-radius: 50%;
+      background: rgba(11,11,9,0.3);
+    }
+    .ad-logo {
+      width: 54px; height: 54px; flex: 0 0 54px; border-radius: 13px;
+      background: #fff; padding: 7px; object-fit: contain;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+    }
+    .ad-body { flex: 1 1 300px; display: block; }
+    .ad-name {
+      display: block;
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
+      font-size: 1.7rem; line-height: 1.1; color: var(--ink);
+    }
+    .ad-desc { display: block; font-size: 0.95rem; line-height: 1.6; color: rgba(11,11,9,0.62); margin-top: 0.35rem; max-width: 50ch; }
+    .ad-cta {
+      flex: 0 0 auto;
+      font-family: 'Space Mono', monospace; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+      padding: 12px 24px; border-radius: 100px;
+      background: var(--ink); color: var(--cream);
+    }
+
+    /* ─────────── VOTACIÓN (guías que vienen) ─────────── */
+    .vote-note {
+      font-size: 0.94rem; line-height: 1.7; color: var(--tc-soft);
+      max-width: 58ch; margin-bottom: 1.5rem;
+    }
+    .vote-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+    .vote-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 14px; padding: 1rem 1.1rem;
+      transition: border-color 0.2s ease-in-out, background 0.2s cubic-bezier(.43,.01,.29,1);
+    }
+    .vote-row:hover { border-color: rgba(237,232,218,0.2); background: var(--surface-up); }
+    .vote-info { min-width: 0; display: block; }
+    .vote-name {
+      display: block;
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
+      font-size: 1.2rem; line-height: 1.15; color: var(--cream);
+    }
+    .vote-desc { display: block; font-size: 0.84rem; line-height: 1.5; color: var(--tc-mute); margin-top: 0.22rem; }
+    .vote-btn {
+      flex: 0 0 auto; cursor: pointer;
+      font-family: 'Space Mono', monospace; font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      padding: 9px 15px; border-radius: 100px;
+      background: transparent; color: var(--olive);
+      border: 1px solid rgba(247,215,148,0.45);
+      transition: background 0.2s, color 0.2s, border-color 0.2s,
+                  transform 0.24s cubic-bezier(.43,.01,.29,1);
+    }
+    .vote-btn:hover { background: rgba(247,215,148,0.12); border-color: var(--olive); }
+    .vote-btn:active { transform: scale(0.95); }
+    .vote-btn[data-voted="1"] {
+      background: var(--olive); color: var(--ink);
+      border-color: var(--olive); cursor: default;
+    }
+
+    /* ─────────── SOCIAL STRIP ─────────── */
+    .social-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap);
+    }
+    .social {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 1.2rem 1.1rem;
+      display: flex; flex-direction: column; gap: 0.35rem;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+    }
+    .social:hover, .social:focus-visible {
+      border-color: var(--line-strong); background: var(--surface-up); transform: translateY(-3px);
+    }
+    .social-net {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
+      font-size: 1.2rem; color: var(--cream); line-height: 1.1;
+    }
+    .social-at {
+      font-family: 'Space Mono', monospace; font-size: 0.56rem;
+      letter-spacing: 0.04em; color: var(--tc-mute);
+      word-break: normal; overflow-wrap: break-word; line-height: 1.5;
+    }
+
+    /* ─────────── FOOTER ─────────── */
+    .site-foot {
+      max-width: var(--wrap); margin: 0 auto;
+      padding: clamp(3rem,7vh,4.5rem) var(--pad-x) clamp(2.5rem,5vh,3.5rem);
+      margin-top: 1.5rem;
+      border-top: 1px solid rgba(237,232,218,0.08);
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      align-items: flex-end; justify-content: space-between;
+    }
+    .foot-meta {
+      font-family: 'Space Mono', monospace; font-size: 0.56rem;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--tc-faint);
+      line-height: 1.9;
+    }
+
+    /* ─────────── ENTRANCE ─────────── */
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .anim { opacity: 0; animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards; animation-delay: var(--d, 0ms); }
+    .t-soon.anim { animation-name: rise; }
+    .t-soon { animation-fill-mode: forwards; }
+
+    /* ─────────── RESPONSIVE ─────────── */
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .t-feature { grid-column: span 2; grid-row: span 1; }
+      .t-feature::after { width: 52%; opacity: 0.13; }
+      .vote-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+      .tile, .t-feature { grid-column: auto; grid-row: auto; }
+      .t-wide, .t-full { grid-column: auto; }
+      .t-feature::after { width: 62%; }
+      .social-strip { grid-template-columns: 1fr; }
+      .site-foot { flex-direction: column; align-items: flex-start; }
+      .foot-meta { text-align: left; }
+      .ad { text-align: left; }
+      .ad-cta { width: 100%; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+      .anim { opacity: 1; }
+    }
+  </style>
 </head>
-<body style="font-family:system-ui;background:#192A56;color:#EDE8DA;display:flex;align-items:center;justify-content:center;height:100vh;margin:0">
-  <p>Redirigiendo a <a href="lista.html" style="color:#F7D794">La Lista</a>…</p>
+<body>
+
+  <header class="site-head">
+    <a href="./" class="head-logo">MOI · <b>RECURSOS</b></a>
+    <a href="lista.html" class="head-cta">La Lista →</a>
+  </header>
+
+  <!-- ═══════════ PERFIL ═══════════ -->
+  <div class="profile">
+    <div class="profile-id anim" style="--d:0ms">
+      <div class="avatar" aria-hidden="true">M</div>
+      <div>
+        <div class="profile-name">Walter Álvarez</div>
+        <div class="profile-role">Moi</div>
+      </div>
+    </div>
+    <h1 class="anim" style="--d:60ms">Acá está todo lo que <em>prometí</em></h1>
+    <p class="profile-sub anim" style="--d:120ms">
+      Las listas, las guías y las herramientas que menciono en TikTok. Sin registro, sin correo, sin curso.
+      Probablemente lo que buscas está acá abajo, y es gratis.
+    </p>
+  </div>
+
+  <!-- ═══════════ ZONA 1 — DISPONIBLE ═══════════ -->
+  <section class="zone">
+    <div class="zone-head">
+      <h2 class="zone-title">Empieza por acá</h2>
+      <span class="zone-state">Disponible ahora</span>
+    </div>
+
+    <div class="grid">
+
+      <a class="tile t-feature c-champagne anim" style="--d:180ms" href="pvp.html">
+        <div class="tile-top">
+          <span class="tile-mark">PVP</span>
+          <span class="chip-row"><span class="chip free">Gratis</span></span>
+        </div>
+        <div class="tile-name">El método PVP</div>
+        <p class="tile-desc">
+          Que un fundador te conteste, aunque no tengas contactos ni portafolio.
+          Llegas con su problema ya resuelto, y deja de ser una conversación en la que pides trabajo.
+        </p>
+        <div class="tile-peek">
+          <span>Investigas 5 startups</span><span>Encuentras 1 problema</span>
+          <span>Lo resuelves</span><span>Lo mandas</span><span>Pides 15 minutos</span>
+        </div>
+        <div class="tile-foot">
+          <span class="tile-meta">Con las plantillas de mensaje que uso</span>
+          <span class="tile-go">Abrir →</span>
+        </div>
+      </a>
+
+      <a class="tile t-wide anim" style="--d:240ms" href="lista.html">
+        <div class="tile-top">
+          <span class="tile-mark">L</span>
+          <span class="chip-row"><span class="chip free">Gratis</span></span>
+        </div>
+        <div class="tile-name">La Lista</div>
+        <p class="tile-desc">
+          Dejas de mandar tu CV al vacío. Sabes exactamente en qué páginas buscar,
+          qué puestos pedir y cuánto deberían pagarte en dólares.
+        </p>
+        <div class="tile-peek">
+          <span>Work at a Startup</span><span>Wellfound</span><span>Get on Board</span>
+          <span class="more">+6 más</span>
+        </div>
+        <div class="tile-foot">
+          <span class="tile-meta">9 puestos que no piden programar</span>
+          <span class="tile-go">Abrir →</span>
+        </div>
+      </a>
+
+      <a class="tile t-wide c-wallbit anim" style="--d:300ms" href="https://github.com/moiwalter/mi-plata" target="_blank" rel="noopener">
+        <div class="tile-top">
+          <span class="tile-mark"><img src="https://www.google.com/s2/favicons?domain=wallbit.io&sz=128" alt="Wallbit"></span>
+          <span class="chip-row"><span class="chip wallbit">Con Wallbit</span><span class="chip source">Código abierto</span></span>
+        </div>
+        <div class="tile-name">Mi Plata</div>
+        <p class="tile-desc">
+          Sabes cuánto puedes gastar hoy sin arruinar el mes. Se conecta a tu cuenta de Wallbit
+          y solo lee: nunca compra ni mueve tu plata.
+        </p>
+        <div class="tile-foot">
+          <span class="tile-meta">Gratis · necesitas cuenta Wallbit</span>
+          <span class="tile-go">Ver el código →</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ ZONA 2 — HERRAMIENTAS ═══════════ -->
+  <section class="zone">
+    <div class="zone-head">
+      <h2 class="zone-title">Herramientas que construí</h2>
+      <span class="zone-state">Puedes usarlas y copiarlas</span>
+    </div>
+
+    <div class="grid">
+
+      <a class="tile t-full anim" style="--d:60ms" href="https://github.com/moiwalter/science-gym-coach" target="_blank" rel="noopener">
+        <div class="tile-top">
+          <span class="tile-mark"><img src="https://www.google.com/s2/favicons?domain=github.com&sz=128" alt=""></span>
+          <span class="chip-row"><span class="chip source">Código abierto</span></span>
+        </div>
+        <div class="tile-name">Science Gym Coach</div>
+        <p class="tile-desc">
+          Dejas de improvisar en el gimnasio. Te dice qué toca hoy y con cuánto peso,
+          según lo que te falta entrenar y cómo vienes de recuperado — no según el día de la semana.
+        </p>
+        <div class="tile-peek">
+          <span>Qué toca hoy</span><span>Con cuánto peso</span>
+          <span>Se ajusta si dormiste mal</span><span>Cada regla con su cita</span>
+        </div>
+        <div class="tile-foot">
+          <span class="tile-meta">Licencia MIT · en inglés</span>
+          <span class="tile-go">GitHub →</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ ANUNCIO ═══════════ -->
+  <div class="ad-slot">
+    <a class="ad anim" style="--d:60ms" href="https://tulibrobolivia.com" target="_blank" rel="noopener">
+      <span class="ad-label">Anuncio</span>
+      <img class="ad-logo" src="https://www.google.com/s2/favicons?domain=tulibrobolivia.com&sz=128" alt="Tu Libro Bolivia">
+      <span class="ad-body">
+        <span class="ad-name">Tu Libro Bolivia</span>
+        <span class="ad-desc">Tu propio libro impreso y en tus manos, sin editorial y desde un solo ejemplar. También imprimimos cualquiera de los 9.000 títulos del catálogo.</span>
+      </span>
+      <span class="ad-cta">Ver la tienda →</span>
+    </a>
+  </div>
+
+  <!-- ═══════════ ZONA 3 — VOTACIÓN ═══════════ -->
+  <section class="zone">
+    <div class="zone-head">
+      <h2 class="zone-title">Qué publico después</h2>
+      <span class="zone-state pending">Tú decides</span>
+    </div>
+    <p class="vote-note">
+      Todo esto ya existe escrito en mis notas, pero hay que limpiarlo antes de soltarlo.
+      Vota lo que quieras que saque primero, y eso es lo que trabajo esta semana.
+    </p>
+
+    <div class="vote-grid">
+      <div class="vote-row anim" style="--d:60ms">
+        <span class="vote-info">
+          <span class="vote-name">Vuelos baratos</span>
+          <span class="vote-desc">Pagas menos por exactamente el mismo vuelo.</span>
+        </span>
+        <button class="vote-btn" type="button" data-id="vuelos" aria-pressed="false">Votar</button>
+      </div>
+      <div class="vote-row anim" style="--d:95ms">
+        <span class="vote-info">
+          <span class="vote-name">Que no parezca escrito por IA</span>
+          <span class="vote-desc">Tu texto deja de sonar a máquina, y aprendes a detectar el de los demás.</span>
+        </span>
+        <button class="vote-btn" type="button" data-id="ai-slops" aria-pressed="false">Votar</button>
+      </div>
+      <div class="vote-row anim" style="--d:130ms">
+        <span class="vote-info">
+          <span class="vote-name">Diseña tu piloto de IA</span>
+          <span class="vote-desc">Sales con tu primer proceso automatizado, y elegido por la razón correcta.</span>
+        </span>
+        <button class="vote-btn" type="button" data-id="clase-ia" aria-pressed="false">Votar</button>
+      </div>
+      <div class="vote-row anim" style="--d:165ms">
+        <span class="vote-info">
+          <span class="vote-name">Que te lean hasta el final</span>
+          <span class="vote-desc">La gente termina lo que escribiste en vez de abandonarlo a la mitad.</span>
+        </span>
+        <button class="vote-btn" type="button" data-id="neuro" aria-pressed="false">Votar</button>
+      </div>
+      <div class="vote-row anim" style="--d:200ms">
+        <span class="vote-info">
+          <span class="vote-name">Animaciones para tus videos</span>
+          <span class="vote-desc">Tus videos se ven editados por alguien que cobra por hacerlo.</span>
+        </span>
+        <button class="vote-btn" type="button" data-id="overlay" aria-pressed="false">Votar</button>
+      </div>
+      <div class="vote-row anim" style="--d:235ms">
+        <span class="vote-info">
+          <span class="vote-name">Kit de edición de video</span>
+          <span class="vote-desc">Editas un video hablado en una tarde, no en tres días.</span>
+        </span>
+        <button class="vote-btn" type="button" data-id="video-kit" aria-pressed="false">Votar</button>
+      </div>
+      <div class="vote-row anim" style="--d:270ms">
+        <span class="vote-info">
+          <span class="vote-name">Qué estoy leyendo</span>
+          <span class="vote-desc">Sabes qué leer y en qué orden, sin perder meses en el libro equivocado.</span>
+        </span>
+        <button class="vote-btn" type="button" data-id="lectura" aria-pressed="false">Votar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ZONA 4 — CONTACTO ═══════════ -->
+  <section class="zone">
+    <div class="zone-head">
+      <h2 class="zone-title">Dónde encontrarme</h2>
+      <span class="zone-state">Contacto</span>
+    </div>
+
+    <div class="social-strip">
+      <a class="social anim" style="--d:60ms"  href="https://www.tiktok.com/@moiwalter" target="_blank" rel="noopener">
+        <span class="social-net">TikTok</span><span class="social-at">@moiwalter</span>
+      </a>
+      <a class="social anim" style="--d:100ms" href="https://www.linkedin.com/in/walteralvarezajata" target="_blank" rel="noopener">
+        <span class="social-net">LinkedIn</span><span class="social-at">walteralvarezajata</span>
+      </a>
+      <a class="social anim" style="--d:140ms" href="https://www.instagram.com/moiwalter" target="_blank" rel="noopener">
+        <span class="social-net">Instagram</span><span class="social-at">@moiwalter</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-meta">
+      Moi — Walter Álvarez
+    </div>
+  </footer>
+
+  <script>
+    // Los votos van a Supabase. Tabla + permisos: ~/Projects/moi-votos/votos.sql
+    // Esta llave es pública a propósito: con RLS solo puede SUMAR un voto,
+    // no leer, editar ni borrar nada.
+    const SUPABASE_URL  = "https://qttoqljqfosojncpwmng.supabase.co";
+    const SUPABASE_ANON = "sb_publishable_E00BpI_dEAWbSKBFVSsMNw_jkLbUqwE";
+
+    function marcarVotada(btn) {
+      btn.dataset.voted = "1";
+      btn.textContent = "Votada \u2713";
+      btn.setAttribute("aria-pressed", "true");
+    }
+
+    document.querySelectorAll(".vote-btn").forEach(function (btn) {
+      const clave = "moi-voto-" + btn.dataset.id;
+      if (localStorage.getItem(clave)) marcarVotada(btn);
+
+      btn.addEventListener("click", function () {
+        if (btn.dataset.voted === "1") return;
+        marcarVotada(btn);
+        try { localStorage.setItem(clave, "1"); } catch (e) {}
+        fetch(SUPABASE_URL + "/rest/v1/votos_hub", {
+          method: "POST",
+          headers: {
+            "apikey": SUPABASE_ANON,
+            "Authorization": "Bearer " + SUPABASE_ANON,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({ guia: btn.dataset.id })
+        }).then(function (r) {
+          // 409 = ya votó esta guía antes. Para la persona es lo mismo que votar.
+          if (!r.ok && r.status !== 409) console.warn("[votos] Supabase respondió", r.status);
+        }).catch(function () {
+          console.warn("[votos] no se pudo enviar el voto");
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
