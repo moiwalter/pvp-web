@@ -115,16 +115,36 @@ const CSS = `
   --brand:#fd551d; --brand-muted:#fd8d68;
   --border:#eeeeee1a; --border-muted:#eeeeee0d; --surface:#333;
 }
-[data-theme="light"]{
+:root[data-theme="light"]{
   --bg:#eee; --fg:#141314; --bg-muted:#f7f7f7; --fg-muted:#696869;
   --brand:#fb460d; --brand-muted:#fd8d68;
   --border:#0003; --border-muted:#0000001a; --surface:#d5d5d5;
 }
 /* el tema atrevido de ellos: la página ENTERA del color de marca, tinta negra */
-[data-theme="brand"]{
+:root[data-theme="brand"]{
   --bg:#fb460d; --fg:#141314; --bg-muted:#fd7142; --fg-muted:#1a1a1a;
   --brand:#141314; --brand-muted:#1a1a1a;
   --border:#0000004d; --border-muted:#00000026; --surface:#fd8d68;
+}
+
+/* ── BANDAS ─────────────────────────────────────────────────────────────────
+   Doce partes seguidas en el mismo fondo son un campo negro sin relieve. La
+   landing respira porque ALTERNA bandas; acá la alternancia va por SECCIÓN
+   (Antes de empezar · El método PVP · Ejecutar), o sea que se cruza dos veces
+   en 18 minutos: da ritmo sin parpadear en cada flecha.
+
+   Es una INVERSIÓN respecto del tema elegido, no un color fijo — si él puso
+   claro con la tecla C, la banda del medio se le pone oscura. El tema brand
+   no invierte: ya es extremo. */
+:root[data-theme="dark"][data-inv="1"]{
+  --bg:#eee; --fg:#141314; --bg-muted:#f7f7f7; --fg-muted:#696869;
+  --brand:#fb460d; --brand-muted:#fd8d68;
+  --border:#0003; --border-muted:#0000001a; --surface:#d5d5d5;
+}
+:root[data-theme="light"][data-inv="1"]{
+  --bg:#141314; --fg:#eee; --bg-muted:#1a1a1a; --fg-muted:#818081;
+  --brand:#fd551d; --brand-muted:#fd8d68;
+  --border:#eeeeee1a; --border-muted:#eeeeee0d; --surface:#333;
 }
 html{-webkit-text-size-adjust:100%}
 body{
@@ -144,10 +164,10 @@ a{color:inherit;text-decoration:none}
   position:absolute;width:200vmax;height:200vmax;left:50%;bottom:0;margin-left:-100vmax;
   background:var(--brand);transform-origin:100vmax 100%;transform:rotate(-90deg);
 }
-.carga[data-fase="entrando"] .carga__sq{transition:transform .8s var(--ease-in-out-quart);transform:rotate(0)}
+.carga[data-fase="entrando"] .carga__sq{transition:transform .55s var(--ease-in-out-quart);transform:rotate(0)}
 .carga[data-fase="quieto"] .carga__sq{transform:rotate(0);margin-left:calc(-100vmax + 100vw)}
 .carga[data-fase="saliendo"] .carga__sq{
-  transition:transform .9s var(--ease-in-out-quart);
+  transition:transform .6s var(--ease-in-out-quart);
   margin-left:calc(-100vmax + 100vw);transform:rotate(90deg);
 }
 
@@ -362,6 +382,12 @@ a{color:inherit;text-decoration:none}
 .parte h1,.parte__tax,.parte__n{transition:opacity .5s var(--ease-out-quart),transform .5s var(--ease-out-quart)}
 .parte.on h1,.parte.on .parte__tax,.parte.on .parte__n{opacity:1;transform:none}
 
+/* ── ENTRADA DE PARTE: dentro de una sección el cambio es rápido y liviano.
+      El barrido naranja se reserva para cruzar de sección (2 veces en todo el
+      documento): repetido en cada flecha —12 veces, 1,8 s cada una— cansaba. */
+.parte.on{animation:entra .38s var(--ease-out-quart) both}
+@keyframes entra{from{opacity:0;transform:translateY(calc(var(--spacing)*14))}to{opacity:1;transform:none}}
+
 /* ── AVANCE DENTRO DE LA PARTE: hilo bajo la cabecera ── */
 .hilo{position:fixed;top:calc(var(--spacing)*60);left:0;height:2px;background:var(--brand);width:0;z-index:99;transition:width .12s linear}
 
@@ -418,6 +444,10 @@ const JS = `
   var pct    = document.getElementById('pct');
   var actual = -1;
   var LS='pvp-parte', LSTEMA='pvp-tema', LSLEIDAS='pvp-leidas';
+  /* a qué sección pertenece cada parte (el cierre cuenta como una más) */
+  var SECCION = ${JSON.stringify(
+    partes.map(p => idx.secciones.findIndex(s => s.parts.includes(p.id))).concat([idx.secciones.length])
+  )};
 
   var leidas = {};
   try{ leidas = JSON.parse(localStorage.getItem(LSLEIDAS)||'{}'); }catch(e){}
@@ -542,6 +572,8 @@ const JS = `
     opts=opts||{};
     if(n<0||n>=partes.length||n===actual) return;
     actual=n;
+    /* la banda alterna por sección: 0 oscura · 1 invertida · 2 oscura */
+    document.documentElement.setAttribute('data-inv', SECCION[n]%2 ? '1' : '0');
     partes.forEach(function(a,i){ a.classList.toggle('on', i===n); });
     if(n<TOTAL){
       leidas[n]=1;
@@ -555,15 +587,25 @@ const JS = `
     requestAnimationFrame(pintarHilo);
     var id = partes[n].id;
     if(!opts.silencioso && id) history.replaceState(null,'','#'+id);
-    if(!opts.sinScroll) window.scrollTo(0,0);
+    /* con Lenis manejando el scroll, window.scrollTo pelea con su bucle:
+       el salto al tope tiene que pasar por él o la parte nueva abre a medias */
+    if(!opts.sinScroll){
+      if(window.__lenis) window.__lenis.scrollTo(0,{immediate:true});
+      else window.scrollTo(0,0);
+    }
     cerrarPanel();
   }
 
-  /* ── barrido diagonal entre partes: el cambio se siente un evento ── */
+  /* ── barrido diagonal SÓLO al cruzar de sección ────────────────────────
+     Dentro de una sección el cambio es una transición rápida del artículo.
+     El barrido se guarda para los 2 cruces de sección, que es donde además
+     se invierte la banda: ahí sí tapa un cambio de fondo entero y significa
+     algo ("entraste a otro acto"). Repetirlo en cada flecha era ruido. */
   var capa=document.getElementById('carga'), animando=false;
   function irConBarrido(n){
-    if(animando||n===actual||n<0||n>=partes.length){ return; }
-    if(!capa||matchMedia('(prefers-reduced-motion: reduce)').matches){ ir(n); return; }
+    if(animando||n===actual||n<0||n>=partes.length) return;
+    var cruza = SECCION[n]!==SECCION[actual];
+    if(!capa||!cruza||matchMedia('(prefers-reduced-motion: reduce)').matches){ ir(n); return; }
     animando=true;
     capa.style.display='block'; capa.dataset.fase='entrando';
     setTimeout(function(){
@@ -571,9 +613,9 @@ const JS = `
       capa.dataset.fase='quieto';
       requestAnimationFrame(function(){ requestAnimationFrame(function(){
         capa.dataset.fase='saliendo';
-        setTimeout(function(){ capa.style.display='none'; animando=false; }, 950);
+        setTimeout(function(){ capa.style.display='none'; animando=false; }, 620);
       });});
-    }, 820);
+    }, 560);
   }
 
   items.forEach(function(b){ b.addEventListener('click', function(){ irConBarrido(+b.dataset.go); }); });
@@ -679,6 +721,11 @@ const html = `<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<!-- Lenis: scroll con inercia. MIT, darkroom.engineering. Local, sin CDN.
+     DESIGN.md lo llama "el motor real de que leerlo se sienta distinto" — y es
+     la página hecha para leer, así que acá pesa más que en la landing. -->
+<link rel="stylesheet" href="vendor/lenis.css">
+
 <!-- ⚠️ GENERADO por content/render-pvp.mjs — no editar a mano.
      Fuente: content/pvp/*.md + content/pvp-indice.json
      El markdown se hornea en build: ya no hay marked desde CDN. -->
@@ -725,6 +772,17 @@ ${finHtml}
   <button class="x" id="seguir-x" type="button" aria-label="Cerrar">×</button>
 </div>
 
+<script src="vendor/lenis.min.js"></script>
+<script>
+/* Scroll con inercia. Se apaga entero si el sistema pide menos movimiento. */
+(function(){
+  if(!window.Lenis || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var lenis=new Lenis({duration:1.05, easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));}});
+  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  window.__lenis=lenis;   // el deck lo usa para saltar al tope sin animar
+})();
+</script>
 <script>${JS}
 </script>
 </body>
@@ -745,8 +803,10 @@ if (/cal\.com|calendly|agendar una llamada/i.test(html)) problemas.push('quedó 
 /* Busca un <script src> externo de verdad, no la palabra "marked" (que aparece
    en el comentario que explica por qué ya no está). Las fuentes de Google son
    <link>, no <script>, y son la misma dependencia que ya tiene la landing. */
-const scriptsExternos = (html.match(/<script[^>]+src=["'][^"']+["']/gi) || []);
-if (scriptsExternos.length) problemas.push(`quedó JS externo: ${scriptsExternos.join(', ')}`);
+/* Lo que se prohíbe es el JS REMOTO (un CDN caído dejaba la página en blanco).
+   vendor/ es local y versionado en el repo, así que no cuenta. */
+const scriptsRemotos = (html.match(/<script[^>]+src=["'](https?:)?\/\/[^"']+["']/gi) || []);
+if (scriptsRemotos.length) problemas.push(`quedó JS remoto: ${scriptsRemotos.join(', ')}`);
 const enIndice = (html.match(/class="idx__p"/g) || []).length;
 if (enIndice !== partes.length) problemas.push(`el índice lista ${enIndice}, deberían ser ${partes.length}`);
 
