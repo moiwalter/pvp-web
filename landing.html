@@ -131,9 +131,10 @@ h2{font-size:var(--text-h2)}
 h3{font-size:var(--text-h3)}
 .t-h4{font-size:var(--text-h4);line-height:1}
 .t-h5{font-size:var(--text-h5)}
-.section-label{
+.section-label,.qtxt__h,.muro__h,.eyebrow-slash{
   font-family:var(--font-mono);font-size:var(--text-body);
-  letter-spacing:.06em;color:var(--rose);display:block;
+  letter-spacing:.025em;      /* 0.4px sobre 16px, medido en su sitio */
+  color:var(--brand);display:block;text-transform:none;
 }
 .mono{font-family:var(--font-mono)}
 .acc{font-family:var(--font-mono);font-size:var(--text-accent);letter-spacing:.08em}
@@ -436,7 +437,7 @@ h3{font-size:var(--text-h3)}
 /* ── tarjetas de contenido dentro de la fila de "quién soy" ── */
 .qtxt{display:flex;flex-direction:column;background:var(--bg-muted);padding:calc(var(--spacing)*20);min-height:calc(var(--spacing)*250)}
 @media(min-width:1024px){.qtxt{padding:calc(var(--spacing)*30);min-height:calc(var(--spacing)*300)}}   /* 300 + 16 + 134 = 450, el alto de la foto */
-.qtxt__h{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:calc(var(--spacing)*20)}
+.qtxt__h{margin-bottom:calc(var(--spacing)*20)}
 .qtxt__cif{margin-top:auto}
 .qtxt__l{display:flex;flex-direction:column;gap:calc(var(--spacing)*12)}
 /* ── FRANJA DE LOGOS a todo el ancho, debajo de las tarjetas ──
@@ -458,10 +459,7 @@ h3{font-size:var(--text-h3)}
   .muro__fila{flex-wrap:wrap;justify-content:flex-start;gap:calc(var(--spacing)*20) calc(var(--spacing)*26)}
 }
 @media(min-width:1024px){.muro{padding:calc(var(--spacing)*24) calc(var(--spacing)*30);min-height:calc(var(--spacing)*134)}}
-.muro__h{
-  font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.1em;
-  text-transform:uppercase;color:var(--fg-muted);flex:none;
-}
+.muro__h{flex:none}
 /* El sello del Tribunal no sobrevive a 36px en monocromo — probado: el completo
    queda un disco y solo el escudo, un cuadrado macizo. Va el nombre compuesto,
    aproximando su tipografía (geométrica pesada, versales) con la de la página.
@@ -1022,7 +1020,7 @@ h3{font-size:var(--text-h3)}
       </div>
 
       <div style="margin-top:calc(var(--spacing)*32)">
-        <span class="acc-sm body-mut" style="display:block;margin-bottom:calc(var(--spacing)*12)">// Anuncio</span>
+        <span class="eyebrow-slash" style="margin-bottom:calc(var(--spacing)*12)">// Anuncio</span>
         <a class="tool" href="https://tulibrobolivia.com" target="_blank" rel="noopener" style="min-height:auto">
           <span class="tool__n">Tu Libro Bolivia</span>
           <span class="tool__d">Tu propio libro impreso y en tus manos, sin editorial y desde un solo ejemplar. También imprimimos cualquiera de los 9.000 títulos del catálogo.</span>
