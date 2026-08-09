@@ -517,6 +517,9 @@ h3{font-size:var(--text-h3)}
   transition:padding-left .45s var(--ease-out-quart),background-color .45s var(--ease-out-quart);
 }
 @media(min-width:700px){.pilar:hover{padding-left:calc(var(--spacing)*18);background:var(--bg-muted)}}
+.pilar{display:block;text-decoration:none}
+a.pilar:hover .pilar__t{color:var(--brand)}
+.pilar__t{transition:color .3s var(--ease-out-quart)}
 .pilar__n{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.14em;color:var(--brand);display:block;margin-bottom:calc(var(--spacing)*14)}
 .pilar__t{font-family:var(--font-sans);font-weight:500;font-size:var(--text-h4);line-height:1;display:block;margin-bottom:calc(var(--spacing)*12)}
 .pilar__d{color:var(--fg-muted);font-size:var(--text-body-sm);line-height:1.6;display:block;max-width:34ch}
@@ -973,6 +976,32 @@ h3{font-size:var(--text-h3)}
   </div>
 </section>
 
+<!-- ═══ LO DEMÁS QUE CONSTRUÍ — formato "What's in a landmark" ═══ -->
+<section class="sec reveal-group inv" id="construi">
+  <div class="grid-container grid-layout">
+    <div class="sp-12 lg-sp-5" style="margin-bottom:calc(var(--spacing)*40)">
+      <h2><span class="rv"><span>Lo demás</span><i class="b1"></i><i class="b2"></i></span><br><span class="rv"><span>que construí.</span><i class="b1"></i><i class="b2"></i></span></h2>
+      <span class="section-label fade" style="margin-top:calc(var(--spacing)*16)">// Sistemas</span>
+    </div>
+    <div class="sp-12 lg-st-7 lg-sp-6 fade" style="align-self:end;margin-bottom:calc(var(--spacing)*40)">
+      <p class="body-mut" style="max-width:44ch">
+        Todo lo que publico sobre IA sale de acá: sistemas que uso todos los días,
+        no de lo que se podría hacer. Dos están abiertos para que los copies.
+      </p>
+    </div>
+    <div class="sp-12">
+      <div class="pilares fade">
+        <a class="pilar" href="https://github.com/moiwalter/mi-plata" target="_blank" rel="noopener"><span class="pilar__n">[Código abierto]</span><span class="pilar__t">Mi Plata</span><span class="pilar__d">Sabes cuánto puedes gastar hoy sin arruinar el mes. Se conecta a Wallbit y solo lee.</span></a>
+        <a class="pilar" href="https://github.com/moiwalter/science-gym-coach" target="_blank" rel="noopener"><span class="pilar__n">[Código abierto]</span><span class="pilar__t">Science Gym Coach</span><span class="pilar__d">Qué toca hoy y con cuánto peso, según lo que te falta y cómo vienes de recuperado.</span></a>
+        <a class="pilar" href="https://tulibrobolivia.com" target="_blank" rel="noopener"><span class="pilar__n">[En vivo]</span><span class="pilar__t">Tu Libro Bolivia</span><span class="pilar__d">Tu propio libro impreso desde un ejemplar, sin editorial. Y 9.000 títulos de catálogo.</span></a>
+        <div class="pilar"><span class="pilar__n">[Privado]</span><span class="pilar__t">El Pilot</span><span class="pilar__d">El sistema multiagente que corre mi vida: doce sistemas bajo un mismo contexto.</span></div>
+        <div class="pilar"><span class="pilar__n">[Privado]</span><span class="pilar__t">Finanzas</span><span class="pilar__d">Lee mi cuenta en vivo y me dice cuánto puedo gastar hoy y qué hacer el 24.</span></div>
+        <div class="pilar"><span class="pilar__n">[Privado]</span><span class="pilar__t">Entrenamiento</span><span class="pilar__d">Decide la próxima sesión por déficit de volumen y recuperación, con cada regla citada.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ VOTACIÓN ═══ -->
 <section class="sec reveal-group" id="votar">
   <div class="grid-container grid-layout">
@@ -997,41 +1026,6 @@ h3{font-size:var(--text-h3)}
     </div>
   </div>
 </section>
-
-<!-- ═══ HERRAMIENTAS + ANUNCIO ═══ -->
-<section class="sec reveal-group">
-  <div class="grid-container grid-layout">
-    <div class="sp-12" style="margin-bottom:calc(var(--spacing)*40)">
-      <h2><span class="rv"><span>Lo demás que construí.</span><i class="b1"></i><i class="b2"></i></span></h2>
-      <span class="section-label fade" style="margin-top:calc(var(--spacing)*16)">// Herramientas</span>
-    </div>
-    <div class="sp-12 fade">
-      <div class="cells">
-        <a class="tool" href="https://github.com/moiwalter/mi-plata" target="_blank" rel="noopener">
-          <span class="tool__n">Mi Plata</span>
-          <span class="tool__d">Sabes cuánto puedes gastar hoy sin arruinar el mes. Se conecta a tu cuenta de Wallbit y solo lee: nunca compra ni mueve tu plata.</span>
-          <span class="tool__t">[Código abierto]—[Con Wallbit] →</span>
-        </a>
-        <a class="tool" href="https://github.com/moiwalter/science-gym-coach" target="_blank" rel="noopener">
-          <span class="tool__n">Science Gym Coach</span>
-          <span class="tool__d">Dejas de improvisar en el gimnasio. Te dice qué toca hoy y con cuánto peso, según lo que te falta entrenar y cómo vienes de recuperado.</span>
-          <span class="tool__t">[Código abierto]—[MIT] →</span>
-        </a>
-      </div>
-
-      <div style="margin-top:calc(var(--spacing)*32)">
-        <span class="eyebrow-slash" style="margin-bottom:calc(var(--spacing)*12)">// Anuncio</span>
-        <a class="tool" href="https://tulibrobolivia.com" target="_blank" rel="noopener" style="min-height:auto">
-          <span class="tool__n">Tu Libro Bolivia</span>
-          <span class="tool__d">Tu propio libro impreso y en tus manos, sin editorial y desde un solo ejemplar. También imprimimos cualquiera de los 9.000 títulos del catálogo.</span>
-          <span class="tool__t">Ver la tienda →</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-</main>
 
 <!-- ═══ PIE — pantalla completa ═══ -->
 <footer class="foot reveal-group">
@@ -1392,6 +1386,38 @@ document.addEventListener('click',function(e){
   cards.forEach(function(c){io.observe(c);});
   minis.forEach(function(m,i){m.addEventListener('click',function(){
     cards[i].scrollIntoView({behavior:'smooth',block:'center'});});});
+})();
+
+/* ── RULETA DE LETRAS ──
+   Medido en su sitio muestreando cada 45ms: el texto se revela de izquierda a
+   derecha y la cola que todavía no llegó son caracteres aleatorios.
+   "LET'S WORK TOGETHER" → "L," → "LET'I>`" → "LET'S Wo,&aYYMz" → final. */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var RUIDO="!<>-_\\/[]{}=+*^?#%&$@ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  function rodar(el,dur){
+    var fin=el.dataset.txt||el.textContent; el.dataset.txt=fin;
+    if(el.dataset.rodando==='1')return; el.dataset.rodando='1';
+    var t0=null;
+    (function paso(t){
+      if(!t0)t0=t;
+      var p=Math.min(1,(t-t0)/dur), n=Math.floor(p*fin.length), s=fin.slice(0,n);
+      for(var i=n;i<fin.length;i++) s += fin[i]===' ' ? ' ' : RUIDO[(Math.random()*RUIDO.length)|0];
+      el.textContent=s;
+      if(p<1) requestAnimationFrame(paso);
+      else { el.textContent=fin; el.dataset.rodando='0'; }
+    })(performance.now());
+  }
+  function armar(disparador,objetivo,dur){
+    document.querySelectorAll(disparador).forEach(function(d){
+      var o=objetivo?d.querySelector(objetivo):d; if(!o)return;
+      d.addEventListener('pointerenter',function(){rodar(o,dur||520);});
+    });
+  }
+  armar('.gbtn','.gbtn__lbl',560);
+  armar('.sw__card','.sw__n',480);
+  armar('a.pilar','.pilar__t',480);
+  armar('.link-u',null,420);
 })();
 
 /* ── VOTOS → Supabase (llave pública: con RLS solo puede SUMAR) ── */
