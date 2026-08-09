@@ -177,6 +177,39 @@ h3{font-size:var(--text-h3)}
 .arw{display:inline-block;transition:transform .3s var(--ease-out-quart)}
 .btn:hover .arw,a:hover>.arw{transform:translateX(5px)}
 
+/* ── CARGA — reproducida de su "page-transition-square" ──
+   Pantalla del color de marca, la marca y la palabra apareciendo letra por letra,
+   y un barrido diagonal que descubre la página. Su elemento es un cuadrado fijo a
+   pantalla completa rotado 90°; acá el barrido sale por la esquina superior izquierda. */
+.carga{position:fixed;inset:0;z-index:10000;overflow:hidden;pointer-events:none}
+/* La compuerta: un cuadrado MÁS GRANDE que la pantalla que gira sobre un pivote
+   anclado al borde inferior. Entra de -90° a 0 (tapa), y para salir el pivote
+   SALTA 100vw a la derecha y gira a +90°: así entra por un lado y sale por el otro.
+   Fases, origen y curva medidos de su .page-transition-square. */
+.carga__sq{
+  position:absolute;width:200vmax;height:200vmax;
+  left:50%;bottom:0;margin-left:-100vmax;
+  background:var(--brand);
+  transform-origin:100vmax 100%;
+  transform:rotate(-90deg);
+}
+.carga[data-fase="entrando"] .carga__sq{transition:transform 1s var(--ease-in-out-quart);transform:rotate(0)}
+.carga[data-fase="quieto"]   .carga__sq{transition:none;transform:rotate(0);transform-origin:calc(100vmax + 100vw) 100%}
+.carga[data-fase="saliendo"] .carga__sq{transform-origin:calc(100vmax + 100vw) 100%;transition:transform 1s var(--ease-in-out-quart) .1s;transform:rotate(90deg)}
+.carga__c{position:absolute;inset:0;display:grid;place-items:center;z-index:1;transition:opacity .3s}
+.carga[data-fase="saliendo"] .carga__c{opacity:0}
+.carga__c{display:flex;flex-direction:column;align-items:center;gap:calc(var(--spacing)*10)}
+.carga__m{
+  font-family:var(--font-sans);font-weight:700;font-size:calc(var(--spacing)*22);
+  letter-spacing:.02em;text-transform:uppercase;color:var(--bg);
+  border:2px solid var(--bg);padding:calc(var(--spacing)*5) calc(var(--spacing)*9);line-height:1;
+}
+.carga__t{
+  font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--bg);opacity:.75;min-height:1em;
+}
+@media(prefers-reduced-motion:reduce){.carga{display:none}}
+
 /* ── ENCABEZADO: flex-col, transparente ── */
 .head{
   position:fixed;inset-inline:0;top:0;z-index:9999;
@@ -276,7 +309,12 @@ h3{font-size:var(--text-h3)}
 /* ── QUIÉN SOY: cuatro columnas, una es FOTO con velo de marca al 6% ── */
 .quien{display:grid;grid-template-columns:1fr;gap:calc(var(--spacing)*16)}
 @media(min-width:700px){.quien{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1100px){.quien{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1100px){
+  /* la foto ocupa las DOS filas; a su derecha, tarjetas arriba y logos abajo */
+  .quien{grid-template-columns:.62fr 1fr 1fr;grid-template-rows:auto auto}
+  .quien>.qfoto{grid-row:1/3}
+  .quien>.muro{grid-column:2/-1}
+}
 .qfoto{position:relative;overflow:hidden;min-height:calc(var(--spacing)*300);background:var(--bg-muted)}
 @media(min-width:1024px){.qfoto{min-height:calc(var(--spacing)*450)}}
 .qfoto img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
@@ -292,9 +330,15 @@ h3{font-size:var(--text-h3)}
 
 /* ── BLOQUE DECLARATIVO: su cierre "Start a project." — tipo display, poco texto ── */
 .decl{padding-block:clamp(90px,14vh,190px)}
-.decl__t{font-size:var(--text-display);line-height:.98;letter-spacing:-.04em;font-weight:500;font-family:var(--font-sans)}
+.decl__t{
+  /* las líneas van con nowrap para que el barrido funcione, así que el tamaño
+     tiene que caber: a 128px se salían del contenedor y se cortaban las letras */
+  font-size:min(var(--text-h1), 6.4vw);
+  line-height:1.06;letter-spacing:-.035em;font-weight:500;font-family:var(--font-sans);
+  text-align:center;
+}
 .decl__t em{font-style:normal;color:var(--brand)}
-.decl__l{display:flex;flex-wrap:wrap;gap:calc(var(--spacing)*10) calc(var(--spacing)*32);margin-top:calc(var(--spacing)*48)}
+.decl__l{display:flex;flex-wrap:wrap;justify-content:center;gap:calc(var(--spacing)*10) calc(var(--spacing)*32);margin-top:calc(var(--spacing)*48)}
 .decl__l span{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);white-space:nowrap}
 .decl__l span::before{content:'— ';color:var(--brand)}
 
@@ -391,17 +435,79 @@ h3{font-size:var(--text-h3)}
 
 /* ── tarjetas de contenido dentro de la fila de "quién soy" ── */
 .qtxt{display:flex;flex-direction:column;background:var(--bg-muted);padding:calc(var(--spacing)*20);min-height:calc(var(--spacing)*250)}
-@media(min-width:1024px){.qtxt{padding:calc(var(--spacing)*32);min-height:calc(var(--spacing)*450)}}
-.qtxt__h{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:auto}
+@media(min-width:1024px){.qtxt{padding:calc(var(--spacing)*30);min-height:calc(var(--spacing)*300)}}   /* 300 + 16 + 134 = 450, el alto de la foto */
+.qtxt__h{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:calc(var(--spacing)*20)}
+.qtxt__cif{margin-top:auto}
 .qtxt__l{display:flex;flex-direction:column;gap:calc(var(--spacing)*12)}
+/* ── FRANJA DE LOGOS a todo el ancho, debajo de las tarjetas ──
+   Monocromo: brightness(0) aplasta cualquier logo a tinta plena respetando el alfa.
+   Es lo que hace que un muro de logos se lea diseñado y no como stickers sueltos.
+   Alturas distintas a propósito: un sello circular con el mismo alto que un
+   logotipo horizontal se ve el doble de grande. Se iguala el PESO, no la caja. */
+.muro{
+  display:flex;flex-direction:column;justify-content:center;
+  gap:calc(var(--spacing)*18);
+  background:var(--bg-muted);
+  padding:calc(var(--spacing)*22) calc(var(--spacing)*18);
+}
+/* la etiqueta va arriba: en la misma línea se comía el ancho que necesitan los 4 */
+.muro__fila{display:flex;align-items:center;justify-content:space-between;gap:calc(var(--spacing)*20);width:100%}
+.muro__fila a{display:flex;align-items:center;text-decoration:none}
+/* en móvil los cuatro no entran en una línea de 390px: la fila envuelve */
+@media(max-width:699px){
+  .muro__fila{flex-wrap:wrap;justify-content:flex-start;gap:calc(var(--spacing)*20) calc(var(--spacing)*26)}
+}
+@media(min-width:1024px){.muro{padding:calc(var(--spacing)*24) calc(var(--spacing)*30);min-height:calc(var(--spacing)*134)}}
+.muro__h{
+  font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-muted);flex:none;
+}
+/* El sello del Tribunal no sobrevive a 36px en monocromo — probado: el completo
+   queda un disco y solo el escudo, un cuadrado macizo. Va el nombre compuesto,
+   aproximando su tipografía (geométrica pesada, versales) con la de la página.
+   No es su logo oficial: es su nombre en nuestra tipografía, y por eso funciona. */
+.muro b{
+  font-family:var(--font-sans);font-weight:700;
+  font-size:calc(var(--spacing)*21);text-transform:uppercase;
+  letter-spacing:-.005em;line-height:1;
+  color:var(--fg);opacity:.55;transition:opacity .4s var(--ease-out-quart);
+  white-space:nowrap;   /* SIEMPRE en una línea */
+}
+/* en móvil se achica para caber en una línea, no se parte */
+@media(max-width:699px){.muro b{font-size:calc(var(--spacing)*19)}}
+.muro:hover b{opacity:.9}
+.muro img{
+  width:auto;object-fit:contain;
+  filter:brightness(0);opacity:.55;
+  transition:opacity .4s var(--ease-out-quart);
+}
+.muro:hover img{opacity:.9}
+  /* altura por logo, medida sobre su tinta ya recortada. No se iguala la caja:
+     un sello cuadrado con la misma altura que una palabra se ve el doble. */
+  /* Alturas calculadas para que la LETRA mida 17px en los tres wordmarks.
+     Medido sobre el archivo: la letra ocupa 41% de la caja en Stacksync,
+     87% en Platzi y 98% en Startupeable — por eso las cajas son tan distintas. */
+  .muro .l-stacksync{height:calc(var(--spacing)*42)}    /* letra 17px */
+  .muro .l-platzi{height:calc(var(--spacing)*20)}       /* letra 17px */
+  .muro .l-startupeable{height:calc(var(--spacing)*17)} /* letra 17px */
+  .muro b.l-tribunal{font-size:calc(var(--spacing)*22)}  /* cap ≈ 15px: cede un punto para que los 4 entren en una línea */
+  /* wordmark: para las marcas sin archivo usable. Misma tinta y mismo peso óptico
+     que los logos, compuesto en la tipografía de la página. No finge ser un logo. */
+  .muro b{font-size:calc(var(--spacing)*21)}
 .qtxt__l b{font-family:var(--font-sans);font-weight:500;font-size:calc(var(--spacing)*22);line-height:1.1}
 .qtxt__l span{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.06em;color:var(--fg-muted);display:block;margin-top:calc(var(--spacing)*3)}
-.qtxt__cif{display:flex;flex-direction:column;gap:calc(var(--spacing)*18)}
+.qtxt__cif{display:flex;flex-direction:column;gap:calc(var(--spacing)*16)}
 .qtxt__cif div{display:flex;align-items:baseline;gap:calc(var(--spacing)*10)}
-.qtxt__cif b{font-family:var(--font-sans);font-weight:300;font-size:calc(var(--spacing)*40);line-height:1;letter-spacing:-.03em}
+.qtxt__cif b{font-family:var(--font-sans);font-weight:300;font-size:calc(var(--spacing)*38);line-height:1;letter-spacing:-.03em}
 .qtxt__cif span{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.06em;color:var(--fg-muted);text-transform:uppercase}
-.qtxt__temas{display:flex;flex-wrap:wrap;gap:calc(var(--spacing)*8)}
-.qtxt__temas span{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.04em;border:1px solid var(--border);padding:calc(var(--spacing)*6) calc(var(--spacing)*10);white-space:nowrap}
+.qtxt__temas{display:flex;flex-direction:column}
+.qtxt__temas span{
+  display:flex;align-items:baseline;gap:calc(var(--spacing)*12);
+  padding:calc(var(--spacing)*9) 0;border-top:1px solid var(--border-muted);
+  font-family:var(--font-sans);font-weight:500;font-size:calc(var(--spacing)*17);line-height:1.1;
+}
+.qtxt__temas span:first-child{border-top:0;padding-top:0}
+.qtxt__temas i{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.1em;color:var(--brand);font-style:normal;flex:none}
 
 /* ── PILARES: de qué se trata Moi (PVP es 1 de 6) ── */
 .pilares{display:grid;grid-template-columns:1fr;border-top:1px solid var(--border)}
@@ -483,6 +589,14 @@ h3{font-size:var(--text-h3)}
 .note{color:var(--fg-muted);font-size:var(--text-body-sm);line-height:1.75;max-width:72ch;margin-top:calc(var(--spacing)*28)}
 
 /* ── PREGUNTAS ── */
+/* Desfile ×3: ellos repiten cada título tres veces en el DOM y al pasar el cursor
+   desfila. Estaba construido y se perdió en una reescritura; vuelve acá. */
+.mq{display:inline-flex;overflow:hidden;max-width:100%;vertical-align:bottom}
+.mq>span{flex:none;white-space:nowrap;padding-right:1.2em}
+.mq>span+span{opacity:.3}
+.faq summary:hover .mq>span,.faq summary:focus-visible .mq>span{animation:desfile 6s linear infinite}
+@keyframes desfile{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
 .faq details{border-bottom:1px solid var(--border)}
 .faq details:first-child{border-top:1px solid var(--border)}
 .faq summary{
@@ -558,6 +672,11 @@ h3{font-size:var(--text-h3)}
 </head>
 <body>
 
+<div class="carga" id="carga" data-fase="entrando" aria-hidden="true">
+  <div class="carga__sq"></div>
+  <div class="carga__c"><span class="carga__m">Moi</span><span class="carga__t" id="carga-t"></span></div>
+</div>
+
 <header class="head" id="head">
   <div class="grid-container">
     <div class="head__row">
@@ -608,8 +727,9 @@ h3{font-size:var(--text-h3)}
     </div>
     <div class="sp-12 lg-st-7 lg-sp-6 fade" style="align-self:end;margin-bottom:calc(var(--spacing)*48)">
       <p class="body-mut" style="max-width:44ch">
-        Walter Álvarez. Hago marketing de contenido para una startup de San Francisco,
-        remoto desde Bolivia. Antes dirigí el marketing del podcast de startups más grande
+        Walter Álvarez. Me formé como ingeniero civil; hoy construyo audiencias en vez de
+        edificios. Hago contenido para Stacksync, una startup de Y Combinator en San Francisco,
+        remoto desde Bolivia. Antes fui CMO de Startupeable, el podcast de startups más grande
         de Latinoamérica. Lo que publico sale de ahí, no de un curso.
       </p>
     </div>
@@ -619,30 +739,35 @@ h3{font-size:var(--text-h3)}
         <div class="qfoto"><img src="walter-foto.webp" alt="Walter Álvarez trabajando" loading="lazy" width="660" height="897"></div>
 
         <div class="qtxt">
-          <span class="qtxt__h">// Dónde he trabajado</span>
-          <div class="qtxt__l">
-            <div><b>Stacksync</b><span>San Francisco · hoy</span></div>
-            <div><b>Startupeable</b><span>CMO · 2022–2025</span></div>
-            <div><b>Platzi</b></div>
-            <div><b>Min. de Medio Ambiente</b><span>Bolivia</span></div>
-          </div>
-        </div>
-
-        <div class="qtxt">
           <span class="qtxt__h">// Los números</span>
           <div class="qtxt__cif">
-            <div><b>5M+</b><span>descargas de podcast</span></div>
-            <div><b>200K</b><span>impresiones por post</span></div>
-            <div><b>8</b><span>perfiles que escribo</span></div>
-            <div><b>4</b><span>años cobrando en USD</span></div>
+            <div><b>7M</b><span>descargas del podcast</span></div>
+            <div><b>2,8M+</b><span>impresiones en 4 meses</span></div>
+            <div><b>50+</b><span>entrevistas a fundadores</span></div>
+            <div><b>66K</b><span>suscriptores en YouTube</span></div>
           </div>
         </div>
 
         <div class="qtxt">
           <span class="qtxt__h">// De qué hablo y por qué</span>
           <div class="qtxt__temas">
-            <span>Trabajo remoto</span><span>Startups</span><span>IA sin bullshit</span>
-            <span>Silicon Valley</span><span>Cómo entrar</span><span>Los que ya entraron</span>
+            <span><i>01</i>Trabajo remoto</span>
+            <span><i>02</i>Startups</span>
+            <span><i>03</i>IA sin bullshit</span>
+            <span><i>04</i>Silicon Valley</span>
+            <span><i>05</i>Cómo entrar</span>
+            <span><i>06</i>Los que ya entraron</span>
+          </div>
+        </div>
+
+
+        <div class="muro">
+          <span class="muro__h">// Dónde he trabajado</span>
+          <div class="muro__fila">
+            <a href="https://www.stacksync.com" target="_blank" rel="noopener"><img class="l-stacksync" src="logos/stacksync.webp" alt="Stacksync" loading="lazy"></a>
+            <a href="https://platzi.com" target="_blank" rel="noopener"><img class="l-platzi" src="logos/platzi.webp" alt="Platzi" loading="lazy"></a>
+            <a href="https://startupeable.com" target="_blank" rel="noopener"><img class="l-startupeable" src="logos/startupeable.webp" alt="Startupeable" loading="lazy"></a>
+            <a href="https://www.tribunalagroambiental.bo/" target="_blank" rel="noopener"><b class="l-tribunal">Tribunal Agroambiental</b></a>
           </div>
         </div>
 
@@ -654,7 +779,7 @@ h3{font-size:var(--text-h3)}
 <!-- ═══ SE EMPIEZA POR EL TRABAJO — bloque declarativo ═══ -->
 <section class="sec decl reveal-group" id="empieza">
   <div class="grid-container grid-layout">
-    <div class="sp-12 lg-sp-10">
+    <div class="sp-12">
       <div class="decl__t">
         <span class="rv"><span>Se empieza por el trabajo.</span><i class="b1"></i><i class="b2"></i></span><br>
         <span class="rv"><span>No porque sea lo importante:</span><i class="b1"></i><i class="b2"></i></span><br>
@@ -665,10 +790,9 @@ h3{font-size:var(--text-h3)}
         <span>Si duermes y si entrenas</span><span>Qué puedes construir</span>
       </div>
     </div>
-    <div class="sp-12 lg-sp-8 fade" style="margin-top:calc(var(--spacing)*56)">
-      <p class="lede">
-        Cambiarlo no es mudarse ni empezar de cero. Es dejar de venderle tus horas al mercado
-        que te tocó y vendérselas al que paga <span class="prueba"><span class="odo" data-odo="10"></span>×</span> más.
+    <div class="sp-12 fade" style="margin-top:calc(var(--spacing)*56)">
+      <p class="lede" style="max-width:none;text-align:center">
+        Cambiarlo no es mudarse ni empezar de cero. Es dejar de venderle tus horas al mercado que te tocó y vendérselas al que paga <span class="prueba"><span class="odo" data-odo="10"></span>×</span> más.
       </p>
     </div>
   </div>
@@ -758,7 +882,7 @@ h3{font-size:var(--text-h3)}
   </div>
 </section>
 
-<!-- ═══ PLATAFORMAS — reproducido de "Selected work" ═══ -->
+<!-- ═══ PLATAFORMAS — 4 destacadas + enlace al resto, como su "Selected work" ═══ -->
 <section class="sec reveal-group" id="lista">
   <div class="grid-container grid-layout">
     <div class="sp-12 lg-sp-3">
@@ -773,33 +897,19 @@ h3{font-size:var(--text-h3)}
         </div>
         <div class="sw__minis fade">
           <button class="sw__mini on" type="button" data-mini="0" aria-label="Work at a Startup">
-            <span><img src="plataformas/workatastartup.webp" alt="" loading="lazy" width="1120" height="700"></span><i></i>
+            <span><img src="plataformas/workatastartup.webp" alt="" loading="lazy"></span><i></i>
           </button>
           <button class="sw__mini" type="button" data-mini="1" aria-label="Wellfound">
-            <span><img src="plataformas/wellfound.webp" alt="" loading="lazy" width="1120" height="700"></span><i></i>
+            <span><img src="plataformas/wellfound.webp" alt="" loading="lazy"></span><i></i>
           </button>
           <button class="sw__mini" type="button" data-mini="2" aria-label="Get on Board">
-            <span><img src="plataformas/getonbrd.webp" alt="" loading="lazy" width="1120" height="700"></span><i></i>
+            <span><img src="plataformas/getonbrd.webp" alt="" loading="lazy"></span><i></i>
           </button>
           <button class="sw__mini" type="button" data-mini="3" aria-label="We Work Remotely">
-            <span><img src="plataformas/weworkremotely.webp" alt="" loading="lazy" width="1120" height="700"></span><i></i>
-          </button>
-          <button class="sw__mini" type="button" data-mini="4" aria-label="RemoteOK">
-            <span><img src="plataformas/remoteok.webp" alt="" loading="lazy" width="1120" height="700"></span><i></i>
-          </button>
-          <button class="sw__mini" type="button" data-mini="5" aria-label="Torre">
-            <span><img src="plataformas/torre.webp" alt="" loading="lazy" width="1120" height="700"></span><i></i>
-          </button>
-          <button class="sw__mini" type="button" data-mini="6" aria-label="WeRemoto">
-            <span><img src="plataformas/weremoto.webp" alt="" loading="lazy" width="1120" height="700"></span><i></i>
-          </button>
-          <button class="sw__mini" type="button" data-mini="7" aria-label="Trabajito">
-            <span><img src="plataformas/trabajito.webp" alt="" loading="lazy" width="1120" height="700"></span><i></i>
-          </button>
-          <button class="sw__mini" type="button" data-mini="8" aria-label="Workana">
-            <span><img src="plataformas/workana.webp" alt="" loading="lazy" width="1120" height="700"></span><i></i>
+            <span><img src="plataformas/weworkremotely.webp" alt="" loading="lazy"></span><i></i>
           </button>
         </div>
+        <a href="lista.html" class="gbtn fade"><i class="gbtn__chip l" aria-hidden="true">+</i><span class="gbtn__lbl">Ver las 9</span><i class="gbtn__chip r" aria-hidden="true">+</i></a>
       </div>
     </div>
     <div class="sp-12 lg-st-5 lg-sp-8 fade">
@@ -820,26 +930,6 @@ h3{font-size:var(--text-h3)}
           <span class="sw__img"><img src="plataformas/weworkremotely.webp" alt="Portada de We Work Remotely" loading="lazy" width="1120" height="700"></span>
           <span class="sw__pie"><span class="sw__n">We Work Remotely</span><span class="sw__t">[Global]—[Todo rol]</span></span>
         </a>
-        <a class="sw__card" data-card="4" href="https://remoteok.com/" target="_blank" rel="noopener">
-          <span class="sw__img"><img src="plataformas/remoteok.webp" alt="Portada de RemoteOK" loading="lazy" width="1120" height="700"></span>
-          <span class="sw__pie"><span class="sw__n">RemoteOK</span><span class="sw__t">[Global]—[Salario visible]</span></span>
-        </a>
-        <a class="sw__card" data-card="5" href="https://torre.ai/" target="_blank" rel="noopener">
-          <span class="sw__img"><img src="plataformas/torre.webp" alt="Portada de Torre" loading="lazy" width="1120" height="700"></span>
-          <span class="sw__pie"><span class="sw__n">Torre</span><span class="sw__t">[Latam]—[Remoto]</span></span>
-        </a>
-        <a class="sw__card" data-card="6" href="https://weremoto.com/" target="_blank" rel="noopener">
-          <span class="sw__img"><img src="plataformas/weremoto.webp" alt="Portada de WeRemoto" loading="lazy" width="1120" height="700"></span>
-          <span class="sw__pie"><span class="sw__n">WeRemoto</span><span class="sw__t">[Latam]—[Español]</span></span>
-        </a>
-        <a class="sw__card" data-card="7" href="https://trabajito.com.bo/" target="_blank" rel="noopener">
-          <span class="sw__img"><img src="plataformas/trabajito.webp" alt="Portada de Trabajito" loading="lazy" width="1120" height="700"></span>
-          <span class="sw__pie"><span class="sw__n">Trabajito</span><span class="sw__t">[Latam]—[Bolivia]</span></span>
-        </a>
-        <a class="sw__card" data-card="8" href="https://www.workana.com/" target="_blank" rel="noopener">
-          <span class="sw__img"><img src="plataformas/workana.webp" alt="Portada de Workana" loading="lazy" width="1120" height="700"></span>
-          <span class="sw__pie"><span class="sw__n">Workana</span><span class="sw__t">[Freelance]—[Latam]</span></span>
-        </a>
       </div>
     </div>
   </div>
@@ -855,14 +945,14 @@ h3{font-size:var(--text-h3)}
       </div>
     </div>
     <div class="sp-12 lg-st-5 lg-sp-8 faq fade">
-      <details><summary>No tengo experiencia <span class="faq__pm">+</span></summary><p class="faq__a">El PVP crea la experiencia. El documento que haces para esa empresa ES tu portafolio — trabajo aplicado, hecho ahora, para ellos. Eso ya demuestra más que cualquier certificado.</p></details>
-      <details><summary>Soy de Bolivia, nadie me contrata <span class="faq__pm">+</span></summary><p class="faq__a">Una startup de diez personas no contrata ubicaciones — contrata soluciones. Bolivia no es un nombre que reconozcan, pero tampoco Perú o Colombia al principio. Lo que sí reconocen es si entendiste su problema.</p></details>
-      <details><summary>No tengo inglés <span class="faq__pm">+</span></summary><p class="faq__a">Empieza con startups en español —México, Colombia, Argentina, España— mientras construyes el inglés en paralelo. Son dos procesos simultáneos, no secuenciales. Y antes de mandar cualquier mensaje en inglés, pásalo por IA.</p></details>
-      <details><summary>¿Y si me ignoran? <span class="faq__pm">+</span></summary><p class="faq__a">La mayoría lo va a hacer. Planifica veinte a cuarenta intentos reales, no cinco. Lo que arruina esto no es la tasa de respuesta: es hacer tres intentos y concluir que no funciona.</p></details>
-      <details><summary>No sé cómo cobrar desde acá <span class="faq__pm">+</span></summary><p class="faq__a">Wallbit te abre una cuenta bancaria en Estados Unidos en 24-48 horas sin ser ciudadano. También existen Wise, USDT, y plataformas como Deel para contratos más formales.</p></details>
-      <details><summary>¿Es legal? <span class="faq__pm">+</span></summary><p class="faq__a">Sí. Trabajar remotamente para empresas extranjeras como freelancer desde Bolivia es legal. Cuando escales a ingresos consistentes, regularizas con el NIT.</p></details>
-      <details><summary>¿Cuánto tarda en funcionar? <span class="faq__pm">+</span></summary><p class="faq__a">Dos a tres meses hasta la primera oportunidad concreta si ejecutas consistentemente. Tres a seis hasta un cliente estable. No es fracaso si no hay cliente el primer mes.</p></details>
-      <details><summary>¿Necesito certificaciones? <span class="faq__pm">+</span></summary><p class="faq__a">No. PVP no pide certificaciones. Pide trabajo real.</p></details>
+      <details><summary><span class="mq"><span>No tengo experiencia</span><span aria-hidden="true">No tengo experiencia</span><span aria-hidden="true">No tengo experiencia</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">El PVP crea la experiencia. El documento que haces para esa empresa ES tu portafolio — trabajo aplicado, hecho ahora, para ellos. Eso ya demuestra más que cualquier certificado.</p></details>
+      <details><summary><span class="mq"><span>Soy de Bolivia, nadie me contrata</span><span aria-hidden="true">Soy de Bolivia, nadie me contrata</span><span aria-hidden="true">Soy de Bolivia, nadie me contrata</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Una startup de diez personas no contrata ubicaciones — contrata soluciones. Bolivia no es un nombre que reconozcan, pero tampoco Perú o Colombia al principio. Lo que sí reconocen es si entendiste su problema.</p></details>
+      <details><summary><span class="mq"><span>No tengo inglés</span><span aria-hidden="true">No tengo inglés</span><span aria-hidden="true">No tengo inglés</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Empieza con startups en español —México, Colombia, Argentina, España— mientras construyes el inglés en paralelo. Son dos procesos simultáneos, no secuenciales. Y antes de mandar cualquier mensaje en inglés, pásalo por IA.</p></details>
+      <details><summary><span class="mq"><span>¿Y si me ignoran?</span><span aria-hidden="true">¿Y si me ignoran?</span><span aria-hidden="true">¿Y si me ignoran?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">La mayoría lo va a hacer. Planifica veinte a cuarenta intentos reales, no cinco. Lo que arruina esto no es la tasa de respuesta: es hacer tres intentos y concluir que no funciona.</p></details>
+      <details><summary><span class="mq"><span>No sé cómo cobrar desde acá</span><span aria-hidden="true">No sé cómo cobrar desde acá</span><span aria-hidden="true">No sé cómo cobrar desde acá</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Wallbit te abre una cuenta bancaria en Estados Unidos en 24-48 horas sin ser ciudadano. También existen Wise, USDT, y plataformas como Deel para contratos más formales.</p></details>
+      <details><summary><span class="mq"><span>¿Es legal?</span><span aria-hidden="true">¿Es legal?</span><span aria-hidden="true">¿Es legal?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Sí. Trabajar remotamente para empresas extranjeras como freelancer desde Bolivia es legal. Cuando escales a ingresos consistentes, regularizas con el NIT.</p></details>
+      <details><summary><span class="mq"><span>¿Cuánto tarda en funcionar?</span><span aria-hidden="true">¿Cuánto tarda en funcionar?</span><span aria-hidden="true">¿Cuánto tarda en funcionar?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Dos a tres meses hasta la primera oportunidad concreta si ejecutas consistentemente. Tres a seis hasta un cliente estable. No es fracaso si no hay cliente el primer mes.</p></details>
+      <details><summary><span class="mq"><span>¿Necesito certificaciones?</span><span aria-hidden="true">¿Necesito certificaciones?</span><span aria-hidden="true">¿Necesito certificaciones?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">No. PVP no pide certificaciones. Pide trabajo real.</p></details>
     </div>
   </div>
 </section>
@@ -962,7 +1052,6 @@ h3{font-size:var(--text-h3)}
   </div>
   <div class="grid-container">
     <div class="foot__bar">
-      <span class="foot__meta">Moi — Walter Álvarez<br>Desde acá. No desde San Francisco.</span>
       <span class="foot__meta">© 2026</span>
     </div>
   </div>
@@ -970,6 +1059,26 @@ h3{font-size:var(--text-h3)}
 
 <script src="vendor/lenis.min.js"></script>
 <script>
+/* ── CARGA: la palabra aparece letra por letra y después barre en diagonal ── */
+(function(){
+  var capa=document.getElementById('carga'); if(!capa)return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ capa.remove(); return; }
+  var t=document.getElementById('carga-t'), txt='Cargando', i=0;
+  var esc=setInterval(function(){ t.textContent=txt.slice(0,++i); if(i>=txt.length)clearInterval(esc); },55);
+  function salir(){
+    capa.dataset.fase='quieto';            // el pivote salta ANTES de girar
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      capa.dataset.fase='saliendo';
+      setTimeout(function(){ capa.remove(); },1250);
+    });});
+  }
+  // sale cuando la página está lista, con un mínimo para que la marca se vea
+  var listo=false, minimo=false;
+  addEventListener('load',function(){ listo=true; if(minimo)salir(); });
+  setTimeout(function(){ minimo=true; if(listo)salir(); },900);
+  setTimeout(function(){ if(document.getElementById('carga'))salir(); },3500);  // red
+})();
+
 /* ── SCROLL CON INERCIA (Lenis) ──
    Es el motor de la sensación de lectura: al soltar la rueda la página sigue
    deslizando y frena suave, en vez de avanzar a saltos. Se apaga entero si el
