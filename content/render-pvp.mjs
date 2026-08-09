@@ -715,7 +715,7 @@ const html = `<!DOCTYPE html>
 <meta property="og:image" content="${URL_BASE}hero.webp">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23141314'/><text x='50%25' y='56%25' font-family='Georgia,serif' font-size='19' font-weight='700' fill='%23fd551d' text-anchor='middle' dominant-baseline='middle'>M</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23fd551d'/><text x='50%25' y='56%25' font-family='Helvetica,Arial,sans-serif' font-size='21' font-weight='700' fill='%23141314' text-anchor='middle' dominant-baseline='middle'>M</text></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
