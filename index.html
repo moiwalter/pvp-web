@@ -536,13 +536,23 @@ h3{font-size:var(--text-h3)}
 .qtxt__cif div{display:flex;align-items:baseline;gap:calc(var(--spacing)*10)}
 .qtxt__cif b{font-family:var(--font-sans);font-weight:300;font-size:calc(var(--spacing)*38);line-height:1;letter-spacing:-.03em}
 .qtxt__cif span{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.06em;color:var(--fg-muted);text-transform:uppercase}
+/* Cada tema lleva su VEREDICTO, no sólo su etiqueta: el título de la zona
+   promete "y por qué" y una lista de seis sustantivos sólo contesta "de qué". */
 .qtxt__temas{display:flex;flex-direction:column}
-.qtxt__temas span{
-  display:flex;align-items:baseline;gap:calc(var(--spacing)*12);
-  padding:calc(var(--spacing)*9) 0;border-top:1px solid var(--border-muted);
-  font-family:var(--font-sans);font-weight:500;font-size:calc(var(--spacing)*17);line-height:1.1;
+.qtxt__temas>span{
+  display:grid;grid-template-columns:auto 1fr;column-gap:calc(var(--spacing)*12);
+  padding:calc(var(--spacing)*11) 0;border-top:1px solid var(--border-muted);
 }
-.qtxt__temas span:first-child{border-top:0;padding-top:0}
+.qtxt__temas>span:first-child{border-top:0;padding-top:0}
+.qtxt__temas i{
+  font-family:var(--font-mono);font-size:var(--text-accent-sm);font-style:normal;
+  color:var(--brand);line-height:1.5;grid-row:1/3
+}
+.qtxt__temas b{font-family:var(--font-sans);font-weight:500;font-size:calc(var(--spacing)*17);line-height:1.15}
+.qtxt__temas em{
+  font-style:normal;color:var(--fg-muted);font-size:var(--text-body-sm);
+  line-height:1.45;margin-top:calc(var(--spacing)*3)
+}
 .qtxt__temas i{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.1em;color:var(--brand);font-style:normal;flex:none}
 
 /* ── PILARES: de qué se trata Moi (PVP es 1 de 6) ── */
@@ -774,10 +784,17 @@ a.pilar--tlb:hover .pilar__t{color:var(--tlb-oro)}
     </div>
     <div class="sp-12 lg-st-7 lg-sp-6 fade" style="align-self:end;margin-bottom:calc(var(--spacing)*48)">
       <p class="body-mut" style="max-width:44ch">
-        Walter Álvarez. Me formé como ingeniero civil; hoy construyo audiencias en vez de
-        edificios. Hago contenido para Stacksync, una startup de Y Combinator en San Francisco,
-        remoto desde Bolivia. Antes fui CMO de Startupeable, el podcast de startups más grande
-        de Latinoamérica. Lo que publico sale de ahí, no de un curso.
+        Walter Álvarez. Estudié ingeniería civil y trabajé en el Tribunal Agroambiental,
+        que es más o menos lo contrario de una startup. No tenía contactos en tecnología, ni
+        portafolio, ni un inglés que valiera la pena presumir.
+        <br><br>
+        Hoy hago contenido para Stacksync, una startup de Y Combinator en San Francisco, en
+        remoto y cobrando en dólares. Antes fui CMO de Startupeable, el podcast de startups más
+        grande de Latinoamérica, donde entrevisté a más de cincuenta fundadores y vi por dentro
+        cómo deciden a quién contratan.
+        <br><br>
+        No escribo esto porque lo leí en algún lado. Es, literalmente, cómo me gano la vida —
+        y todo lo que está en esta página lo usé yo primero.
       </p>
     </div>
     <div class="sp-12">
@@ -798,12 +815,12 @@ a.pilar--tlb:hover .pilar__t{color:var(--tlb-oro)}
         <div class="qtxt">
           <span class="qtxt__h">// De qué hablo y por qué</span>
           <div class="qtxt__temas">
-            <span><i>01</i>Trabajo remoto</span>
-            <span><i>02</i>Startups</span>
-            <span><i>03</i>IA sin bullshit</span>
-            <span><i>04</i>Silicon Valley</span>
-            <span><i>05</i>Cómo entrar</span>
-            <span><i>06</i>Los que ya entraron</span>
+            <span><i>01</i><b>Trabajo remoto</b><em>No es trabajar desde la playa. Es cobrar en otra moneda.</em></span>
+            <span><i>02</i><b>Startups</b><em>Diez personas decidiendo rápido valen más que un logo grande.</em></span>
+            <span><i>03</i><b>IA sin bullshit</b><em>Lo que uso de verdad, no lo que se podría hacer.</em></span>
+            <span><i>04</i><b>Silicon Valley</b><em>No es un lugar. Es un estándar de cómo se trabaja.</em></span>
+            <span><i>05</i><b>Cómo entrar</b><em>Sin contactos, sin portafolio y sin pedir permiso.</em></span>
+            <span><i>06</i><b>Los que ya entraron</b><em>Gente de acá que hoy cobra afuera. Y cómo lo hizo.</em></span>
           </div>
         </div>
 
@@ -850,29 +867,35 @@ a.pilar--tlb:hover .pilar__t{color:var(--tlb-oro)}
   <div class="pin__stick">
     <div class="grid-container grid-layout">
       <div class="sp-12 lg-st-3 lg-sp-8">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:calc(var(--spacing)*56);flex-wrap:wrap">
-          <h2><span class="rv"><span>Tener la lista no basta.</span><i class="b1"></i><i class="b2"></i></span></h2>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:calc(var(--spacing)*22);flex-wrap:wrap">
+          <h2><span class="rv"><span>Así se consigue trabajo</span><i class="b1"></i><i class="b2"></i></span><br><span class="rv"><span><em>sin pedir permiso</em>.</span><i class="b1"></i><i class="b2"></i></span></h2>
           <span class="section-label">// El método PVP</span>
         </div>
+        <p class="body-mut fade" style="max-width:56ch;margin-bottom:calc(var(--spacing)*52)">
+          PVP es <strong>Permissionless Value Proposition</strong>. El orden normal es pedir
+          permiso primero —mandar el CV, esperar— y recién después demostrar que puedes.
+          Acá se invierte: demuestras primero y pides después. Son cuatro pasos, y para
+          empezar no necesitas portafolio, contactos ni inglés avanzado.
+        </p>
         <div class="hw">
           <div class="hw__izq">
             <div class="hw__pasos">
               <span class="hw__marca" id="hw-marca" aria-hidden="true"></span>
             <div class="hw__paso" data-paso="0">
               <span class="hw__n">01</span>
-              <div style="flex:1"><h3>Investiga</h3><p>Eliges una startup de la lista y la entiendes a fondo: su web, sus redes, su producto, sus competidores. Hoy, con IA, eso toma una tarde.</p></div>
+              <div style="flex:1"><h3>Investiga</h3><p>Antes de proponer nada tienes que entender el negocio mejor que el resto de los que aplican. No es curiosidad: es la materia prima de todo lo demás. Lo que antes tomaba semanas, hoy toma una tarde.</p></div>
             </div>
             <div class="hw__paso off" data-paso="1">
               <span class="hw__n">02</span>
-              <div style="flex:1"><h3>Encuentra un problema</h3><p>Algo concreto y roto, en un área en la que seas bueno. Lo que ellos ya no ven por estar adentro.</p></div>
+              <div style="flex:1"><h3>Encuentra un problema</h3><p>Toda empresa tiene problemas que sus propios equipos ya no ven, porque están adentro. Tu ventaja no es saber más que ellos: es mirar desde afuera, con ojos nuevos y en un área que dominas.</p></div>
             </div>
             <div class="hw__paso off" data-paso="2">
               <span class="hw__n">03</span>
-              <div style="flex:1"><h3>Resuélvelo antes de que te lo pidan</h3><p>Creas la solución y la entregas como un link, nunca como adjunto. Ese documento es tu portafolio.</p></div>
+              <div style="flex:1"><h3>Resuélvelo antes de que te lo pidan</h3><p>Acá se invierte el orden normal. En vez de pedir permiso para demostrar que puedes, demuestras primero y pides después. El trabajo que entregas deja de ser una promesa y pasa a ser evidencia.</p></div>
             </div>
             <div class="hw__paso off" data-paso="3">
               <span class="hw__n">04</span>
-              <div style="flex:1"><h3>Mándalo al fundador</h3><p>Por LinkedIn, no al portal. Seis a ocho líneas. Y no pides el trabajo: pides quince minutos.</p></div>
+              <div style="flex:1"><h3>Mándalo al fundador</h3><p>Vas a la persona que decide, no al formulario donde compites con cientos. Y no pides el trabajo — pides una conversación. Es una puerta mucho más fácil de abrir, y es la única que necesitas.</p></div>
             </div>
             </div>
           </div>
@@ -909,13 +932,18 @@ a.pilar--tlb:hover .pilar__t{color:var(--tlb-oro)}
 <section class="sec stack reveal-group inv">
   <div class="grid-container grid-layout">
     <div class="sp-12" style="margin-bottom:calc(var(--spacing)*24)">
-      <h2><span class="rv"><span>Tener la lista</span><i class="b1"></i><i class="b2"></i></span><br><span class="rv"><span>no basta.</span><i class="b1"></i><i class="b2"></i></span></h2>
+      <h2><span class="rv"><span>Así se consigue</span><i class="b1"></i><i class="b2"></i></span><br><span class="rv"><span>trabajo <em>sin pedir</em></span><i class="b1"></i><i class="b2"></i></span><br><span class="rv"><span><em>permiso</em>.</span><i class="b1"></i><i class="b2"></i></span></h2>
+      <p class="body-mut fade" style="margin-top:calc(var(--spacing)*20)">
+        PVP es <strong>Permissionless Value Proposition</strong>. El orden normal es pedir
+        permiso primero y recién después demostrar que puedes. Acá se invierte: demuestras
+        primero y pides después.
+      </p>
     </div>
     <div class="sp-12 fade">
-      <div class="stack__i"><span class="step__n">PASO 01</span><h3>Investiga</h3><p>Eliges una startup de la lista y la entiendes a fondo: su web, sus redes, su producto, sus competidores. Hoy, con IA, eso toma una tarde.</p></div>
-      <div class="stack__i"><span class="step__n">PASO 02</span><h3>Encuentra un problema</h3><p>Algo concreto y roto, en un área en la que seas bueno. Lo que ellos ya no ven por estar adentro.</p></div>
-      <div class="stack__i"><span class="step__n">PASO 03</span><h3>Resuélvelo antes de que te lo pidan</h3><p>Creas la solución y la entregas como un link, nunca como adjunto. Ese documento es tu portafolio.</p></div>
-      <div class="stack__i"><span class="step__n">PASO 04</span><h3>Mándalo al fundador</h3><p>Por LinkedIn, no al portal. Seis a ocho líneas. Y no pides el trabajo: pides quince minutos.</p></div>
+      <div class="stack__i"><span class="step__n">PASO 01</span><h3>Investiga</h3><p>Antes de proponer nada tienes que entender el negocio mejor que el resto de los que aplican. No es curiosidad: es la materia prima de todo lo demás. Lo que antes tomaba semanas, hoy toma una tarde.</p></div>
+      <div class="stack__i"><span class="step__n">PASO 02</span><h3>Encuentra un problema</h3><p>Toda empresa tiene problemas que sus propios equipos ya no ven, porque están adentro. Tu ventaja no es saber más que ellos: es mirar desde afuera, con ojos nuevos y en un área que dominas.</p></div>
+      <div class="stack__i"><span class="step__n">PASO 03</span><h3>Resuélvelo antes de que te lo pidan</h3><p>Acá se invierte el orden normal. En vez de pedir permiso para demostrar que puedes, demuestras primero y pides después. El trabajo que entregas deja de ser una promesa y pasa a ser evidencia.</p></div>
+      <div class="stack__i"><span class="step__n">PASO 04</span><h3>Mándalo al fundador</h3><p>Vas a la persona que decide, no al formulario donde compites con cientos. Y no pides el trabajo — pides una conversación. Es una puerta mucho más fácil de abrir, y es la única que necesitas.</p></div>
     </div>
   </div>
 </section>
@@ -1476,12 +1504,22 @@ document.addEventListener('click',function(e){
       "You were taught one way to live: study, get a job, endure. That formula stopped working and nobody announced it. Life isn't accepting the salary, the ceiling and the market you were handed for being born where you were born — and this page is what I put together to get out of that.",
     "Por dónde se empieza":"Where to start","De qué se trata":"What this is about",
     "Quién te habla":"Who's talking","y de qué.":"and about what.",
-    "Walter Álvarez. Me formé como ingeniero civil; hoy construyo audiencias en vez de edificios. Hago contenido para Stacksync, una startup de Y Combinator en San Francisco, remoto desde Bolivia. Antes fui CMO de Startupeable, el podcast de startups más grande de Latinoamérica. Lo que publico sale de ahí, no de un curso.":
-      "Walter Álvarez. I trained as a civil engineer; today I build audiences instead of buildings. I make content for Stacksync, a Y Combinator startup in San Francisco, remote from Bolivia. Before that I was CMO of Startupeable, the biggest startup podcast in Latin America. What I publish comes from there, not from a course.",
+    "Walter Álvarez. Estudié ingeniería civil y trabajé en el Tribunal Agroambiental, que es más o menos lo contrario de una startup. No tenía contactos en tecnología, ni portafolio, ni un inglés que valiera la pena presumir.":
+      "Walter Álvarez. I studied civil engineering and worked at Bolivia's Agro-Environmental Court, which is more or less the opposite of a startup. I had no contacts in tech, no portfolio, and no English worth showing off.",
+    "Hoy hago contenido para Stacksync, una startup de Y Combinator en San Francisco, en remoto y cobrando en dólares. Antes fui CMO de Startupeable, el podcast de startups más grande de Latinoamérica, donde entrevisté a más de cincuenta fundadores y vi por dentro cómo deciden a quién contratan.":
+      "Today I make content for Stacksync, a Y Combinator startup in San Francisco — remote, and paid in dollars. Before that I was CMO of Startupeable, the biggest startup podcast in Latin America, where I interviewed more than fifty founders and saw from the inside how they decide who to hire.",
+    "No escribo esto porque lo leí en algún lado. Es, literalmente, cómo me gano la vida — y todo lo que está en esta página lo usé yo primero.":
+      "I'm not writing this because I read it somewhere. It is, literally, how I make my living — and everything on this page I used myself first.",
     "// Los números":"// The numbers",
     "descargas del podcast":"podcast downloads","impresiones en 4 meses":"impressions in 4 months",
     "entrevistas a fundadores":"founder interviews","suscriptores en YouTube":"YouTube subscribers",
     "// De qué hablo y por qué":"// What I talk about and why",
+    "No es trabajar desde la playa. Es cobrar en otra moneda.":"It isn't working from the beach. It's getting paid in another currency.",
+    "Diez personas decidiendo rápido valen más que un logo grande.":"Ten people deciding fast are worth more than a big logo.",
+    "Lo que uso de verdad, no lo que se podría hacer.":"What I actually use, not what could be done.",
+    "No es un lugar. Es un estándar de cómo se trabaja.":"It isn't a place. It's a standard for how work gets done.",
+    "Sin contactos, sin portafolio y sin pedir permiso.":"With no contacts, no portfolio and without asking permission.",
+    "Gente de acá que hoy cobra afuera. Y cómo lo hizo.":"People from here who now get paid abroad. And how they did it.",
     "Trabajo remoto":"Remote work","IA sin bullshit":"AI without bullshit",
     "Cómo entrar":"How to get in","Los que ya entraron":"The ones already in",
     "// Dónde he trabajado":"// Where I've worked",
@@ -1493,23 +1531,30 @@ document.addEventListener('click',function(e){
     "Cambiarlo no es mudarse ni empezar de cero. Es dejar de venderle tus horas al mercado que te tocó y vendérselas al que paga":
       "Changing it isn't moving abroad or starting from zero. It's about no longer selling your hours to the market you were handed, and selling them to one that pays",
     "más.":"more.",
-    "Tener la lista no basta.":"The list alone isn't enough.","// El método PVP":"// The PVP method",
+    "// El método PVP":"// The PVP method",
+    "Así se consigue trabajo":"This is how you get hired","sin pedir permiso":"without asking permission",
+    "Así se consigue":"This is how you get","trabajo sin pedir":"hired without asking","permiso":"permission",
+    "PVP es":"PVP stands for","Permissionless Value Proposition":"Permissionless Value Proposition",
+    "El orden normal es pedir permiso primero —mandar el CV, esperar— y recién después demostrar que puedes. Acá se invierte: demuestras primero y pides después. Son cuatro pasos, y para empezar no necesitas portafolio, contactos ni inglés avanzado.":
+      "The normal order is to ask permission first —send the CV, wait— and only then prove you can do it. Here it flips: you prove it first and ask after. It's four steps, and to start you need no portfolio, no contacts and no advanced English.",
+    "El orden normal es pedir permiso primero y recién después demostrar que puedes. Acá se invierte: demuestras primero y pides después.":
+      "The normal order is to ask permission first and only then prove you can. Here it flips: you prove it first and ask after.",
     "Investiga":"Research",
-    "Eliges una startup de la lista y la entiendes a fondo: su web, sus redes, su producto, sus competidores. Hoy, con IA, eso toma una tarde.":
-      "You pick a startup from the list and understand it deeply: their site, their socials, their product, their competitors. Today, with AI, that takes an afternoon.",
+    "Antes de proponer nada tienes que entender el negocio mejor que el resto de los que aplican. No es curiosidad: es la materia prima de todo lo demás. Lo que antes tomaba semanas, hoy toma una tarde.":
+      "Before proposing anything you need to understand the business better than everyone else applying. It isn't curiosity: it's the raw material for everything that follows. What used to take weeks now takes an afternoon.",
     "Encuentra un problema":"Find a problem",
-    "Algo concreto y roto, en un área en la que seas bueno. Lo que ellos ya no ven por estar adentro.":
-      "Something concrete and broken, in an area you're good at. What they no longer see from the inside.",
+    "Toda empresa tiene problemas que sus propios equipos ya no ven, porque están adentro. Tu ventaja no es saber más que ellos: es mirar desde afuera, con ojos nuevos y en un área que dominas.":
+      "Every company has problems its own team stopped seeing, because they're inside it. Your advantage isn't knowing more than them: it's looking from the outside, with fresh eyes, in an area you know well.",
     "Resuélvelo antes de que te lo pidan":"Solve it before they ask",
-    "Creas la solución y la entregas como un link, nunca como adjunto. Ese documento es tu portafolio.":
-      "You build the solution and deliver it as a link, never as an attachment. That document is your portfolio.",
+    "Acá se invierte el orden normal. En vez de pedir permiso para demostrar que puedes, demuestras primero y pides después. El trabajo que entregas deja de ser una promesa y pasa a ser evidencia.":
+      "This is where the usual order flips. Instead of asking permission to prove you can, you prove it first and ask after. What you hand over stops being a promise and becomes evidence.",
     "Mándalo al fundador":"Send it to the founder",
-    "Por LinkedIn, no al portal. Seis a ocho líneas. Y no pides el trabajo: pides quince minutos.":
-      "Over LinkedIn, not the job portal. Six to eight lines. And you don't ask for the job: you ask for fifteen minutes.",
+    "Vas a la persona que decide, no al formulario donde compites con cientos. Y no pides el trabajo — pides una conversación. Es una puerta mucho más fácil de abrir, y es la única que necesitas.":
+      "You go to the person who decides, not the form where you compete with hundreds. And you don't ask for the job — you ask for a conversation. That's a far easier door to open, and it's the only one you need.",
     "Paso 01 — 04":"Step 01 — 04","Paso 02 — 04":"Step 02 — 04","Paso 03 — 04":"Step 03 — 04","Paso 04 — 04":"Step 04 — 04",
     "startups que revisas":"startups you review","problema, no diez":"problem, not ten",
     "secciones tiene el documento":"sections in the document","minutos es todo lo que pides":"minutes is all you ask for",
-    "Tener la lista":"The list alone","no basta.":"isn't enough.",
+    
     "PASO 01":"STEP 01","PASO 02":"STEP 02","PASO 03":"STEP 03","PASO 04":"STEP 04",
     "Leer el método completo":"Read the full method","12 partes · nada bloqueado":"12 parts · nothing gated · in Spanish",
     "Dónde están":"Where the jobs","los trabajos.":"actually are.",
