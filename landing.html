@@ -618,26 +618,7 @@ a.pilar:hover .pilar__t{color:var(--brand)}
 .faq details[open] .faq__pm{transform:rotate(45deg)}
 .faq__a{color:var(--fg-muted);max-width:60ch;padding-bottom:calc(var(--spacing)*28)}
 
-/* ── VOTACIÓN / HERRAMIENTAS ── */
-.cells{display:grid;grid-template-columns:1fr;gap:calc(var(--spacing)*16)}
-@media(min-width:820px){.cells{grid-template-columns:1fr 1fr}}
-.cell{
-  background:var(--bg-muted);padding:calc(var(--spacing)*24);
-  display:flex;align-items:center;justify-content:space-between;gap:calc(var(--spacing)*18);
-  transition:background-color .4s var(--ease-out-quart);
-}
-.cell:hover{background:var(--border-muted)}
-.cell__n{font-family:var(--font-sans);font-weight:500;font-size:var(--text-h5);line-height:1.1;display:block}
-.cell__d{color:var(--fg-muted);font-size:var(--text-body-sm);line-height:1.55;display:block;margin-top:calc(var(--spacing)*6)}
-.cell__b{
-  font-family:var(--font-mono);font-size:var(--text-accent-sm);font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;flex:none;
-  padding:calc(var(--spacing)*11) calc(var(--spacing)*18);
-  border:1px solid var(--brand);color:var(--brand);background:transparent;cursor:pointer;
-  transition:background-color .3s var(--ease-out-quart),color .3s var(--ease-out-quart);
-}
-.cell__b:hover{background:var(--brand);color:var(--bg)}
-.cell__b[data-voted="1"]{background:var(--brand);color:var(--bg);cursor:default}
+/* ── HERRAMIENTAS ── */
 .tool{display:block;background:var(--bg-muted);padding:calc(var(--spacing)*24);min-height:calc(var(--spacing)*220);transition:background-color .4s var(--ease-out-quart)}
 @media(min-width:1024px){.tool{padding:calc(var(--spacing)*32)}}
 .tool:hover{background:var(--border-muted)}
@@ -976,7 +957,7 @@ a.pilar:hover .pilar__t{color:var(--brand)}
       </p>
       <div class="close__ctas fade">
         <a href="pvp.html" class="gbtn"><i class="gbtn__chip l" aria-hidden="true">+</i><span class="gbtn__lbl">Abrir el método</span><i class="gbtn__chip r" aria-hidden="true">+</i></a>
-        <a href="#votar" class="link-u">Pedir la próxima guía</a>
+        <a href="lista.html" class="link-u">Ver dónde están los trabajos</a>
       </div>
     </div>
   </div>
@@ -1008,30 +989,9 @@ a.pilar:hover .pilar__t{color:var(--brand)}
   </div>
 </section>
 
-<!-- ═══ VOTACIÓN ═══ -->
-<section class="sec reveal-group" id="votar">
-  <div class="grid-container grid-layout">
-    <div class="sp-12" style="margin-bottom:calc(var(--spacing)*40)">
-      <h2><span class="rv"><span>Qué publico después.</span><i class="b1"></i><i class="b2"></i></span></h2>
-      <span class="section-label fade" style="margin-top:calc(var(--spacing)*16)">// Tú decides</span>
-      <p class="lede fade" style="margin-top:calc(var(--spacing)*24)">
-        Todo esto ya existe escrito en mis notas, pero hay que limpiarlo antes de soltarlo.
-        Vota lo que quieras que saque primero. Un toque, sin dejar nada.
-      </p>
-    </div>
-    <div class="sp-12 fade">
-      <div class="cells">
-        <div class="cell"><span><span class="cell__n">Vuelos baratos</span><span class="cell__d">Pagas menos por exactamente el mismo vuelo.</span></span><button class="cell__b" type="button" data-id="vuelos" aria-pressed="false">Votar</button></div>
-        <div class="cell"><span><span class="cell__n">Que no parezca escrito por IA</span><span class="cell__d">Tu texto deja de sonar a máquina, y aprendes a detectar el de los demás.</span></span><button class="cell__b" type="button" data-id="ai-slops" aria-pressed="false">Votar</button></div>
-        <div class="cell"><span><span class="cell__n">Diseña tu piloto de IA</span><span class="cell__d">Sales con tu primer proceso automatizado, y elegido por la razón correcta.</span></span><button class="cell__b" type="button" data-id="clase-ia" aria-pressed="false">Votar</button></div>
-        <div class="cell"><span><span class="cell__n">Que te lean hasta el final</span><span class="cell__d">La gente termina lo que escribiste en vez de abandonarlo a la mitad.</span></span><button class="cell__b" type="button" data-id="neuro" aria-pressed="false">Votar</button></div>
-        <div class="cell"><span><span class="cell__n">Animaciones para tus videos</span><span class="cell__d">Tus videos se ven editados por alguien que cobra por hacerlo.</span></span><button class="cell__b" type="button" data-id="overlay" aria-pressed="false">Votar</button></div>
-        <div class="cell"><span><span class="cell__n">Kit de edición de video</span><span class="cell__d">Editas un video hablado en una tarde, no en tres días.</span></span><button class="cell__b" type="button" data-id="video-kit" aria-pressed="false">Votar</button></div>
-        <div class="cell"><span><span class="cell__n">Qué estoy leyendo</span><span class="cell__d">Sabes qué leer y en qué orden, sin perder meses en el libro equivocado.</span></span><button class="cell__b" type="button" data-id="lectura" aria-pressed="false">Votar</button></div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- La votación ("Qué publico después") se retiró de la landing el 9-ago-2026 por
+     decisión de Walter. Sigue viva en el hub (index.html) con los mismos 7 ids
+     y la misma tabla de Supabase. Para devolverla acá: git show 172384f. -->
 
 <!-- ═══ PIE — pantalla completa ═══ -->
 <footer class="foot reveal-group">
@@ -1427,26 +1387,8 @@ document.addEventListener('click',function(e){
   armar('.link-u',null,420);
 })();
 
-/* ── VOTOS → Supabase (llave pública: con RLS solo puede SUMAR) ── */
-(function(){
-  var U="https://qttoqljqfosojncpwmng.supabase.co";
-  var K="sb_publishable_E00BpI_dEAWbSKBFVSsMNw_jkLbUqwE";
-  function marcar(b){b.dataset.voted="1";b.textContent="Votada ✓";b.setAttribute("aria-pressed","true");}
-  document.querySelectorAll(".cell__b").forEach(function(b){
-    var k="moi-voto-"+b.dataset.id;
-    try{if(localStorage.getItem(k))marcar(b);}catch(e){}
-    b.addEventListener("click",function(){
-      if(b.dataset.voted==="1")return;
-      marcar(b);
-      try{localStorage.setItem(k,"1");}catch(e){}
-      fetch(U+"/rest/v1/votos_hub",{method:"POST",
-        headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},
-        body:JSON.stringify({guia:b.dataset.id})
-      }).then(function(r){if(!r.ok&&r.status!==409)console.warn("[votos]",r.status);})
-        .catch(function(){console.warn("[votos] no se pudo enviar");});
-    });
-  });
-})();
+/* La votación salió de esta página el 9-ago-2026: su JS (y la llave pública de
+   Supabase que lo acompañaba) se fue con ella. Sigue viva en index.html. */
 </script>
 
 </body>

@@ -23,11 +23,16 @@ desborde horizontal, cero voseo. Tres cosas estaban rotas y se arreglaron:
    `workana.webp` (sale en La Lista). Se recapturaron con un navegador real
    —cargan sin desafío, no hubo que evadir nada— a los mismos 1120×700 webp.
 
-3. **La votación quedó verificada de punta a punta sin ensuciar los resultados**:
-   los 7 `data-id` de la landing coinciden con los del hub y con el `CHECK` de
-   `votos.sql`; un POST con una guía inválida devuelve `400 guia_conocida`, lo que
-   prueba endpoint + llave + política RLS de INSERT vivos **sin insertar un voto**.
-   Ese es el chequeo barato para repetir cuando se toquen los ids.
+3. **La votación se RETIRÓ de la landing** (decisión de Walter, 9-ago). Con ella
+   se fueron su sección, su CSS (`.cells`/`.cell*`), su JS y la llave pública de
+   Supabase que vivía en esta página. Sigue **viva en el hub** (`index.html`) con
+   los mismos 7 ids. El CTA secundario del cierre apuntaba a `#votar` y ahora va
+   a `lista.html`, así que no quedaron anclas muertas.
+   Antes de sacarla quedó verificada de punta a punta **sin ensuciar los
+   resultados**: los 7 `data-id` coincidían con el hub y con el `CHECK` de
+   `votos.sql`, y un POST con una guía inválida devuelve `400 guia_conocida` —
+   prueba endpoint + llave + RLS de INSERT vivos **sin insertar un voto**. Ese es
+   el chequeo barato para repetir cuando se toquen los ids (aplica al hub).
 
 También verificado: las 4 tarjetas del método están **sincronizadas** entre la
 escena fijada (`.hw__paso`) y la caída apilada de móvil (`.stack__i`) — el drift
@@ -74,7 +79,6 @@ El contenido vive separado en `content/` (`site.json` + las 12 partes del métod
 | Las preguntas incómodas | blanco |
 | No hay siguiente paso que cobrar | negro |
 | Lo demás que construí | blanco |
-| Qué publico después | negro |
 
 **Mecanismos reproducidos**, todos medidos del DOM/CSS de producción, no a ojo:
 - Revelado de titular con dos barras que barren (`.rv` + `i.b1`/`i.b2`)
