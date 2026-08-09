@@ -1,0 +1,132 @@
+{
+  "secciones": [
+    {
+      "label": "Antes de empezar",
+      "parts": [
+        0,
+        1,
+        2
+      ],
+      "bg": "section-1.webp"
+    },
+    {
+      "label": "El método PVP",
+      "parts": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "bg": "section-2.webp"
+    },
+    {
+      "label": "Ejecutar",
+      "parts": [
+        9,
+        10,
+        11
+      ],
+      "bg": "section-3.webp"
+    }
+  ],
+  "partes": [
+    {
+      "id": 0,
+      "orden": 0,
+      "titulo": "Por qué esto es diferente",
+      "seccion": "Antes de empezar",
+      "archivo": "content/pvp/00-por-que-esto-es-diferente.md",
+      "palabras": 217
+    },
+    {
+      "id": 1,
+      "orden": 1,
+      "titulo": "Las inseguridades reales",
+      "seccion": "Antes de empezar",
+      "archivo": "content/pvp/01-las-inseguridades-reales.md",
+      "palabras": 298
+    },
+    {
+      "id": 2,
+      "orden": 2,
+      "titulo": "Portafolio, experiencia y tiempo",
+      "seccion": "Antes de empezar",
+      "archivo": "content/pvp/02-portafolio-experiencia-y-tiempo.md",
+      "palabras": 421
+    },
+    {
+      "id": 3,
+      "orden": 3,
+      "titulo": "Qué es PVP y cómo funciona",
+      "seccion": "El método PVP",
+      "archivo": "content/pvp/03-que-es-pvp-y-como-funciona.md",
+      "palabras": 170
+    },
+    {
+      "id": 4,
+      "orden": 4,
+      "titulo": "Elegir la startup correcta",
+      "seccion": "El método PVP",
+      "archivo": "content/pvp/04-elegir-la-startup-correcta.md",
+      "palabras": 280
+    },
+    {
+      "id": 5,
+      "orden": 5,
+      "titulo": "Investigación profunda",
+      "seccion": "El método PVP",
+      "archivo": "content/pvp/05-investigacion-profunda.md",
+      "palabras": 240
+    },
+    {
+      "id": 6,
+      "orden": 6,
+      "titulo": "Prompts de IA para el análisis",
+      "seccion": "El método PVP",
+      "archivo": "content/pvp/06-prompts-de-ia-para-el-analisis.md",
+      "palabras": 394
+    },
+    {
+      "id": 7,
+      "orden": 7,
+      "titulo": "Crear la solución real",
+      "seccion": "El método PVP",
+      "archivo": "content/pvp/07-crear-la-solucion-real.md",
+      "palabras": 409
+    },
+    {
+      "id": 8,
+      "orden": 8,
+      "titulo": "El mensaje al CEO",
+      "seccion": "El método PVP",
+      "archivo": "content/pvp/08-el-mensaje-al-ceo.md",
+      "palabras": 346
+    },
+    {
+      "id": 9,
+      "orden": 9,
+      "titulo": "La llamada",
+      "seccion": "Ejecutar",
+      "archivo": "content/pvp/09-la-llamada.md",
+      "palabras": 222
+    },
+    {
+      "id": 10,
+      "orden": 10,
+      "titulo": "Cuando no funciona + Herramientas",
+      "seccion": "Ejecutar",
+      "archivo": "content/pvp/10-cuando-no-funciona-herramientas.md",
+      "palabras": 388
+    },
+    {
+      "id": 11,
+      "orden": 11,
+      "titulo": "El plan de 30 días para empezar",
+      "seccion": "Ejecutar",
+      "archivo": "content/pvp/11-el-plan-de-30-dias-para-empezar.md",
+      "palabras": 246
+    }
+  ]
+}

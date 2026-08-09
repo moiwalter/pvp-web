@@ -90,7 +90,7 @@ sería el siguiente paso natural.
 | `ai-slops` | Que no parezca escrito por IA | `04-resources/frameworks/ai_slops.md` |
 | `clase-ia` | Diseña tu piloto de IA | `~/Downloads/Personal/moi/claude-class/index.html` |
 | `neuro` | Que te lean hasta el final | `04-resources/frameworks/neuropsych_writing_system.md` |
-| `overlay` | Animaciones para tus videos | `~/Downloads/Personal/moi/overlay-pipeline/` |
+| `overlay` | Animaciones para tus videos | `~/Downloads/Personal/moi/video-edit/` |
 | `video-kit` | Kit de edición de video | `~/Downloads/Personal/moi/video-edit/` — **quitar el linaje Stacksync antes** |
 | `lectura` | Qué estoy leyendo | `04-resources/reading/lista-lectura.md` |
 

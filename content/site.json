@@ -1,0 +1,487 @@
+{
+  "_meta": {
+    "proposito": "Capa de datos del sitio de Moi. Todo el contenido separado de la presentación, para poder montar una nueva imagen sin volver a escribir nada. Fuente de verdad del CONTENIDO; el diseño vive en las páginas.",
+    "extraido_de": ["index.html", "lista.html", "pvp.html"],
+    "fecha_extraccion": "2026-08-08",
+    "nota": "Los textos son verbatim de las páginas publicadas. Lo que se corrija acá hay que llevarlo a la landing nueva, no al revés.",
+    "ver_tambien": "content/README.md — qué campo alimenta qué, y los defectos detectados al extraer."
+  },
+
+  "marca": {
+    "colores": {
+      "black": { "hex": "#0B0B09", "uso": "fondo de todo el sitio" },
+      "cream": { "hex": "#EDE8DA", "uso": "texto principal y superficies claras (tabla de roles, anuncio)" },
+      "champagne": { "hex": "#F7D794", "uso": "EL acento. Una sola cosa destacada por pantalla.", "alias_en_css": "--olive" },
+      "rose": { "hex": "#EDA6A3", "uso": "acento secundario: numeración de sección, etiquetas de región" },
+      "navy": { "hex": "#192A56", "uso": "bloque del método en lista.html, favicon. No es acento." }
+    },
+    "colores_wallbit": {
+      "_regla": "El azul está RESERVADO a Wallbit. Ningún otro elemento del sitio lleva azul.",
+      "primario": "#2388FF",
+      "claro": "#0D99FF",
+      "fondo": "#19213D",
+      "hover_texto": "#4FA3FF",
+      "origen": "CSS de producción de wallbit.io"
+    },
+    "tipografias": {
+      "display": { "familia": "Cormorant Garamond", "pesos": [600, 700], "uso": "títulos, nombres de tarjeta, cifras grandes" },
+      "cuerpo": { "familia": "Lora", "pesos": ["400", "700", "400 italic"], "uso": "párrafos, descripciones" },
+      "datos": { "familia": "Space Mono", "pesos": [400, 700], "uso": "etiquetas, chips, montos, metadatos, overlines" }
+    },
+    "geometria": {
+      "radio_base": "18px",
+      "radio_por_tamano": { "tile": "18px", "wide": "22px", "feature": "26px" },
+      "_nota_radio": "El radio crece con el tile para que la curvatura se VEA igual en un tile chico y en uno grande.",
+      "gap": "1.35rem",
+      "ancho_max": "1180px",
+      "padding_x": "clamp(1.5rem, 8vw, 7rem)"
+    },
+    "reglas_duras": [
+      "El champán #F7D794 es EL acento: resalta UNA sola cosa por pantalla.",
+      "El azul es exclusivo de Wallbit. Nada más lleva azul.",
+      "Nada de rellenos de color planos. El color va en el borde, la marca y un halo tenue sobre fondo oscuro.",
+      "Las descripciones dicen el RESULTADO, no la función.",
+      "Titulares chicos y en su registro. Sin frases de cierre tipo eslogan.",
+      "Nada de ubicación (ni 'Santa Cruz, Bolivia') en el perfil ni en el pie.",
+      "Tuteo neutro SIEMPRE. Nunca voseo (vos/tenés/hacés/usá/agendá).",
+      "Solo tema oscuro. Compromiso deliberado en todo el sitio."
+    ]
+  },
+
+  "perfil": {
+    "nombre": "Walter Álvarez",
+    "alias": "Moi",
+    "inicial": "M",
+    "titular": "Acá está todo lo que <em>prometí</em>",
+    "titular_texto_plano": "Acá está todo lo que prometí",
+    "palabra_acentuada": "prometí",
+    "subtitulo": "Las listas, las guías y las herramientas que menciono en TikTok. Sin registro, sin correo, sin curso. Probablemente lo que buscas está acá abajo, y es gratis.",
+    "pie": "Moi — Walter Álvarez"
+  },
+
+  "rutas": {
+    "base": "https://moiwalter.github.io/pvp-web/",
+    "paginas": [
+      {
+        "archivo": "index.html",
+        "url": "https://moiwalter.github.io/pvp-web/",
+        "rol": "EL HUB — la bio link de TikTok/LinkedIn/Instagram",
+        "entrada_principal": "bio de redes"
+      },
+      {
+        "archivo": "lista.html",
+        "url": "https://moiwalter.github.io/pvp-web/lista.html",
+        "rol": "La Lista — plataformas + roles + pago",
+        "entrada_principal": "el QR de los videos apunta ACÁ directo",
+        "no_cambiar_url": true
+      },
+      {
+        "archivo": "pvp.html",
+        "url": "https://moiwalter.github.io/pvp-web/pvp.html",
+        "rol": "El método PVP paso a paso (12 partes)",
+        "entrada_principal": "desde lista.html y desde el hub"
+      },
+      { "archivo": "404.html", "url": null, "rol": "página de error" }
+    ],
+    "regla_de_flujo": "Dentro del contenido el flujo es lista → PVP, nunca al revés. El hub es un nivel arriba de eso.",
+    "hueco_detectado": "Ni lista.html ni pvp.html enlazan de vuelta al hub. El tráfico del QR (el más grande) nunca descubre el resto de los recursos."
+  },
+
+  "seo": {
+    "index.html": {
+      "title": "Moi — Todo lo que comparto, en un solo lugar",
+      "description": "Las listas, las guías y las herramientas que menciono en los videos. Trabajo remoto, finanzas y sistemas con IA. Gratis, sin registro.",
+      "og_title": "Moi — Todo lo que comparto, en un solo lugar",
+      "og_description": "Las listas, las guías y las herramientas que menciono en los videos. Gratis, sin registro.",
+      "og_url": "https://moiwalter.github.io/pvp-web/",
+      "og_image": "hero.webp",
+      "canonical": null
+    },
+    "lista.html": {
+      "title": "La Lista — Trabajo remoto en dólares desde Bolivia",
+      "description": "La lista de plataformas donde las startups publican trabajo remoto en dólares, qué puestos buscar y cuánto pagan. Gratis. Úsala con el método PVP.",
+      "og_title": "La Lista — Trabajo remoto en dólares",
+      "og_description": "Dónde están las startups que pagan en dólares, qué puestos buscar y cuánto pagan. Gratis.",
+      "og_url": "https://moiwalter.github.io/pvp-web/lista.html",
+      "og_image": "hero.webp",
+      "canonical": null
+    },
+    "pvp.html": {
+      "title": "PVP — Trabajo remoto desde Bolivia",
+      "description": "El método PVP para conseguir trabajo remoto desde Bolivia sin portafolio, sin contactos y sin inglés avanzado.",
+      "og_url": "https://moiwalter.github.io/pvp-web/",
+      "og_image": "hero.webp",
+      "og_image_width": 1248,
+      "og_image_height": 832,
+      "canonical": null,
+      "_defecto": "og_url apunta a la raíz, no a pvp.html. Quien comparte el método genera un preview de otra página."
+    },
+    "_defecto_global": "Las tres páginas usan la MISMA og:image (hero.webp) y ninguna declara canonical."
+  },
+
+  "assets": {
+    "en_uso": [
+      { "archivo": "hero.webp", "peso": "309K", "usado_en": ["index.html (esquina del tile PVP)", "pvp.html (hero)", "og:image de las 3"] },
+      { "archivo": "section-1.webp", "peso": "244K", "usado_en": ["pvp.html — portada sección 'Antes de empezar'"] },
+      { "archivo": "section-2.webp", "peso": "292K", "usado_en": ["pvp.html — portada sección 'El método PVP'"] },
+      { "archivo": "section-3.webp", "peso": "243K", "usado_en": ["pvp.html — portada sección 'Ejecutar'"] }
+    ],
+    "peso_muerto": {
+      "_nota": "Ya no se sirven: las páginas solo piden los .webp. 4,3 MB que se pueden borrar del repo.",
+      "archivos": ["hero.png (1.2M)", "section-1.jpg (1.1M)", "section-2.jpg (1.1M)", "section-3.jpg (914K)"]
+    },
+    "logos_externos": {
+      "_defecto": "15 llamadas a google.com/s2/favicons (12 en lista.html, 3 en index.html). Filtra cada visitante a Google y el logo del auspiciador sale de un favicon de 128px.",
+      "patron_actual": "https://www.google.com/s2/favicons?domain={dominio}&sz=128",
+      "a_reemplazar_por": "logos locales en /logos/{slug}.svg o .webp"
+    },
+    "dependencias_externas": [
+      { "que": "Google Fonts", "usado_en": ["index.html", "lista.html", "pvp.html", "404.html"] },
+      { "que": "marked.min.js (cdn.jsdelivr.net)", "usado_en": ["pvp.html"], "para": "renderizar el markdown de las 12 partes" },
+      { "que": "Google favicons", "usado_en": ["index.html", "lista.html"] },
+      { "que": "Supabase PostgREST", "usado_en": ["index.html"], "para": "la votación de guías" }
+    ],
+    "analitica": null,
+    "_nota_analitica": "Cero analítica en las 3 páginas. No hay forma de saber cuánta gente llega, por dónde entra ni qué recurso abre."
+  },
+
+  "auspicio": {
+    "marca": "Wallbit",
+    "etiqueta": "Auspiciado por",
+    "url": "https://www.wallbit.io/es?gad_source=1&gad_campaignid=22752697607&gbraid=0AAAAA-1U6VdZcmHYGsovEas8rWyf_-uo-",
+    "dominio": "wallbit.io",
+    "aparece_en": ["lista.html — header", "lista.html — pill del hero", "lista.html — footer"],
+    "no_aparece_en": ["index.html (el hub)"],
+    "regla": "El auspicio es por video/recurso, NO sobre la página personal de Walter. Ponerlo en el hub extendería la marca más allá del trato. Decisión de Walter, 28-jul-2026."
+  },
+
+  "hub": {
+    "header": { "logo": "MOI · RECURSOS", "cta": { "texto": "La Lista →", "href": "lista.html" } },
+    "zonas": [
+      {
+        "id": "empieza",
+        "titulo": "Empieza por acá",
+        "estado": "Disponible ahora",
+        "estado_tipo": "activo",
+        "recursos": ["pvp", "lista", "mi-plata"]
+      },
+      {
+        "id": "herramientas",
+        "titulo": "Herramientas que construí",
+        "estado": "Puedes usarlas y copiarlas",
+        "estado_tipo": "activo",
+        "recursos": ["science-gym-coach"],
+        "_nota": "Una sola tarjeta a ancho completo. Se ve vacía."
+      },
+      { "id": "votacion", "titulo": "Qué publico después", "estado": "Tú decides", "estado_tipo": "pendiente" },
+      { "id": "contacto", "titulo": "Dónde encontrarme", "estado": "Contacto", "estado_tipo": "activo" }
+    ],
+    "recursos": [
+      {
+        "id": "pvp",
+        "marca": "PVP",
+        "marca_tipo": "iniciales",
+        "nombre": "El método PVP",
+        "descripcion": "Que un fundador te conteste, aunque no tengas contactos ni portafolio. Llegas con su problema ya resuelto, y deja de ser una conversación en la que pides trabajo.",
+        "href": "pvp.html",
+        "externo": false,
+        "color": "champagne",
+        "tamano": "feature",
+        "chips": [{ "texto": "Gratis", "tipo": "free" }],
+        "peek": ["Investigas 5 startups", "Encuentras 1 problema", "Lo resuelves", "Lo mandas", "Pides 15 minutos"],
+        "meta": "Con las plantillas de mensaje que uso",
+        "accion": "Abrir →",
+        "imagen_esquina": "hero.webp"
+      },
+      {
+        "id": "lista",
+        "marca": "L",
+        "marca_tipo": "iniciales",
+        "nombre": "La Lista",
+        "descripcion": "Dejas de mandar tu CV al vacío. Sabes exactamente en qué páginas buscar, qué puestos pedir y cuánto deberían pagarte en dólares.",
+        "href": "lista.html",
+        "externo": false,
+        "color": "neutro",
+        "tamano": "wide",
+        "chips": [{ "texto": "Gratis", "tipo": "free" }],
+        "peek": ["Work at a Startup", "Wellfound", "Get on Board", "+6 más"],
+        "meta": "9 puestos que no piden programar",
+        "accion": "Abrir →"
+      },
+      {
+        "id": "mi-plata",
+        "marca": "wallbit.io",
+        "marca_tipo": "logo",
+        "nombre": "Mi Plata",
+        "descripcion": "Sabes cuánto puedes gastar hoy sin arruinar el mes. Se conecta a tu cuenta de Wallbit y solo lee: nunca compra ni mueve tu plata.",
+        "href": "https://github.com/moiwalter/mi-plata",
+        "externo": true,
+        "color": "wallbit",
+        "tamano": "wide",
+        "chips": [{ "texto": "Con Wallbit", "tipo": "wallbit" }, { "texto": "Código abierto", "tipo": "source" }],
+        "peek": [],
+        "meta": "Gratis · necesitas cuenta Wallbit",
+        "accion": "Ver el código →",
+        "_nota": "Apunta al REPO, no al demo."
+      },
+      {
+        "id": "science-gym-coach",
+        "marca": "github.com",
+        "marca_tipo": "logo",
+        "nombre": "Science Gym Coach",
+        "descripcion": "Dejas de improvisar en el gimnasio. Te dice qué toca hoy y con cuánto peso, según lo que te falta entrenar y cómo vienes de recuperado — no según el día de la semana.",
+        "href": "https://github.com/moiwalter/science-gym-coach",
+        "externo": true,
+        "color": "neutro",
+        "tamano": "full",
+        "chips": [{ "texto": "Código abierto", "tipo": "source" }],
+        "peek": ["Qué toca hoy", "Con cuánto peso", "Se ajusta si dormiste mal", "Cada regla con su cita"],
+        "meta": "Licencia MIT · en inglés",
+        "accion": "GitHub →"
+      }
+    ],
+    "anuncio": {
+      "etiqueta": "Anuncio",
+      "nombre": "Tu Libro Bolivia",
+      "descripcion": "Tu propio libro impreso y en tus manos, sin editorial y desde un solo ejemplar. También imprimimos cualquiera de los 9.000 títulos del catálogo.",
+      "href": "https://tulibrobolivia.com",
+      "dominio": "tulibrobolivia.com",
+      "cta": "Ver la tienda →",
+      "estilo": "bloque crema, fuera de las zonas de recursos gratis"
+    },
+    "redes": [
+      { "red": "TikTok", "handle": "@moiwalter", "href": "https://www.tiktok.com/@moiwalter", "verificado": true },
+      { "red": "LinkedIn", "handle": "walteralvarezajata", "href": "https://www.linkedin.com/in/walteralvarezajata", "verificado": true },
+      { "red": "Instagram", "handle": "@moiwalter", "href": "https://www.instagram.com/moiwalter", "verificado": false, "_nota": "Handle sin actividad confirmada." }
+    ]
+  },
+
+  "votacion": {
+    "titulo": "Qué publico después",
+    "estado": "Tú decides",
+    "nota": "Todo esto ya existe escrito en mis notas, pero hay que limpiarlo antes de soltarlo. Vota lo que quieras que saque primero, y eso es lo que trabajo esta semana.",
+    "backend": {
+      "tipo": "Supabase PostgREST, sin servidor",
+      "proyecto": "imprimelibro",
+      "url": "https://qttoqljqfosojncpwmng.supabase.co",
+      "tabla": "public.votos_hub",
+      "llave_publica": "sb_publishable_E00BpI_dEAWbSKBFVSsMNw_jkLbUqwE",
+      "estado": "VIVO — responde 201 (verificado 8-ago-2026)",
+      "seguridad": "RLS insert-only: la llave no puede leer, editar ni borrar. Un trigger calcula sha256(ip + sal) en el servidor; no se guarda ninguna IP.",
+      "duplicados": "Índice único (guia, huella). El repetido devuelve 409 y la página lo trata como éxito.",
+      "persistencia_local": "localStorage['moi-voto-<id>']",
+      "sin_contadores_publicos": "A propósito: una guía en 0 se ve muerta y sesga el voto.",
+      "ver_resultados": "select * from public.votos_hub_conteo; en el SQL Editor de imprimelibro",
+      "sql_y_notas": "~/Projects/moi-votos",
+      "_aviso": "Los ids de abajo tienen que coincidir con el CHECK de votos.sql. Si se desincronizan, un voto real se pierde con un 400 silencioso: node ~/Projects/moi-votos/verificar-ids.mjs"
+    },
+    "guias": [
+      { "id": "vuelos", "nombre": "Vuelos baratos", "descripcion": "Pagas menos por exactamente el mismo vuelo.", "fuente": "04-resources/playbooks/vuelos-baratos.md" },
+      { "id": "ai-slops", "nombre": "Que no parezca escrito por IA", "descripcion": "Tu texto deja de sonar a máquina, y aprendes a detectar el de los demás.", "fuente": "04-resources/frameworks/ai_slops.md" },
+      { "id": "clase-ia", "nombre": "Diseña tu piloto de IA", "descripcion": "Sales con tu primer proceso automatizado, y elegido por la razón correcta.", "fuente": "~/Downloads/Personal/moi/claude-class/index.html" },
+      { "id": "neuro", "nombre": "Que te lean hasta el final", "descripcion": "La gente termina lo que escribiste en vez de abandonarlo a la mitad.", "fuente": "04-resources/frameworks/neuropsych_writing_system.md" },
+      { "id": "overlay", "nombre": "Animaciones para tus videos", "descripcion": "Tus videos se ven editados por alguien que cobra por hacerlo.", "fuente": "~/Downloads/Personal/moi/video-edit/" },
+      { "id": "video-kit", "nombre": "Kit de edición de video", "descripcion": "Editas un video hablado en una tarde, no en tres días.", "fuente": "~/Downloads/Personal/moi/video-edit/", "_pendiente": "quitar el linaje Stacksync antes de publicar" },
+      { "id": "lectura", "nombre": "Qué estoy leyendo", "descripcion": "Sabes qué leer y en qué orden, sin perder meses en el libro equivocado.", "fuente": "04-resources/reading/lista-lectura.md" }
+    ],
+    "descartadas": {
+      "por_walter": ["La Lista Contada (formato propio, se lo guarda)", "Mis skills de Claude Code", "Qué quiere la juventud boliviana"],
+      "por_ip_de_terceros": ["kallaway_clone.md", "sandcastles-breakdown.md", "ninja-youtube"]
+    }
+  },
+
+  "lista": {
+    "header": { "logo": "MOI · LA LISTA", "cta": { "texto": "El método PVP →", "href": "pvp.html" } },
+    "hero": {
+      "overline": "Trabajo remoto en dólares · gratis",
+      "titular": "Dónde están las startups que pagan en <em>dólares</em>",
+      "titular_texto_plano": "Dónde están las startups que pagan en dólares",
+      "palabra_acentuada": "dólares",
+      "subtitulo": "Esta es la lista que te prometí en el video. Las páginas donde las startups publican sus puestos remotos, qué roles buscar y cuánto pagan. Sin portafolio, sin contactos, sin inglés avanzado. Después, entras con el método PVP.",
+      "cta": { "texto": "Ver el método PVP completo →", "href": "pvp.html", "nota": "Gratis · cómo entrar de verdad" },
+      "pills": ["8 plataformas + freelance", "9 puestos sin programar", "Pagan en USD"]
+    },
+    "seccion_plataformas": {
+      "numero": "01 — Dónde están",
+      "titulo": "Las plataformas",
+      "descripcion": "Páginas hechas para esto. Acá no compites contra todo Bolivia: compites contra los pocos que saben que existen. Filtra siempre por <b>remote</b>.",
+      "palabra_destacada": "remote"
+    },
+    "plataformas": [
+      {
+        "nombre": "Work at a Startup",
+        "dominio": "workatastartup.com",
+        "url": "https://www.workatastartup.com/",
+        "etiqueta": "Y Combinator",
+        "etiqueta_tipo": "marca",
+        "descripcion": "El bolsa de empleo de las startups de Y Combinator —las mejores del mundo—. Tu perfil llega directo a fundadores.",
+        "mejor_para": "apuntar alto. Startups financiadas, serias, globales.",
+        "_defecto_copy": "'El bolsa de empleo' — concordancia. Debería ser 'La bolsa de empleo'."
+      },
+      {
+        "nombre": "Wellfound",
+        "dominio": "wellfound.com",
+        "url": "https://wellfound.com/",
+        "etiqueta": "ex-AngelList",
+        "etiqueta_tipo": "marca",
+        "descripcion": "Miles de startups en un solo lugar. Aplicas con un perfil, no con un CV, y muchas veces hablas directo con el equipo.",
+        "mejor_para": "volumen + variedad de roles y etapas."
+      },
+      {
+        "nombre": "Get on Board",
+        "dominio": "getonbrd.com",
+        "url": "https://www.getonbrd.com/",
+        "etiqueta": "Latam · Tech",
+        "etiqueta_tipo": "region",
+        "descripcion": "Empleos tech curados de toda Latinoamérica. Muchos son remotos y pagan en dólares, y filtras rápido por lo que sabes.",
+        "mejor_para": "roles tech y digitales en la región, sin ruido."
+      },
+      {
+        "nombre": "We Work Remotely",
+        "dominio": "weworkremotely.com",
+        "url": "https://weworkremotely.com/",
+        "etiqueta": "Global",
+        "etiqueta_tipo": "marca",
+        "descripcion": "La bolsa de trabajo remoto más grande de internet. No solo tech: soporte, ventas, marketing, diseño.",
+        "mejor_para": "ver TODO lo remoto que existe ahora mismo."
+      },
+      {
+        "nombre": "RemoteOK",
+        "dominio": "remoteok.com",
+        "url": "https://remoteok.com/",
+        "etiqueta": "Global",
+        "etiqueta_tipo": "marca",
+        "descripcion": "Feed rápido y simple de trabajos remotos de todo el mundo, con el salario casi siempre a la vista.",
+        "mejor_para": "revisar rápido, todos los días."
+      },
+      {
+        "nombre": "Torre",
+        "dominio": "torre.ai",
+        "url": "https://torre.ai/",
+        "etiqueta": "Latam · Remoto",
+        "etiqueta_tipo": "region",
+        "descripcion": "Plataforma de empleo remoto que te conecta con vacantes globales y de la región según lo que sabes hacer. Las oportunidades te llegan a ti.",
+        "mejor_para": "que el trabajo te busque mientras duermes."
+      },
+      {
+        "nombre": "WeRemoto",
+        "dominio": "weremoto.com",
+        "url": "https://weremoto.com/",
+        "etiqueta": "Latam · Español",
+        "etiqueta_tipo": "region",
+        "descripcion": "Enfocado en Latinoamérica y en español. Empresas que ya buscan talento de la región y entienden cómo pagarte.",
+        "mejor_para": "empezar sin inglés avanzado."
+      },
+      {
+        "nombre": "Trabajito",
+        "dominio": "trabajito.com.bo",
+        "url": "https://trabajito.com.bo/",
+        "etiqueta": "Latam · Bolivia",
+        "etiqueta_tipo": "region",
+        "descripcion": "Bolsa de empleo de varios países de la región. Tiene un buen número de vacantes remotas y en dólares, mezcladas con las locales.",
+        "mejor_para": "opciones cercanas, filtrando por remoto / USD."
+      }
+    ],
+    "freelance": {
+      "encabezado": "Y para empezar — freelance",
+      "descripcion": "No es un empleo fijo, pero es la forma más rápida de cobrar tu primer dólar y construir <b>prueba de trabajo</b> antes de aplicar a una startup.",
+      "palabra_destacada": "prueba de trabajo",
+      "plataformas": [
+        {
+          "nombre": "Workana",
+          "dominio": "workana.com",
+          "url": "https://www.workana.com/",
+          "etiqueta": "Freelance",
+          "etiqueta_tipo": "marca",
+          "descripcion": "El mercado freelance más grande de Latinoamérica. Proyectos cortos para arrancar, cobrar tus primeros dólares y armar evidencia real.",
+          "mejor_para": "tu primer cliente y tu primera prueba de trabajo."
+        }
+      ]
+    },
+    "seccion_roles": {
+      "numero": "02 — Qué buscar",
+      "titulo": "Los puestos sin programar",
+      "descripcion": "Una startup no contrata solo programadores. Estos son los roles que puedes aprender solo, que pagan en dólares y que casi nadie busca.",
+      "columnas": ["Puesto", "Qué hace", "Rango aprox.", "Inglés"],
+      "nota": "Rangos de entrada (mercado remoto LatAm). Al principio cobras en la parte baja y subes con experiencia y resultados — pero hasta el piso es varias veces un sueldo local. El inglés multiplica el rango: \"bajo/medio\" significa leer y escribir, no conversar; lo apoyas con un traductor o con IA.",
+      "_aviso_walter": "Los rangos son aproximados (mercado LatAm remoto, entry/mid). Ajustar a lo que Walter sepa real."
+    },
+    "roles": [
+      { "puesto": "Soporte al cliente", "que_hace": "Responde y resuelve a los clientes por chat o correo.", "rango_usd": "$400–1.200", "min": 400, "max": 1200, "ingles": "Medio" },
+      { "puesto": "Ventas / SDR", "que_hace": "Prospecta y agenda reuniones para el equipo de ventas.", "rango_usd": "$500–1.500", "min": 500, "max": 1500, "ingles": "Medio" },
+      { "puesto": "Operaciones", "que_hace": "Coordina procesos internos para que todo funcione.", "rango_usd": "$500–1.500", "min": 500, "max": 1500, "ingles": "Medio" },
+      { "puesto": "Asistente del fundador", "que_hace": "Agenda, tareas y organización del día a día del founder.", "rango_usd": "$400–1.000", "min": 400, "max": 1000, "ingles": "Medio" },
+      { "puesto": "Community / Redes", "que_hace": "Modera y hace crecer la comunidad y las redes.", "rango_usd": "$400–1.200", "min": 400, "max": 1200, "ingles": "Bajo" },
+      { "puesto": "QA / Tester", "que_hace": "Prueba el producto y reporta lo que está roto.", "rango_usd": "$400–1.200", "min": 400, "max": 1200, "ingles": "Bajo" },
+      { "puesto": "No-code", "que_hace": "Arma flujos y herramientas internas sin programar.", "rango_usd": "$500–1.500", "min": 500, "max": 1500, "ingles": "Bajo" },
+      { "puesto": "Diseño", "que_hace": "Interfaz, gráfico o producto. El trabajo habla por ti.", "rango_usd": "$500–1.800", "min": 500, "max": 1800, "ingles": "Bajo" },
+      { "puesto": "Marketing", "que_hace": "Contenido, anuncios o crecimiento. Resultados medibles.", "rango_usd": "$500–1.800", "min": 500, "max": 1800, "ingles": "Medio" }
+    ],
+    "seccion_metodo": {
+      "numero": "03 — Cómo entrar",
+      "titulo": "Tener la lista no basta",
+      "descripcion": "Si subes tu CV a un portal y esperas, haces lo de todos y compites con todos. Así entras de verdad —el método PVP, en tres pasos:",
+      "pasos": [
+        { "n": "PASO 01", "titulo": "Investiga", "descripcion": "Elige una startup de la lista y entiéndela a fondo. Hoy, con IA, es rápido." },
+        { "n": "PASO 02", "titulo": "Encuentra un problema", "descripcion": "Algo concreto y roto en su producto, en un área en la que seas bueno." },
+        { "n": "PASO 03", "titulo": "Mándalo directo", "descripcion": "Resuélvelo o haz un plan, y envíalo al fundador por LinkedIn. No al portal." }
+      ],
+      "cta": { "texto": "Ver el método PVP completo →", "href": "pvp.html" }
+    },
+    "footer": {
+      "cita": "No tienes que irte de Bolivia para que te paguen como si lo hubieras hecho.",
+      "meta": "Moi · Trabajo remoto en dólares"
+    }
+  },
+
+  "pvp": {
+    "header": { "logo": "PVP · Trabajo Remoto", "volver": { "texto": "← La Lista", "href": "lista.html" } },
+    "hero": {
+      "overline": "Trabajo remoto desde Bolivia",
+      "titular": "Cómo conseguir trabajo remoto sin pedir permiso.",
+      "cta": "Leer el método →"
+    },
+    "significado": "PVP = Permissionless Value Proposition",
+    "frase_central": "Yo no pido trabajo. Yo demuestro trabajo. Y por eso me contratan.",
+    "formato": {
+      "modo": "12 partes navegables con teclado, progreso guardado en localStorage",
+      "navegacion_hash": "#parte-N (1-indexado)",
+      "persistencia": "localStorage['pvp-step'] y localStorage['pvp-check-step-N-i'] para las casillas",
+      "render": "markdown vía marked.js desde CDN",
+      "extras": ["botón Copiar en cada bloque de código", "casillas persistentes en el plan de 30 días", "portada por sección con imagen de fondo"]
+    },
+    "secciones": [
+      { "n": 1, "label": "Antes de empezar", "partes": [0, 1, 2], "fondo": "section-1.webp" },
+      { "n": 2, "label": "El método PVP", "partes": [3, 4, 5, 6, 7, 8], "fondo": "section-2.webp" },
+      { "n": 3, "label": "Ejecutar", "partes": [9, 10, 11], "fondo": "section-3.webp" }
+    ],
+    "partes": "Las 12 partes viven como markdown en content/pvp/. El índice con orden, sección y archivo está en content/pvp-indice.json.",
+    "booking": {
+      "etiqueta": "Walter Alvarez · PVP",
+      "titular": "¿Quieres aplicar esto?",
+      "subtitulo": "Agendá una llamada de 30 minutos. Sin costo. Solo para ver si tiene sentido trabajar juntos.",
+      "oferta": "Gratis · 30 min",
+      "nombre_oferta": "Llamada de descubrimiento",
+      "cta": "Agendar llamada →",
+      "url": "https://cal.com/walter-moises-alvarez-ajata-j50cox/pvp",
+      "visible_en": "solo el último step (parte 12)",
+      "_defecto": "'Agendá' es voseo. Debe ser 'Agenda'."
+    }
+  },
+
+  "datos_reutilizables": {
+    "_nota": "Cifras que la landing nueva puede usar como prueba, ya contadas contra el contenido real.",
+    "plataformas_empleo": 8,
+    "plataformas_freelance": 1,
+    "roles_sin_programar": 9,
+    "partes_del_metodo": 12,
+    "secciones_del_metodo": 3,
+    "palabras_del_metodo": 3631,
+    "guias_a_votacion": 7,
+    "recursos_publicados": 4,
+    "rango_salarial_min_usd": 400,
+    "rango_salarial_max_usd": 1800,
+    "intentos_recomendados": "20-40",
+    "tiempo_a_primer_cliente": "3-6 meses ejecutando consistentemente"
+  }
+}
