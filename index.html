@@ -512,7 +512,11 @@ h3{font-size:var(--text-h3)}
 .qtxt{display:flex;flex-direction:column;background:var(--bg-muted);padding:calc(var(--spacing)*20);min-height:calc(var(--spacing)*250)}
 @media(min-width:1024px){.qtxt{padding:calc(var(--spacing)*30);min-height:calc(var(--spacing)*300)}}   /* 300 + 16 + 134 = 450, el alto de la foto */
 .qtxt__h{margin-bottom:calc(var(--spacing)*20)}
-.qtxt__cif{margin-top:auto}
+/* Antes: margin-top:auto, que pegaba las cifras al fondo. Servía cuando la
+   tarjeta medía su min-height, pero la tarjeta vecina creció (los temas ahora
+   llevan veredicto), la fila se estiró y el auto se convirtió en un hueco de
+   400px. Ahora el grupo OCUPA la altura sobrante y se reparte dentro. */
+.qtxt__cif{flex:1;justify-content:space-evenly}
 .qtxt__l{display:flex;flex-direction:column;gap:calc(var(--spacing)*12)}
 /* ── FRANJA DE LOGOS a todo el ancho, debajo de las tarjetas ──
    Monocromo: brightness(0) aplasta cualquier logo a tinta plena respetando el alfa.
@@ -579,7 +583,7 @@ h3{font-size:var(--text-h3)}
   .muro b{font-size:calc(var(--spacing)*21)}
 .qtxt__l b{font-family:var(--font-sans);font-weight:500;font-size:calc(var(--spacing)*22);line-height:1.1}
 .qtxt__l span{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.06em;color:var(--fg-muted);display:block;margin-top:calc(var(--spacing)*3)}
-.qtxt__cif{display:flex;flex-direction:column;gap:calc(var(--spacing)*16)}
+.qtxt__cif{display:flex;flex-direction:column;gap:calc(var(--spacing)*16);min-height:0}
 .qtxt__cif div{display:flex;align-items:baseline;gap:calc(var(--spacing)*10)}
 .qtxt__cif b{font-family:var(--font-sans);font-weight:300;font-size:calc(var(--spacing)*38);line-height:1;letter-spacing:-.03em}
 .qtxt__cif span{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.06em;color:var(--fg-muted);text-transform:uppercase}
