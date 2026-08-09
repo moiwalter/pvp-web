@@ -46,20 +46,29 @@ el cursor desfila. No "arreglarlo".
 PVP al formato de la landing. Ese archivo tiene el diagnóstico, la decisión de layout
 abierta (A/B/C) y por dónde arrancar sin haberla tomado.
 
-## Qué está en vivo y qué no
+## Qué está en vivo
 
-`landing.html` está **publicada pero NO es la página principal**:
-`moiwalter.github.io/pvp-web/landing.html`
+✅ **La landing ES la raíz desde el 9-ago-2026.** El ruteo quedó así:
 
-La raíz sigue siendo `index.html`, el hub anterior. **Ninguno de los commits tocó
-`index.html`, `lista.html` ni `pvp.html`.**
+| URL | Qué es |
+|---|---|
+| `/` (`index.html`) | **La landing** — la bio link. Antes era el hub. |
+| `/pvp.html` | El método, 12 partes. **Generado** desde `content/` (ver `content/README.md`). |
+| `/lista.html` | La Lista. **El QR impreso en los videos apunta acá — no se toca.** |
+| `/hub.html` | El hub anterior. Sigue vivo **porque la votación de guías sólo existe ahí**. |
+| `/landing.html` | Redirect a la raíz + `noindex`. Existe porque esa URL estuvo publicada. |
 
-⛔ **Antes de promoverla a la raíz**, tener presente que:
-- Esa URL está en las bios de TikTok, LinkedIn e Instagram.
-- **`lista.html` recibe el QR ya impreso en videos publicados** — esa URL no se toca.
-- El hub actual tiene recursos que sólo viven ahí (la votación de guías, Mi Plata,
-  Science Gym Coach, el anuncio). La landing los cubre casi todos, pero hay que
-  revisar uno por uno antes de que el hub desaparezca.
+Cómo se resolvieron los riesgos que estaban anotados acá:
+- **Las bios** (TikTok/LinkedIn/Instagram) apuntan a la raíz, así que no hubo que
+  cambiar ningún enlace: cambió el contenido de la raíz, no su dirección.
+- **`lista.html` no se tocó** en ninguno de los commits.
+- **El inventario se hizo uno por uno**: la landing cubre *todos* los destinos que
+  enlazaba el hub. Lo único exclusivo del hub es **la votación de 7 guías**, que
+  está viva y recibiendo votos — por eso el hub se conserva y el pie de la raíz lo
+  enlaza como *"Qué publico después"*. Sin ese enlace la votación se apagaba en
+  silencio.
+- El hub dejó de declarar la raíz como su `canonical`/`og:url`; ahora declara
+  `hub.html`. Si no, competía consigo mismo en buscadores y previews.
 
 ## Qué es
 
