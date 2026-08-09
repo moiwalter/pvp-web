@@ -504,12 +504,20 @@ h3{font-size:var(--text-h3)}
 /* en móvil se achica para caber en una línea, no se parte */
 @media(max-width:699px){.muro b{font-size:calc(var(--spacing)*19)}}
 .muro:hover b{opacity:.9}
+/* En reposo los cuatro van en tinta plana para que el muro se lea como una sola
+   fila. Al pasar el cursor SOBRE UNO, ese recupera su color real — el hover es
+   individual, no del muro entero: premia mirar de cerca. */
 .muro img{
   width:auto;object-fit:contain;
   filter:brightness(0);opacity:.55;
-  transition:opacity .4s var(--ease-out-quart);
+  transition:opacity .4s var(--ease-out-quart),filter .4s var(--ease-out-quart);
 }
 .muro:hover img{opacity:.9}
+.muro a:hover img{filter:none;opacity:1}
+/* El Tribunal es un wordmark tipográfico, no un archivo: su "color real" es el
+   verde de la bandera de Bolivia (#007934, el oficial). */
+.muro b.l-tribunal{transition:color .4s var(--ease-out-quart)}
+.muro a:hover b.l-tribunal{color:#007934;opacity:1}
   /* altura por logo, medida sobre su tinta ya recortada. No se iguala la caja:
      un sello cuadrado con la misma altura que una palabra se ve el doble. */
   /* Alturas calculadas para que la LETRA mida 17px en los tres wordmarks.
@@ -553,6 +561,25 @@ a.pilar:hover .pilar__t{color:var(--brand)}
 .pilar__n{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.14em;color:var(--brand);display:block;margin-bottom:calc(var(--spacing)*14)}
 .pilar__t{font-family:var(--font-sans);font-weight:500;font-size:var(--text-h4);line-height:1;display:block;margin-bottom:calc(var(--spacing)*12)}
 .pilar__d{color:var(--fg-muted);font-size:var(--text-body-sm);line-height:1.6;display:block;max-width:34ch}
+
+/* ── Tu Libro Bolivia: la única tarjeta con marca propia ─────────────────────
+   Es el único de la fila que es un NEGOCIO en vivo, no un sistema personal ni
+   un repo. Lleva su navy y su dorado (tomados de tulibrobolivia.com), así que
+   se lee como lo que es: otra marca, no una fila más. Es la excepción que
+   confirma la regla de "un solo acento por pantalla". */
+.pilar--tlb{
+  --tlb-navy:#1B2A4A; --tlb-oro:#C9A96E;
+  background:var(--tlb-navy);
+  border-bottom-color:transparent;
+  padding:calc(var(--spacing)*28) calc(var(--spacing)*24) calc(var(--spacing)*32) calc(var(--spacing)*24);
+}
+.pilar--tlb .pilar__n{color:var(--tlb-oro)}
+.pilar--tlb .pilar__t{color:#FAF8F5}
+.pilar--tlb .pilar__d{color:#FAF8F5;opacity:.72}
+@media(min-width:700px){
+  a.pilar--tlb:hover{background:#111D35;padding-left:calc(var(--spacing)*30)}
+}
+a.pilar--tlb:hover .pilar__t{color:var(--tlb-oro)}
 
 /* ══ ESCENA FIJADA — 320vh, se clava mientras avanzan los pasos ══ */
 .pin{position:relative;display:none}
@@ -806,7 +833,7 @@ a.pilar:hover .pilar__t{color:var(--brand)}
         <span class="rv"><span>porque <em>decide todo lo demás</em>.</span><i class="b1"></i><i class="b2"></i></span>
       </div>
       <div class="decl__l fade">
-        <span>Dónde puedes vivir</span><span>Cuántas horas te quedan</span>
+        <span>Dónde puedes vivir</span><span>Cuánto control tienes de tu tiempo</span>
         <span>Si duermes y si entrenas</span><span>Qué puedes construir</span>
       </div>
     </div>
@@ -968,10 +995,10 @@ a.pilar:hover .pilar__t{color:var(--brand)}
       <details><summary><span class="mq"><span>No tengo experiencia</span><span aria-hidden="true">No tengo experiencia</span><span aria-hidden="true">No tengo experiencia</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">El PVP crea la experiencia. El documento que haces para esa empresa ES tu portafolio — trabajo aplicado, hecho ahora, para ellos. Eso ya demuestra más que cualquier certificado.</p></details>
       <details><summary><span class="mq"><span>Soy de Bolivia, nadie me contrata</span><span aria-hidden="true">Soy de Bolivia, nadie me contrata</span><span aria-hidden="true">Soy de Bolivia, nadie me contrata</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Una startup de diez personas no contrata ubicaciones — contrata soluciones. Bolivia no es un nombre que reconozcan, pero tampoco Perú o Colombia al principio. Lo que sí reconocen es si entendiste su problema.</p></details>
       <details><summary><span class="mq"><span>No tengo inglés</span><span aria-hidden="true">No tengo inglés</span><span aria-hidden="true">No tengo inglés</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Empieza con startups en español —México, Colombia, Argentina, España— mientras construyes el inglés en paralelo. Son dos procesos simultáneos, no secuenciales. Y antes de mandar cualquier mensaje en inglés, pásalo por IA.</p></details>
-      <details><summary><span class="mq"><span>¿Y si me ignoran?</span><span aria-hidden="true">¿Y si me ignoran?</span><span aria-hidden="true">¿Y si me ignoran?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">La mayoría lo va a hacer. Planifica veinte a cuarenta intentos reales, no cinco. Lo que arruina esto no es la tasa de respuesta: es hacer tres intentos y concluir que no funciona.</p></details>
-      <details><summary><span class="mq"><span>No sé cómo cobrar desde acá</span><span aria-hidden="true">No sé cómo cobrar desde acá</span><span aria-hidden="true">No sé cómo cobrar desde acá</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Wallbit te abre una cuenta bancaria en Estados Unidos en 24-48 horas sin ser ciudadano. También existen Wise, USDT, y plataformas como Deel para contratos más formales.</p></details>
+      <details><summary><span class="mq"><span>¿Y si me ignoran?</span><span aria-hidden="true">¿Y si me ignoran?</span><span aria-hidden="true">¿Y si me ignoran?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">La mayoría lo va a hacer. Planifica diez a veinte intentos reales, no tres. Lo que arruina esto no es la tasa de respuesta: es hacer tres intentos y concluir que no funciona.</p></details>
+      <details><summary><span class="mq"><span>No sé cómo cobrar desde acá</span><span aria-hidden="true">No sé cómo cobrar desde acá</span><span aria-hidden="true">No sé cómo cobrar desde acá</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Yo cobro con Wallbit: te abre una cuenta bancaria en Estados Unidos en 24-48 horas sin ser ciudadano ni viajar. Es lo que uso todos los meses. También existen Wise, USDT, y plataformas como Deel para contratos más formales.</p></details>
       <details><summary><span class="mq"><span>¿Es legal?</span><span aria-hidden="true">¿Es legal?</span><span aria-hidden="true">¿Es legal?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Sí. Trabajar remotamente para empresas extranjeras como freelancer desde Bolivia es legal. Cuando escales a ingresos consistentes, regularizas con el NIT.</p></details>
-      <details><summary><span class="mq"><span>¿Cuánto tarda en funcionar?</span><span aria-hidden="true">¿Cuánto tarda en funcionar?</span><span aria-hidden="true">¿Cuánto tarda en funcionar?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Dos a tres meses hasta la primera oportunidad concreta si ejecutas consistentemente. Tres a seis hasta un cliente estable. No es fracaso si no hay cliente el primer mes.</p></details>
+      <details><summary><span class="mq"><span>¿Cuánto tarda en funcionar?</span><span aria-hidden="true">¿Cuánto tarda en funcionar?</span><span aria-hidden="true">¿Cuánto tarda en funcionar?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">Depende de qué tan bien ejecutes el PVP, no de cuánto esperes. Con un análisis serio y mensajes que demuestran trabajo real, uno a tres meses hasta la primera oportunidad concreta. Si mandas plantillas genéricas, no llega nunca. No es fracaso si no hay cliente el primer mes.</p></details>
       <details><summary><span class="mq"><span>¿Necesito certificaciones?</span><span aria-hidden="true">¿Necesito certificaciones?</span><span aria-hidden="true">¿Necesito certificaciones?</span></span> <span class="faq__pm">+</span></summary><p class="faq__a">No. PVP no pide certificaciones. Pide trabajo real.</p></details>
     </div>
   </div>
@@ -1013,7 +1040,7 @@ a.pilar:hover .pilar__t{color:var(--brand)}
       <div class="pilares fade">
         <a class="pilar" href="https://github.com/moiwalter/mi-plata" target="_blank" rel="noopener"><span class="pilar__n">[Código abierto]</span><span class="pilar__t">Mi Plata</span><span class="pilar__d">Sabes cuánto puedes gastar hoy sin arruinar el mes. Se conecta a Wallbit y solo lee.</span></a>
         <a class="pilar" href="https://github.com/moiwalter/science-gym-coach" target="_blank" rel="noopener"><span class="pilar__n">[Código abierto]</span><span class="pilar__t">Science Gym Coach</span><span class="pilar__d">Qué toca hoy y con cuánto peso, según lo que te falta y cómo vienes de recuperado.</span></a>
-        <a class="pilar" href="https://tulibrobolivia.com" target="_blank" rel="noopener"><span class="pilar__n">[En vivo]</span><span class="pilar__t">Tu Libro Bolivia</span><span class="pilar__d">Tu propio libro impreso desde un ejemplar, sin editorial. Y 9.000 títulos de catálogo.</span></a>
+        <a class="pilar pilar--tlb" href="https://tulibrobolivia.com" target="_blank" rel="noopener"><span class="pilar__n">[En vivo]</span><span class="pilar__t">Tu Libro Bolivia</span><span class="pilar__d">Tu propio libro impreso desde un ejemplar, sin editorial. Y 9.000 títulos de catálogo.</span></a>
         <div class="pilar"><span class="pilar__n">[Privado]</span><span class="pilar__t">El Pilot</span><span class="pilar__d">El sistema multiagente que corre mi vida: doce sistemas bajo un mismo contexto.</span></div>
         <div class="pilar"><span class="pilar__n">[Privado]</span><span class="pilar__t">Finanzas</span><span class="pilar__d">Lee mi cuenta en vivo y me dice cuánto puedo gastar hoy y qué hacer el 24.</span></div>
         <div class="pilar"><span class="pilar__n">[Privado]</span><span class="pilar__t">Entrenamiento</span><span class="pilar__d">Decide la próxima sesión por déficit de volumen y recuperación, con cada regla citada.</span></div>
@@ -1461,7 +1488,7 @@ document.addEventListener('click',function(e){
     "Se empieza por el trabajo.":"It starts with the work.",
     "No porque sea lo importante:":"Not because it's what matters:",
     "porque":"because","decide todo lo demás":"it decides everything else",
-    "Dónde puedes vivir":"Where you can live","Cuántas horas te quedan":"How many hours you have left",
+    "Dónde puedes vivir":"Where you can live","Cuánto control tienes de tu tiempo":"How much control you have over your time",
     "Si duermes y si entrenas":"Whether you sleep and train","Qué puedes construir":"What you can build",
     "Cambiarlo no es mudarse ni empezar de cero. Es dejar de venderle tus horas al mercado que te tocó y vendérselas al que paga":
       "Changing it isn't moving abroad or starting from zero. It's about no longer selling your hours to the market you were handed, and selling them to one that pays",
@@ -1500,17 +1527,17 @@ document.addEventListener('click',function(e){
     "Empieza con startups en español —México, Colombia, Argentina, España— mientras construyes el inglés en paralelo. Son dos procesos simultáneos, no secuenciales. Y antes de mandar cualquier mensaje en inglés, pásalo por IA.":
       "Start with Spanish-speaking startups —Mexico, Colombia, Argentina, Spain— while you build your English in parallel. They're two simultaneous processes, not sequential ones. And before sending any message in English, run it through AI.",
     "¿Y si me ignoran?":"What if they ignore me?",
-    "La mayoría lo va a hacer. Planifica veinte a cuarenta intentos reales, no cinco. Lo que arruina esto no es la tasa de respuesta: es hacer tres intentos y concluir que no funciona.":
-      "Most of them will. Plan for twenty to forty real attempts, not five. What ruins this isn't the response rate: it's making three attempts and concluding it doesn't work.",
+    "La mayoría lo va a hacer. Planifica diez a veinte intentos reales, no tres. Lo que arruina esto no es la tasa de respuesta: es hacer tres intentos y concluir que no funciona.":
+      "Most of them will. Plan for ten to twenty real attempts, not three. What ruins this isn't the response rate: it's making three attempts and concluding it doesn't work.",
     "No sé cómo cobrar desde acá":"I don't know how to get paid from here",
-    "Wallbit te abre una cuenta bancaria en Estados Unidos en 24-48 horas sin ser ciudadano. También existen Wise, USDT, y plataformas como Deel para contratos más formales.":
-      "Wallbit opens a US bank account for you in 24-48 hours without being a citizen. There's also Wise, USDT, and platforms like Deel for more formal contracts.",
+    "Yo cobro con Wallbit: te abre una cuenta bancaria en Estados Unidos en 24-48 horas sin ser ciudadano ni viajar. Es lo que uso todos los meses. También existen Wise, USDT, y plataformas como Deel para contratos más formales.":
+      "I get paid through Wallbit: it opens a US bank account for you in 24-48 hours without being a citizen or travelling. It's what I use every month. There's also Wise, USDT, and platforms like Deel for more formal contracts.",
     "¿Es legal?":"Is it legal?",
     "Sí. Trabajar remotamente para empresas extranjeras como freelancer desde Bolivia es legal. Cuando escales a ingresos consistentes, regularizas con el NIT.":
       "Yes. Working remotely for foreign companies as a freelancer from Bolivia is legal. Once you scale to consistent income, you formalize with an NIT.",
     "¿Cuánto tarda en funcionar?":"How long until it works?",
-    "Dos a tres meses hasta la primera oportunidad concreta si ejecutas consistentemente. Tres a seis hasta un cliente estable. No es fracaso si no hay cliente el primer mes.":
-      "Two to three months to the first concrete opportunity if you execute consistently. Three to six to a stable client. It's not failure if there's no client in the first month.",
+    "Depende de qué tan bien ejecutes el PVP, no de cuánto esperes. Con un análisis serio y mensajes que demuestran trabajo real, uno a tres meses hasta la primera oportunidad concreta. Si mandas plantillas genéricas, no llega nunca. No es fracaso si no hay cliente el primer mes.":
+      "It depends on how well you execute PVP, not on how long you wait. With serious research and messages that show real work, one to three months to the first concrete opportunity. If you send generic templates, it never comes. It's not failure if there's no client in the first month.",
     "¿Necesito certificaciones?":"Do I need certifications?",
     "No. PVP no pide certificaciones. Pide trabajo real.":"No. PVP doesn't ask for certifications. It asks for real work.",
     "No te voy a":"I'm not going to","vender un curso":"sell you a course","// Sin letra chica":"// No fine print",
