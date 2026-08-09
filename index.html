@@ -204,9 +204,16 @@ h3{font-size:var(--text-h3)}
 .carga[data-fase="entrando"] .carga__sq{transition:transform 1s var(--ease-in-out-quart);transform:rotate(0)}
 .carga[data-fase="quieto"]   .carga__sq{transition:none;transform:rotate(0);transform-origin:calc(100vmax + 100vw) 100%}
 .carga[data-fase="saliendo"] .carga__sq{transform-origin:calc(100vmax + 100vw) 100%;transition:transform 1s var(--ease-in-out-quart) .1s;transform:rotate(90deg)}
-.carga__c{position:absolute;inset:0;display:grid;place-items:center;z-index:1;transition:opacity .3s}
+/* UNA sola regla. Había dos: la primera centraba con grid + place-items, y la
+   segunda la pisaba con display:flex SIN justify-content — en un flex de columna
+   eso centra horizontal y deja el bloque pegado ARRIBA. Por eso el "Moi ·
+   Cargando" salía arriba en vez de al medio. */
+.carga__c{
+  position:absolute;inset:0;z-index:1;transition:opacity .3s;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:calc(var(--spacing)*10);
+}
 .carga[data-fase="saliendo"] .carga__c{opacity:0}
-.carga__c{display:flex;flex-direction:column;align-items:center;gap:calc(var(--spacing)*10)}
 .carga__m{
   font-family:var(--font-sans);font-weight:700;font-size:calc(var(--spacing)*22);
   letter-spacing:.02em;text-transform:uppercase;color:var(--bg);
