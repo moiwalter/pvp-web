@@ -19,7 +19,7 @@ La diferencia entre un PVP mediocre y uno que consigue llamadas es la profundida
 - ¿Cuándo publicaron por última vez? ¿Hay inconsistencia?
 
 ### C. Producto / app
-- Si tienen demo o app: usala. Como usuario nuevo.
+- Si tienen demo o app: úsala. Como usuario nuevo.
 - ¿Dónde hay fricción? ¿Qué no es intuitivo?
 - ¿El onboarding explica el valor rápido o tarda demasiado?
 

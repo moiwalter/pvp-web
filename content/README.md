@@ -1,5 +1,18 @@
 # La capa de datos — todo el contenido, separado del diseño
 
+> ⚠️ **La dirección del flujo se INVIRTIÓ el 9-ago-2026.** Antes el HTML era la
+> fuente y los `.md` una copia extraída. Ahora es al revés:
+>
+> ```
+> content/pvp/*.md + pvp-indice.json   ← LA FUENTE (se edita acá)
+>          ↓  node content/render-pvp.mjs
+>       pvp.html                        ← GENERADO (nunca editar a mano)
+> ```
+>
+> `extraer-pvp.mjs` quedó **retirado** y aborta si lo corres: iba en la dirección
+> vieja y hoy pisaría la fuente con el generado. El conversor markdown vive en
+> `md.mjs` y el markdown se **hornea en build** — ya no hay `marked` desde CDN.
+
 Acá vive **el contenido** del sitio de Moi. Las páginas actuales (`index.html`, `lista.html`,
 `pvp.html`) tienen el texto incrustado en el HTML; esto lo saca afuera para poder montar una
 **imagen nueva** sin volver a escribir ni una línea.
@@ -50,11 +63,16 @@ pase lo que pase con el diseño.
 
 ## Lo que encontré roto al extraer
 
-Ninguno de estos se tocó todavía — quedan listados para decidir qué entra en la landing nueva.
+**Estado al 9-ago-2026:** lo de `pvp.html` está ✅ **arreglado** en el rediseño del deck
+(voseo, `og:url`, canonical, CDN, y el cierre en llamada). Lo de `lista.html` e
+`index.html` sigue pendiente y se marca abajo.
 
 ### Contenido
 
-- **Voseo en `pvp.html`, 6 veces** — contra la regla de tuteo neutro, y está publicado:
+- ✅ **Voseo — RESUELTO.** Los 5 casos que vivían en las 12 partes se corrigieron en la
+  **fuente** (`content/pvp/*.md`) y `render-pvp.mjs` tiene un **gate de voseo** que hace
+  fallar el build si vuelve a aparecer. El sexto (`Agendá una llamada`) murió con la
+  sección de booking. Tabla original, para referencia:
   | Dónde | Dice | Debería decir |
   |---|---|---|
   | booking (línea 816) | `Agendá una llamada` | `Agenda una llamada` |
@@ -68,11 +86,11 @@ Ninguno de estos se tocó todavía — quedan listados para decidir qué entra e
 
 ### Estructura y embudo
 
-- **Ni `lista.html` ni `pvp.html` enlazan de vuelta al hub.** El QR de los videos entra por
+- **`lista.html` no enlaza de vuelta al hub** (`pvp.html` ya sí: cabecera y "Volver al inicio"). El QR de los videos entra por
   `lista.html`, o sea que el tráfico grande nunca descubre Mi Plata, Science Gym Coach ni la
   votación. El hub solo lo ve quien entra por la bio.
-- **`og:url` de `pvp.html` apunta a la raíz** — quien comparte el método genera un preview de
-  otra página.
+- ✅ **`og:url` de `pvp.html` — RESUELTO**: apunta a `pvp.html` y ahora declara `canonical`.
+  Además cada parte tiene ancla propia (`#parte-7`), así que el deck es compartible por parte.
 - **Las tres páginas comparten la misma `og:image`** (`hero.webp`) y **ninguna declara canonical**.
 - **Zona "Herramientas que construí"**: una sola tarjeta a ancho completo. Se ve vacía.
 
@@ -84,8 +102,8 @@ Ninguno de estos se tocó todavía — quedan listados para decidir qué entra e
   visitante a Google, y el logo de Wallbit —el auspiciador— sale de un favicon de 128px.
 - **4,3 MB de peso muerto** en el repo: `hero.png` y los tres `section-*.jpg` ya no se sirven
   (las páginas solo piden los `.webp`).
-- **`pvp.html` depende de `marked.min.js` desde CDN** para renderizar las 12 partes. Si el CDN
-  cae, la página queda en blanco.
+- ✅ **CDN — RESUELTO**: el markdown se hornea en build con `md.mjs`. `pvp.html` ya no carga
+  ningún JS externo (el selftest de `render-pvp.mjs` lo verifica en cada corrida).
 
 ### Documentación
 

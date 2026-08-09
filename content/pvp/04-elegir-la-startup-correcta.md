@@ -31,7 +31,7 @@ Un PVP no es una táctica para colarte en empresas que no te conocen. Es una dem
 4. El CEO está activo en LinkedIn, Twitter/X, o Instagram → respuesta más rápida
 5. Tienen ofertas de trabajo remotas publicadas → ya rompieron la barrera cultural
 
-**Rojo — Evitá estas (al principio):**
+**Rojo — Evita estas (al principio):**
 - Empresas grandes (+100 personas) — tu mensaje llega a RRHH, no al CEO
 - Startups sin presencia en redes — difícil saber si están activas
 - Empresas en mercados muy regulados (salud, finanzas en EEUU)

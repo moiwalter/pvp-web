@@ -12,7 +12,7 @@ Esta es la primera barrera. Y es real — pero es menos grande de lo que parece.
 
 **Lo que sí importa**: El costo de contratar talento latinoamericano es 3-6 veces menor que contratar en EEUU o Europa. Para ellos es una ventaja. Para ti es una salida.
 
-**Qué hacer**: No ocultes que sos de Bolivia, pero no lo hagas el centro de tu presentación. "Soy de Bolivia y llevo un tiempo siguiendo lo que están construyendo con [empresa]." Eso es todo. Tu trabajo habla por ti.
+**Qué hacer**: No ocultes que eres de Bolivia, pero no lo hagas el centro de tu presentación. "Soy de Bolivia y llevo un tiempo siguiendo lo que están construyendo con [empresa]." Eso es todo. Tu trabajo habla por ti.
 
 ---
 
@@ -28,4 +28,4 @@ Esta es la segunda barrera más común. Y la respuesta honesta no es "no lo nece
 
 **Lo que recomiendo**: Empieza con startups en español mientras construyes el inglés en paralelo. Son dos procesos simultáneos, no secuenciales.
 
-**El rol de la IA**: ChatGPT revisa tu inglés escrito en segundos. Antes de mandar cualquier mensaje en inglés, pasalo por IA. Eso cubre la mayor parte del problema mientras sigues mejorando.
+**El rol de la IA**: ChatGPT revisa tu inglés escrito en segundos. Antes de mandar cualquier mensaje en inglés, pásalo por IA. Eso cubre la mayor parte del problema mientras sigues mejorando.

@@ -1,6 +1,6 @@
 # Prompts de IA para el análisis
 
-Usá estos prompts en ChatGPT o Perplexity. Están listos para copiar y editar.
+Usa estos prompts en ChatGPT o Perplexity. Están listos para copiar y editar.
 
 ## Prompt Maestro — análisis completo
 
