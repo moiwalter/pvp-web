@@ -2,6 +2,41 @@
 
 Última actualización: **9-ago-2026**, árbol limpio en `main`.
 
+## Arreglado el 9-ago (tarde) — la página ya no tiene defectos conocidos
+
+Auditoría con Playwright a 1920/1440/1280/1024/768/390. Cero errores de JS, cero
+desborde horizontal, cero voseo. Tres cosas estaban rotas y se arreglaron:
+
+1. **El titular del pie se cortaba en TODO ancho de escritorio.** `.dsp` usaba
+   `--text-display` puro: la línea *"Ganarte la vida en otro mercado."* medía
+   **1650px dentro de una columna de 1016px** a 1440, y `.foot{overflow:hidden}`
+   la recortaba en silencio (se leía *"…en otro merc"*). La segunda línea también
+   se salía. Medido: 250–290px de exceso entre 768 y 1440.
+   **Arreglo**: el titular se parte en **tres** líneas (como el hero) y `.dsp` se
+   mide contra su propia columna — `min(var(--text-display),10.5cqi)` sobre
+   `.foot__col{container-type:inline-size}`. Así el tipo se queda grande en vez
+   de encogerse. Verificado: las 3 líneas caben en los 6 anchos.
+   De paso se borró `.foot__big`, que era CSS muerto (ningún nodo lo usaba).
+
+2. **Dos capturas de plataforma eran la pantalla anti-bots de Cloudflare**, no el
+   sitio: `weworkremotely.webp` (sale en la landing, una de las 4 tarjetas) y
+   `workana.webp` (sale en La Lista). Se recapturaron con un navegador real
+   —cargan sin desafío, no hubo que evadir nada— a los mismos 1120×700 webp.
+
+3. **La votación quedó verificada de punta a punta sin ensuciar los resultados**:
+   los 7 `data-id` de la landing coinciden con los del hub y con el `CHECK` de
+   `votos.sql`; un POST con una guía inválida devuelve `400 guia_conocida`, lo que
+   prueba endpoint + llave + política RLS de INSERT vivos **sin insertar un voto**.
+   Ese es el chequeo barato para repetir cuando se toquen los ids.
+
+También verificado: las 4 tarjetas del método están **sincronizadas** entre la
+escena fijada (`.hw__paso`) y la caída apilada de móvil (`.stack__i`) — el drift
+que `PLAN-METODO.md` advierte todavía no ocurrió.
+
+⚠️ **No es un bug**: en el FAQ cada pregunta se ve **repetida en gris**. Es el
+desfile ×3 de good-fella (`.mq`, línea ~594), reproducido a propósito; al pasar
+el cursor desfila. No "arreglarlo".
+
 ▶ **Lo siguiente está planificado en `PLAN-METODO.md`**: pasar las 12 partes del método
 PVP al formato de la landing. Ese archivo tiene el diagnóstico, la decisión de layout
 abierta (A/B/C) y por dónde arrancar sin haberla tomado.
