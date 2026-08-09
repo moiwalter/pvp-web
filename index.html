@@ -907,7 +907,11 @@ a.pilar--tlb:hover .pilar__t{color:var(--tlb-oro)}
      .pin__stick mide 100vh con align-items:center: todo lo que no quepa se
      desborda por arriba y por abajo, y el bloque siguiente se le monta encima.
      En la escena queda sólo lo que se anima — los pasos y su tarjeta. -->
-<section class="sec inv" style="padding-bottom:0">
+<!-- `reveal-group` NO es decorativo: es el gancho que el IntersectionObserver
+     usa para poner `is-in`. Sin él, los .rv del titular se quedan en
+     translateY(106%) para siempre y el h2 NUNCA aparece — está en el DOM,
+     invisible. Cualquier sección nueva con titular tiene que llevarlo. -->
+<section class="sec inv reveal-group" style="padding-bottom:0">
   <div class="grid-container grid-layout">
     <div class="sp-12 lg-st-3 lg-sp-8">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:calc(var(--spacing)*24);flex-wrap:wrap">
