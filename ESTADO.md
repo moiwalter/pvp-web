@@ -100,12 +100,21 @@ El contenido vive separado en `content/` (`site.json` + las 12 partes del métod
 
 ## Decisiones pendientes de Walter
 
-1. **El `10×`** de la sección del trabajo. Su documento de estrategia
-   (`03-areas/moiwalter/workflow/estrategia-contenido.md`) dice **5–10x**; está puesto
-   el techo. Frente a una audiencia cuyos 5 comentarios más likeados son desconfianza,
-   el piso defiende mejor.
-2. **Switch a inglés.** Pedido, no hecho: falta definir si va toda la página o sólo la
-   presentación. No es un botón — son dos versiones de texto a mantener en sincronía.
+1. ✅ **El `10×` bajó a `5×`** (9-ago). Su documento de estrategia dice 5–10x y estaba
+   puesto el techo; frente a una audiencia cuyos 5 comentarios más likeados son
+   desconfianza, el piso defiende mejor. Es `data-odo` en el odómetro.
+2. ✅ **Switch a inglés hecho** (9-ago), toda la página, botón `EN`/`ES` en la cabecera.
+   - **Diccionario por TEXTO**, no `data-en` por etiqueta: los titulares están partidos
+     en `<span>` de revelado y las preguntas del FAQ están **triplicadas** en el DOM
+     (el desfile de good-fella). Con diccionario las tres se traducen solas y el markup
+     no se toca. Para editar el inglés: el objeto `EN` al final de `index.html`.
+   - **Arranca SIEMPRE en español.** Nada de `navigator.language`: la audiencia es
+     boliviana y mucha gente usa el teléfono en inglés — auto-traducir les serviría un
+     idioma que no pidieron. La elección se recuerda en `localStorage`.
+   - ⚠️ Es traducción de **cliente**: los buscadores siguen indexando el español. Para
+     SEO real en inglés haría falta `/en/` como página propia. Decisión aparte.
+   - El deck (`pvp.html`) sigue en español; el CTA lo dice: *"12 parts · nothing gated ·
+     in Spanish"*.
 3. **Pilares 03 y 06** ("IA sin bullshit", "Los que ya entraron") no enlazan a nada.
 4. **Promover a la raíz** — ver arriba.
 5. **El layout del método (A/B/C)** — la decisión está descrita en `PLAN-METODO.md`.

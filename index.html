@@ -228,6 +228,15 @@ h3{font-size:var(--text-h3)}
 .head.is-stuck{background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .head__row{display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .head__tools{display:flex;align-items:center;gap:calc(var(--spacing)*12)}
+/* ── Switch de idioma ── */
+.lang{
+  font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.1em;
+  color:var(--fg-muted);background:none;border:0;cursor:pointer;padding:0;
+  display:flex;align-items:center;transition:color .3s var(--ease-out-quart)
+}
+.lang b{border:1px solid var(--border);padding:calc(var(--spacing)*6) calc(var(--spacing)*9);font-weight:400;transition:border-color .3s var(--ease-out-quart),color .3s var(--ease-out-quart)}
+.lang:hover{color:var(--brand)}
+.lang:hover b{border-color:var(--brand)}
 
 /* ── RETRATO ASCII — el ancla visual del hero ── */
 .ascii{
@@ -316,7 +325,11 @@ h3{font-size:var(--text-h3)}
 
 /* ── QUIÉN SOY: cuatro columnas, una es FOTO con velo de marca al 6% ── */
 .quien{display:grid;grid-template-columns:1fr;gap:calc(var(--spacing)*16)}
-@media(min-width:700px){.quien{grid-template-columns:repeat(2,1fr)}}
+/* minmax(0,1fr) y no 1fr: por defecto una pista de grilla tiene min-width:auto,
+   así que el contenido ancho (la rejilla de cifras) la empujaba y NO encogía.
+   Entre 700 y 1023px las dos columnas sumaban 938px dentro de 720 y la página
+   entera ganaba scroll horizontal. Preexistente, no lo trajo la traducción. */
+@media(min-width:700px){.quien{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:1100px){
   /* la foto ocupa las DOS filas; a su derecha, tarjetas arriba y logos abajo */
   .quien{grid-template-columns:.62fr 1fr 1fr;grid-template-rows:auto auto}
@@ -461,8 +474,11 @@ h3{font-size:var(--text-h3)}
 /* la etiqueta va arriba: en la misma línea se comía el ancho que necesitan los 4 */
 .muro__fila{display:flex;align-items:center;justify-content:space-between;gap:calc(var(--spacing)*20);width:100%}
 .muro__fila a{display:flex;align-items:center;text-decoration:none}
-/* en móvil los cuatro no entran en una línea de 390px: la fila envuelve */
-@media(max-width:699px){
+/* La fila envuelve en TODO el rango donde la columna es angosta, no sólo en
+   móvil: entre 700 y 1099px la rejilla de "quién soy" es de dos columnas, así
+   que el muro vive en ~350px y los cuatro logos (el del Tribunal solo mide 302)
+   se salían de la página. Arriba de 1100 la rejilla cambia y sí entran. */
+@media(max-width:1099px){
   .muro__fila{flex-wrap:wrap;justify-content:flex-start;gap:calc(var(--spacing)*20) calc(var(--spacing)*26)}
 }
 @media(min-width:1024px){.muro{padding:calc(var(--spacing)*24) calc(var(--spacing)*30);min-height:calc(var(--spacing)*134)}}
@@ -678,6 +694,7 @@ a.pilar:hover .pilar__t{color:var(--brand)}
     <div class="head__row">
       <a href="./" class="head__logo">Moi</a>
       <div class="head__tools">
+        <button class="lang" id="lang" type="button" aria-label="Switch to English"><b>EN</b></button>
         <a href="#lista" class="gbtn"><i class="gbtn__chip l" aria-hidden="true">+</i><span class="gbtn__lbl">La Lista</span><i class="gbtn__chip r" aria-hidden="true">+</i></a>
       </div>
     </div>
@@ -788,7 +805,7 @@ a.pilar:hover .pilar__t{color:var(--brand)}
     </div>
     <div class="sp-12 fade" style="margin-top:calc(var(--spacing)*56)">
       <p class="lede" style="max-width:none;text-align:center">
-        Cambiarlo no es mudarse ni empezar de cero. Es dejar de venderle tus horas al mercado que te tocó y vendérselas al que paga <span class="prueba"><span class="odo" data-odo="10"></span>×</span> más.
+        Cambiarlo no es mudarse ni empezar de cero. Es dejar de venderle tus horas al mercado que te tocó y vendérselas al que paga <span class="prueba"><span class="odo" data-odo="5"></span>×</span> más.
       </p>
     </div>
   </div>
@@ -1405,7 +1422,162 @@ document.addEventListener('click',function(e){
 })();
 
 /* La votación salió de esta página el 9-ago-2026: su JS (y la llave pública de
-   Supabase que lo acompañaba) se fue con ella. Sigue viva en index.html. */
+   Supabase que lo acompañaba) se fue con ella. Sigue viva en hub.html. */
+
+/* ── SWITCH DE IDIOMA ────────────────────────────────────────────────────────
+   Diccionario por TEXTO, no data-en por etiqueta. Dos razones:
+   · los titulares están partidos en <span> de revelado con barras adentro;
+     tocar el markup de cada uno era pedir un bug de layout
+   · las preguntas del FAQ están TRIPLICADAS en el DOM (el desfile de
+     good-fella): con diccionario se traducen las tres solas
+   Sólo entran las cadenas que cambian — nombres propios, cifras, arrobas y la
+   taxonomía en corchetes se quedan igual.
+   ⚠️ Es traducción de CLIENTE: los buscadores indexan el español. Para SEO real
+   en inglés haría falta una página aparte (/en/), que es otra decisión. */
+(function(){
+  var EN = {
+    "La Lista":"The List",
+    "Hay una forma nueva":"There's a new way","de ganarse la vida.":"to make a living.","Y de vivirla.":"And to live it.",
+    "Te enseñaron una sola forma de vivir: estudia, consigue un puesto, aguanta. Esa fórmula dejó de funcionar y nadie lo anunció. La vida no es aceptar el sueldo, el techo y el mercado que te tocaron por haber nacido donde naciste — y esta página es lo que fui armando para salir de ahí.":
+      "You were taught one way to live: study, get a job, endure. That formula stopped working and nobody announced it. Life isn't accepting the salary, the ceiling and the market you were handed for being born where you were born — and this page is what I put together to get out of that.",
+    "Por dónde se empieza":"Where to start","De qué se trata":"What this is about",
+    "Quién te habla":"Who's talking","y de qué.":"and about what.",
+    "Walter Álvarez. Me formé como ingeniero civil; hoy construyo audiencias en vez de edificios. Hago contenido para Stacksync, una startup de Y Combinator en San Francisco, remoto desde Bolivia. Antes fui CMO de Startupeable, el podcast de startups más grande de Latinoamérica. Lo que publico sale de ahí, no de un curso.":
+      "Walter Álvarez. I trained as a civil engineer; today I build audiences instead of buildings. I make content for Stacksync, a Y Combinator startup in San Francisco, remote from Bolivia. Before that I was CMO of Startupeable, the biggest startup podcast in Latin America. What I publish comes from there, not from a course.",
+    "// Los números":"// The numbers",
+    "descargas del podcast":"podcast downloads","impresiones en 4 meses":"impressions in 4 months",
+    "entrevistas a fundadores":"founder interviews","suscriptores en YouTube":"YouTube subscribers",
+    "// De qué hablo y por qué":"// What I talk about and why",
+    "Trabajo remoto":"Remote work","IA sin bullshit":"AI without bullshit",
+    "Cómo entrar":"How to get in","Los que ya entraron":"The ones already in",
+    "// Dónde he trabajado":"// Where I've worked",
+    "Se empieza por el trabajo.":"It starts with the work.",
+    "No porque sea lo importante:":"Not because it's what matters:",
+    "porque":"because","decide todo lo demás":"it decides everything else",
+    "Dónde puedes vivir":"Where you can live","Cuántas horas te quedan":"How many hours you have left",
+    "Si duermes y si entrenas":"Whether you sleep and train","Qué puedes construir":"What you can build",
+    "Cambiarlo no es mudarse ni empezar de cero. Es dejar de venderle tus horas al mercado que te tocó y vendérselas al que paga":
+      "Changing it isn't moving abroad or starting from zero. It's about no longer selling your hours to the market you were handed, and selling them to one that pays",
+    "más.":"more.",
+    "Tener la lista no basta.":"The list alone isn't enough.","// El método PVP":"// The PVP method",
+    "Investiga":"Research",
+    "Eliges una startup de la lista y la entiendes a fondo: su web, sus redes, su producto, sus competidores. Hoy, con IA, eso toma una tarde.":
+      "You pick a startup from the list and understand it deeply: their site, their socials, their product, their competitors. Today, with AI, that takes an afternoon.",
+    "Encuentra un problema":"Find a problem",
+    "Algo concreto y roto, en un área en la que seas bueno. Lo que ellos ya no ven por estar adentro.":
+      "Something concrete and broken, in an area you're good at. What they no longer see from the inside.",
+    "Resuélvelo antes de que te lo pidan":"Solve it before they ask",
+    "Creas la solución y la entregas como un link, nunca como adjunto. Ese documento es tu portafolio.":
+      "You build the solution and deliver it as a link, never as an attachment. That document is your portfolio.",
+    "Mándalo al fundador":"Send it to the founder",
+    "Por LinkedIn, no al portal. Seis a ocho líneas. Y no pides el trabajo: pides quince minutos.":
+      "Over LinkedIn, not the job portal. Six to eight lines. And you don't ask for the job: you ask for fifteen minutes.",
+    "Paso 01 — 04":"Step 01 — 04","Paso 02 — 04":"Step 02 — 04","Paso 03 — 04":"Step 03 — 04","Paso 04 — 04":"Step 04 — 04",
+    "startups que revisas":"startups you review","problema, no diez":"problem, not ten",
+    "secciones tiene el documento":"sections in the document","minutos es todo lo que pides":"minutes is all you ask for",
+    "Tener la lista":"The list alone","no basta.":"isn't enough.",
+    "PASO 01":"STEP 01","PASO 02":"STEP 02","PASO 03":"STEP 03","PASO 04":"STEP 04",
+    "Leer el método completo":"Read the full method","12 partes · nada bloqueado":"12 parts · nothing gated · in Spanish",
+    "Dónde están":"Where the jobs","los trabajos.":"actually are.",
+    "Páginas hechas para esto. Acá no compites contra todo Bolivia: compites contra los pocos que saben que existen. Filtra siempre por":
+      "Sites built for this. Here you're not competing against all of Bolivia: you're competing against the few who know they exist. Always filter by",
+    "Ver las 9":"See all 9","[Global]—[Todo rol]":"[Global]—[Any role]",
+    "Las preguntas":"The uncomfortable","incómodas.":"questions.","// Lo que estás pensando":"// What you're thinking",
+    "No tengo experiencia":"I have no experience",
+    "El PVP crea la experiencia. El documento que haces para esa empresa ES tu portafolio — trabajo aplicado, hecho ahora, para ellos. Eso ya demuestra más que cualquier certificado.":
+      "PVP creates the experience. The document you make for that company IS your portfolio — applied work, done now, for them. That already proves more than any certificate.",
+    "Soy de Bolivia, nadie me contrata":"I'm from Bolivia, nobody hires me",
+    "Una startup de diez personas no contrata ubicaciones — contrata soluciones. Bolivia no es un nombre que reconozcan, pero tampoco Perú o Colombia al principio. Lo que sí reconocen es si entendiste su problema.":
+      "A ten-person startup doesn't hire locations — it hires solutions. Bolivia isn't a name they recognize, but neither was Peru or Colombia at first. What they do recognize is whether you understood their problem.",
+    "No tengo inglés":"My English isn't good enough",
+    "Empieza con startups en español —México, Colombia, Argentina, España— mientras construyes el inglés en paralelo. Son dos procesos simultáneos, no secuenciales. Y antes de mandar cualquier mensaje en inglés, pásalo por IA.":
+      "Start with Spanish-speaking startups —Mexico, Colombia, Argentina, Spain— while you build your English in parallel. They're two simultaneous processes, not sequential ones. And before sending any message in English, run it through AI.",
+    "¿Y si me ignoran?":"What if they ignore me?",
+    "La mayoría lo va a hacer. Planifica veinte a cuarenta intentos reales, no cinco. Lo que arruina esto no es la tasa de respuesta: es hacer tres intentos y concluir que no funciona.":
+      "Most of them will. Plan for twenty to forty real attempts, not five. What ruins this isn't the response rate: it's making three attempts and concluding it doesn't work.",
+    "No sé cómo cobrar desde acá":"I don't know how to get paid from here",
+    "Wallbit te abre una cuenta bancaria en Estados Unidos en 24-48 horas sin ser ciudadano. También existen Wise, USDT, y plataformas como Deel para contratos más formales.":
+      "Wallbit opens a US bank account for you in 24-48 hours without being a citizen. There's also Wise, USDT, and platforms like Deel for more formal contracts.",
+    "¿Es legal?":"Is it legal?",
+    "Sí. Trabajar remotamente para empresas extranjeras como freelancer desde Bolivia es legal. Cuando escales a ingresos consistentes, regularizas con el NIT.":
+      "Yes. Working remotely for foreign companies as a freelancer from Bolivia is legal. Once you scale to consistent income, you formalize with an NIT.",
+    "¿Cuánto tarda en funcionar?":"How long until it works?",
+    "Dos a tres meses hasta la primera oportunidad concreta si ejecutas consistentemente. Tres a seis hasta un cliente estable. No es fracaso si no hay cliente el primer mes.":
+      "Two to three months to the first concrete opportunity if you execute consistently. Three to six to a stable client. It's not failure if there's no client in the first month.",
+    "¿Necesito certificaciones?":"Do I need certifications?",
+    "No. PVP no pide certificaciones. Pide trabajo real.":"No. PVP doesn't ask for certifications. It asks for real work.",
+    "No te voy a":"I'm not going to","vender un curso":"sell you a course","// Sin letra chica":"// No fine print",
+    "Arriba viste los cuatro pasos. El método completo tiene doce partes y está a un clic, entero y abierto. No hay lista de espera, no hay correo que dejar, no hay llamada que agendar. Si te sirve, úsalo. Si no, no perdiste nada.":
+      "You just saw the four steps. The full method has twelve parts and it's one click away, complete and open. There's no waitlist, no email to leave, no call to book. If it helps you, use it. If not, you lost nothing.",
+    "Abrir el método":"Open the method","Ver dónde están los trabajos":"See where the jobs are",
+    "Lo demás":"Everything else","que construí.":"I've built.","// Sistemas":"// Systems",
+    "Todo lo que publico sobre IA sale de acá: sistemas que uso todos los días, no de lo que se podría hacer. Dos están abiertos para que los copies.":
+      "Everything I publish about AI comes from here: systems I use every day, not from what could be done. Two are open for you to copy.",
+    "[Código abierto]":"[Open source]","[En vivo]":"[Live]","[Privado]":"[Private]",
+    "Sabes cuánto puedes gastar hoy sin arruinar el mes. Se conecta a Wallbit y solo lee.":
+      "You know how much you can spend today without wrecking the month. Connects to Wallbit and only reads.",
+    "Qué toca hoy y con cuánto peso, según lo que te falta y cómo vienes de recuperado.":
+      "What you train today and with how much weight, based on what you're behind on and how recovered you are.",
+    "Tu propio libro impreso desde un ejemplar, sin editorial. Y 9.000 títulos de catálogo.":
+      "Your own book printed from a single copy, no publisher. Plus 9,000 catalog titles.",
+    "El Pilot":"The Pilot",
+    "El sistema multiagente que corre mi vida: doce sistemas bajo un mismo contexto.":
+      "The multi-agent system that runs my life: twelve systems under one context.",
+    "Finanzas":"Finances",
+    "Lee mi cuenta en vivo y me dice cuánto puedo gastar hoy y qué hacer el 24.":
+      "Reads my account live and tells me how much I can spend today and what to do on the 24th.",
+    "Entrenamiento":"Training",
+    "Decide la próxima sesión por déficit de volumen y recuperación, con cada regla citada.":
+      "Decides the next session by volume deficit and recovery, with every rule cited.",
+    "Ganarte la vida":"Make your living","en otro mercado.":"in another market.",
+    "Vivirla":"Live it","donde naciste":"where you were born",
+    "El método":"The method","Qué publico después":"What I publish next"
+  };
+
+  var TITULOS = {
+    es:"Moi — Hay una forma nueva de ganarse la vida",
+    en:"Moi — There's a new way to make a living"
+  };
+
+  var btn=document.getElementById('lang'); if(!btn) return;
+  var nodos=null, idioma='es';
+
+  function recolectar(){
+    nodos=[];
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
+    var n;
+    while((n=w.nextNode())){
+      if(n.parentElement && n.parentElement.closest('script,style,#carga,#lang')) continue;
+      var bruto=n.textContent, s=bruto.replace(/\s+/g,' ').trim();
+      if(!s || !EN[s]) continue;
+      /* se preserva el espacio de alrededor: estos textos están indentados
+         dentro del HTML y arrancarlo cambiaba el interlineado */
+      var m=bruto.match(/^(\s*)[\s\S]*?(\s*)$/);
+      nodos.push({n:n, es:bruto, en:m[1]+EN[s]+m[2]});
+    }
+  }
+
+  function poner(l){
+    if(!nodos) recolectar();
+    idioma=l;
+    nodos.forEach(function(o){ o.n.textContent = (l==='en' ? o.en : o.es); });
+    document.documentElement.lang = l;
+    document.title = TITULOS[l];
+    btn.querySelector('b').textContent = (l==='en' ? 'ES' : 'EN');
+    btn.setAttribute('aria-label', l==='en' ? 'Cambiar a español' : 'Switch to English');
+    try{ localStorage.setItem('moi-lang', l); }catch(e){}
+  }
+
+  btn.addEventListener('click', function(){ poner(idioma==='en' ? 'es' : 'en'); });
+
+  /* Arranque: SIEMPRE español, salvo que él mismo haya elegido inglés antes.
+     Nada de auto-detectar navigator.language — la audiencia es boliviana y
+     muchísima gente usa el teléfono en inglés: auto-traducir les serviría la
+     página en un idioma que no pidieron. El inglés es la excepción explícita. */
+  var guardado=null;
+  try{ guardado=localStorage.getItem('moi-lang'); }catch(e){}
+  if(guardado==='en') poner('en');
+})();
 </script>
 
 </body>
