@@ -1,6 +1,10 @@
 # Estado — landing.html
 
-Última actualización: **9-ago-2026**. Cuatro commits en `main`, árbol limpio.
+Última actualización: **9-ago-2026**, árbol limpio en `main`.
+
+▶ **Lo siguiente está planificado en `PLAN-METODO.md`**: pasar las 12 partes del método
+PVP al formato de la landing. Ese archivo tiene el diagnóstico, la decisión de layout
+abierta (A/B/C) y por dónde arrancar sin haberla tomado.
 
 ## Qué está en vivo y qué no
 
@@ -56,6 +60,8 @@ El contenido vive separado en `content/` (`site.json` + las 12 partes del métod
    presentación. No es un botón — son dos versiones de texto a mantener en sincronía.
 3. **Pilares 03 y 06** ("IA sin bullshit", "Los que ya entraron") no enlazan a nada.
 4. **Promover a la raíz** — ver arriba.
+5. **El layout del método (A/B/C)** — la decisión está descrita en `PLAN-METODO.md`.
+   No bloquea: las 12 glosas y las 12 cifras se escriben igual en los tres casos.
 
 ## Nunca construidos (de good-fella)
 
