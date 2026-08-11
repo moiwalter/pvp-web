@@ -1,6 +1,58 @@
 # Estado — landing.html
 
-Última actualización: **9-ago-2026**, árbol limpio en `main`.
+Última actualización: **11-ago-2026**. ⚠️ Los cambios del 11-ago están **sin commitear**.
+
+## 11-ago — las cifras pasan a tener dueño
+
+La tarjeta `// Los números` listaba cuatro cifras sin fuente (`7M descargas del
+podcast`, `2,8M+ impresiones en 4 meses`, `50+ entrevistas a fundadores`, `66K
+suscriptores en YouTube`). Walter la leyó y preguntó *"¿qué números?"*: bajo su
+foto, "el podcast" se lee como **su** podcast, y nada de eso se puede verificar.
+Frente a una audiencia cuyos 5 comentarios más likeados son de desconfianza, una
+cifra sin dueño **resta** autoridad. Misma lógica que bajar el `10×` a `5×`.
+
+Se agruparon **por fuente**, con la atribución escrita una vez por grupo:
+
+| grupo | cifras |
+|---|---|
+| Startupeable — dirigí el marketing | 7M descargas · 66K suscriptores · **130+ entrevistas producidas** |
+| Stacksync — San Francisco | 2,8M+ impresiones en LinkedIn · 4 meses |
+| Moi — esta cuenta | **660K+ vistas en TikTok** |
+
+Dos correcciones de fondo, no de forma:
+- **`50+ entrevistas a fundadores` era falso por partida doble.** Son **130+**, y
+  **producidas**, no hechas por él. Tal como estaba, se leía como que las condujo.
+- **Faltaba la única cifra propia.** Las cuatro viejas eran de terceros. Los 660K+
+  salen de sumar los 58 videos del corpus (`second-brain/03-areas/moiwalter/corpus`,
+  664.751 al 9-ago). Sólo sube: por eso va con `+` y redondeado abajo.
+
+Detalles que cuestan repetir:
+- **`space-between`, no `flex-start`.** El comentario del CSS (línea ~515) advierte
+  de un hueco de 400px que ya ocurrió: la tarjeta vecina creció y el sobrante quedó
+  muerto al fondo. El sobrante se reparte **entre grupos** (`.cifg`) — si se
+  repartiera entre filas, el rótulo de fuente flotaría tan lejos de sus cifras como
+  de las ajenas y la atribución dejaría de leerse.
+- **Las cifras bajaron de 38px a 33px.** Con 5 cifras + 3 rótulos, a 38px el
+  contenido pedía 493px contra los 488px de la tarjeta vecina: se pasaba y, peor,
+  no dejaba sobrante que repartir (grupos a 18px contra 14px dentro del grupo — no
+  se leían como grupos). A 33px la separación es 37px contra 11px.
+- ⚠️ **`scrollHeight − clientHeight` da un falso positivo de ~4px acá.** `<b>` usa
+  `line-height:1`, más apretado que la caja natural de la fuente, así que la tinta
+  del descendente de la última cifra sobresale y Chromium la cuenta. Ya pasaba antes
+  (`space-evenly` lo escondía dejando 36px al fondo). Medir **recorte real** y que
+  la última fila siga dentro de la tarjeta, no el rebalse.
+- El diccionario `EN` traduce **por texto**: cada string nuevo necesitó su entrada.
+  `Stacksync — San Francisco` no lleva (dos nombres propios) y queda igual a propósito.
+
+Auditado con Playwright a 1920/1440/1280/1024/768/390: nada se recorta, ninguna
+etiqueta se sale, cero errores JS, sin desborde horizontal, y el switch EN traduce
+las cinco cifras. El script vive en el scratchpad de la sesión, no en el repo.
+
+**Queda abierto**: `Stacksync — San Francisco` dice *dónde*, mientras Startupeable
+dice *qué hizo*. Si se confirma que sigue vigente, `escribo para 8 perfiles de sus
+fundadores` es más fuerte y deja los tres rótulos en paralelo.
+
+## Estado al 9-ago (previo)
 
 ## Arreglado el 9-ago (tarde) — la página ya no tiene defectos conocidos
 

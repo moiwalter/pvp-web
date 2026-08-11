@@ -515,8 +515,11 @@ h3{font-size:var(--text-h3)}
 /* Antes: margin-top:auto, que pegaba las cifras al fondo. Servía cuando la
    tarjeta medía su min-height, pero la tarjeta vecina creció (los temas ahora
    llevan veredicto), la fila se estiró y el auto se convirtió en un hueco de
-   400px. Ahora el grupo OCUPA la altura sobrante y se reparte dentro. */
-.qtxt__cif{flex:1;justify-content:space-evenly}
+   400px. Ahora el grupo OCUPA la altura sobrante y se reparte dentro.
+   El sobrante se reparte entre GRUPOS (.cifg), no entre filas: si se repartiera
+   entre filas, el rótulo de fuente flotaría tan lejos de sus cifras como de las
+   ajenas y la atribución —el punto entero de la tarjeta— dejaría de leerse. */
+.qtxt__cif{flex:1;justify-content:space-between}
 .qtxt__l{display:flex;flex-direction:column;gap:calc(var(--spacing)*12)}
 /* ── FRANJA DE LOGOS a todo el ancho, debajo de las tarjetas ──
    Monocromo: brightness(0) aplasta cualquier logo a tinta plena respetando el alfa.
@@ -584,9 +587,27 @@ h3{font-size:var(--text-h3)}
 .qtxt__l b{font-family:var(--font-sans);font-weight:500;font-size:calc(var(--spacing)*22);line-height:1.1}
 .qtxt__l span{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.06em;color:var(--fg-muted);display:block;margin-top:calc(var(--spacing)*3)}
 .qtxt__cif{display:flex;flex-direction:column;gap:calc(var(--spacing)*16);min-height:0}
-.qtxt__cif div{display:flex;align-items:baseline;gap:calc(var(--spacing)*10)}
-.qtxt__cif b{font-family:var(--font-sans);font-weight:300;font-size:calc(var(--spacing)*38);line-height:1;letter-spacing:-.03em}
+.qtxt__cif .cif{display:flex;align-items:baseline;gap:calc(var(--spacing)*10)}
+/* 38px cabía con 4 cifras sueltas; con 5 cifras + 3 rótulos de fuente el
+   contenido pedía 493px contra los 488px que da la tarjeta vecina — se pasaba
+   5px y, peor, no dejaba sobrante que repartir: los grupos quedaban a 18px
+   unos de otros contra 14px dentro del grupo, así que no se leían como grupos.
+   A 33px sobran ~45px y la separación entre fuentes se vuelve evidente. */
+.qtxt__cif b{font-family:var(--font-sans);font-weight:300;font-size:calc(var(--spacing)*33);line-height:1;letter-spacing:-.03em}
 .qtxt__cif span{font-family:var(--font-mono);font-size:var(--text-accent-sm);letter-spacing:.06em;color:var(--fg-muted);text-transform:uppercase}
+/* Un número sin dueño no da autoridad: la resta. Frente a una audiencia cuyos
+   comentarios más likeados son de desconfianza, "7M descargas del podcast" bajo
+   una foto se lee como "SU podcast" y no se puede verificar. Agrupados por
+   FUENTE, la atribución se escribe una vez y las etiquetas no crecen hasta
+   envolver — repetir "· Startupeable" en cada fila las estiraba a 35 caracteres
+   contra los ~285px que deja la columna. */
+.cifg{display:flex;flex-direction:column;gap:calc(var(--spacing)*11)}
+.cifg__src{
+  font-family:var(--font-sans);font-weight:500;font-size:calc(var(--spacing)*15);
+  line-height:1.25;padding-top:calc(var(--spacing)*11);
+  border-top:1px solid var(--border-muted)
+}
+.cifg:first-child .cifg__src{border-top:0;padding-top:0}
 /* Cada tema lleva su VEREDICTO, no sólo su etiqueta: el título de la zona
    promete "y por qué" y una lista de seis sustantivos sólo contesta "de qué". */
 .qtxt__temas{display:flex;flex-direction:column}
@@ -847,12 +868,22 @@ a.pilar--tlb:hover .pilar__t{color:var(--tlb-oro)}
         <div class="qfoto"><img src="walter-foto.webp" alt="Walter Álvarez trabajando" loading="lazy" width="660" height="897"></div>
 
         <div class="qtxt">
-          <span class="qtxt__h">// Los números</span>
+          <span class="qtxt__h">// Los números y de quién son</span>
           <div class="qtxt__cif">
-            <div><b>7M</b><span>descargas del podcast</span></div>
-            <div><b>2,8M+</b><span>impresiones en 4 meses</span></div>
-            <div><b>50+</b><span>entrevistas a fundadores</span></div>
-            <div><b>66K</b><span>suscriptores en YouTube</span></div>
+            <div class="cifg">
+              <p class="cifg__src">Startupeable — dirigí el marketing</p>
+              <div class="cif"><b>7M</b><span>descargas del podcast</span></div>
+              <div class="cif"><b>66K</b><span>suscriptores en YouTube</span></div>
+              <div class="cif"><b>130+</b><span>entrevistas producidas</span></div>
+            </div>
+            <div class="cifg">
+              <p class="cifg__src">Stacksync — San Francisco</p>
+              <div class="cif"><b>2,8M+</b><span>impresiones en LinkedIn · 4 meses</span></div>
+            </div>
+            <div class="cifg">
+              <p class="cifg__src">Moi — esta cuenta</p>
+              <div class="cif"><b>660K+</b><span>vistas en TikTok</span></div>
+            </div>
           </div>
         </div>
 
@@ -1587,9 +1618,12 @@ document.addEventListener('click',function(e){
       "I'm Walter. A civil engineer who ended up working for a San Francisco startup without leaving Bolivia.",
     "Lo que está acá es lo que fui aprendiendo en el camino, probándolo yo primero.":
       "What's here is what I picked up along the way, trying it on myself first.",
-    "// Los números":"// The numbers",
-    "descargas del podcast":"podcast downloads","impresiones en 4 meses":"impressions in 4 months",
-    "entrevistas a fundadores":"founder interviews","suscriptores en YouTube":"YouTube subscribers",
+    "// Los números y de quién son":"// The numbers, and whose they are",
+    "Startupeable — dirigí el marketing":"Startupeable — I ran marketing",
+    "descargas del podcast":"podcast downloads","suscriptores en YouTube":"YouTube subscribers",
+    "entrevistas producidas":"founder interviews produced",
+    "impresiones en LinkedIn · 4 meses":"LinkedIn impressions · 4 months",
+    "Moi — esta cuenta":"Moi — this account","vistas en TikTok":"TikTok views",
     "// De qué hablo y por qué":"// What I talk about and why",
     "No es trabajar desde la playa. Es cobrar en otra moneda.":"It isn't working from the beach. It's getting paid in another currency.",
     "Diez personas decidiendo rápido valen más que un logo grande.":"Ten people deciding fast are worth more than a big logo.",
