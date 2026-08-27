@@ -21,27 +21,33 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;700&family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:   #0B0B09;
-      --cream:   #EDE8DA;
-      --olive:   #F7D794;   /* champagne */
-      --rose:    #EDA6A3;   /* dusty rose */
-      --navy:    #192A56;   /* midnight navy */
-      --ink:     #0B0B09;
-      --tc:      #EDE8DA;
-      --muted:   rgba(11,11,9,0.5);
-      --border:  rgba(11,11,9,0.1);
+      /* Marca alineada a index.html / pvp.html (negro + naranja + Geist).
+         Los NOMBRES viejos se conservan a propósito: 450 líneas los usan y
+         renombrarlos era el cambio riesgoso. Lo que cambia es el ROL. */
+      --black:   #141314;   /* fondo */
+      --cream:   #eeeeee;   /* texto */
+      --olive:   #fd551d;   /* EL acento (antes champán) */
+      --rose:    #fd8d68;   /* acento suave */
+      --navy:    #141314;   /* lo que va ENCIMA del acento */
+      --panel:   #1c1b1a;   /* superficie elevada (antes el navy de fondo) */
+      --ink:     #141314;
+      --tc:      #eeeeee;
+      --muted:   rgba(238,238,238,0.55);
+      --border:  rgba(238,238,238,0.12);
+      --font-sans:'Geist',ui-sans-serif,system-ui,-apple-system,sans-serif;
+      --font-mono:'Geist Mono',ui-monospace,'Fira Code',monospace;
       --radius:  18px;
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
-      font-family: 'Lora', Georgia, serif;
+      font-family: var(--font-sans);
       background: var(--black);
       color: var(--tc);
       overflow-x: hidden;
@@ -53,18 +59,18 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 300;
       height: 52px; display: flex; align-items: center; justify-content: space-between;
       padding: 0 clamp(1.5rem, 5vw, 3rem);
-      background: rgba(11,11,9,0.96);
+      background: rgba(20,19,20,0.96);
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(237,232,218,0.07);
+      border-bottom: 1px solid rgba(238,238,238,0.07);
     }
     .header-logo {
-      font-family: 'Space Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.65rem; letter-spacing: 0.1em;
-      color: rgba(237,232,218,0.5); text-transform: uppercase; text-decoration: none;
+      color: rgba(238,238,238,0.5); text-transform: uppercase; text-decoration: none;
     }
     .header-logo b { color: var(--olive); font-weight: 400; }
     .header-cta {
-      font-family: 'Space Mono', monospace; font-weight: 700;
+      font-family: var(--font-mono); font-weight: 700;
       font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase;
       padding: 7px 17px; border: 1px solid var(--olive); border-radius: 100px;
       color: var(--navy); background: var(--olive); text-decoration: none; transition: opacity 0.15s;
@@ -72,8 +78,8 @@
     .header-cta:hover { opacity: 0.85; }
     .header-sponsor { display: inline-flex; align-items: center; gap: 0.45rem; text-decoration: none; opacity: 0.92; transition: opacity 0.15s; }
     .header-sponsor:hover { opacity: 1; }
-    .hs-label { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(237,232,218,0.5); }
-    .hs-name { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 1.2rem; color: var(--olive); line-height: 1; }
+    .hs-label { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(238,238,238,0.5); }
+    .hs-name { font-family: var(--font-sans); letter-spacing:-0.02em; font-weight: 700; font-size: 1.2rem; color: var(--olive); line-height: 1; }
     .header-sponsor img { width: 19px; height: 19px; border-radius: 5px; background: #fff; padding: 2px; }
     @media (max-width: 640px) {
       .hs-label { display: none; }
@@ -86,84 +92,87 @@
       max-width: 1180px; margin: 0 auto;
     }
     .overline {
-      font-family: 'Space Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(247,215,148,0.7); margin-bottom: 1.75rem;
+      color: rgba(253,85,29,0.7); margin-bottom: 1.75rem;
       display: flex; align-items: center; gap: 0.85rem;
     }
-    .overline::after { content:''; flex:0 0 60px; height:1px; background: rgba(247,215,148,0.3); }
+    .overline::after { content:''; flex:0 0 60px; height:1px; background: rgba(253,85,29,0.3); }
     .hero h1 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--font-sans); letter-spacing:-0.02em;
       font-weight: 700; font-size: clamp(2.8rem, 8vw, 6rem);
       line-height: 1.0; letter-spacing: -0.025em; color: var(--cream);
       max-width: 16ch; margin-bottom: 1.75rem;
     }
     .hero h1 em { color: var(--olive); font-style: normal; }
     .hero-sub {
-      font-family: 'Lora', Georgia, serif;
+      font-family: var(--font-sans);
       font-size: clamp(1.05rem, 2vw, 1.2rem); line-height: 1.8;
-      color: rgba(237,232,218,0.6); max-width: 560px; margin-bottom: 2.5rem;
+      color: rgba(238,238,238,0.6); max-width: 560px; margin-bottom: 2.5rem;
     }
     .hero-cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
-    .hero-cta-note { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(237,232,218,0.4); }
-    .btn-glow { box-shadow: 0 0 0 0 rgba(247,215,148,0.5); animation: glow 2.4s ease-in-out infinite; }
+    .hero-cta-note { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(238,238,238,0.4); }
+    .btn-glow { box-shadow: 0 0 0 0 rgba(253,85,29,0.5); animation: glow 2.4s ease-in-out infinite; }
     @keyframes glow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(247,215,148,0.45); }
-      50%      { box-shadow: 0 0 22px 2px rgba(247,215,148,0.35); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(253,85,29,0.45); }
+      50%      { box-shadow: 0 0 22px 2px rgba(253,85,29,0.35); }
     }
     .hero-meta { display: flex; flex-wrap: wrap; gap: 0.6rem; }
     .pill {
-      font-family: 'Space Mono', monospace; font-size: 0.58rem;
+      font-family: var(--font-mono); font-size: 0.58rem;
       letter-spacing: 0.08em; text-transform: uppercase;
       padding: 7px 14px; border-radius: 100px;
-      border: 1px solid rgba(237,232,218,0.14); color: rgba(237,232,218,0.55);
+      border: 1px solid rgba(238,238,238,0.14); color: rgba(238,238,238,0.55);
     }
 
     /* ── SECTION ── */
     section.block { max-width: 1180px; margin: 0 auto; padding: clamp(3rem,7vh,5rem) clamp(1.5rem,8vw,7rem); }
     .sec-head { margin-bottom: 2.75rem; }
     .sec-num {
-      font-family: 'Space Mono', monospace; font-size: 0.6rem;
+      font-family: var(--font-mono); font-size: 0.6rem;
       letter-spacing: 0.14em; text-transform: uppercase; color: var(--rose); margin-bottom: 0.9rem;
     }
     .sec-title {
-      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
+      font-family: var(--font-sans); letter-spacing:-0.02em; font-weight: 700;
       font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--cream);
       margin-bottom: 0.9rem;
     }
-    .sec-desc { font-size: 1.02rem; line-height: 1.75; color: rgba(237,232,218,0.55); max-width: 580px; }
+    .sec-desc { font-size: 1.02rem; line-height: 1.75; color: rgba(238,238,238,0.55); max-width: 580px; }
 
     /* ── PLATFORM CARDS ── */
     .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr)); gap: 1.1rem; }
     .card {
-      background: rgba(237,232,218,0.04);
-      border: 1px solid rgba(237,232,218,0.1);
+      background: rgba(238,238,238,0.04);
+      border: 1px solid rgba(238,238,238,0.1);
       border-radius: var(--radius); padding: 1.9rem 1.75rem;
       display: flex; flex-direction: column;
       transition: border-color 0.18s, transform 0.18s, background 0.18s;
     }
-    .card:hover { border-color: rgba(247,215,148,0.45); transform: translateY(-3px); background: rgba(237,232,218,0.06); }
-    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 1.1rem; }
+    .card:hover { border-color: rgba(253,85,29,0.45); transform: translateY(-3px); background: rgba(238,238,238,0.06); }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
     .card-id { display: flex; align-items: center; gap: 0.7rem; min-width: 0; }
     .card-logo { width: 38px; height: 38px; border-radius: 9px; background: #fff; padding: 5px; object-fit: contain; flex-shrink: 0; box-shadow: 0 1px 5px rgba(0,0,0,0.3); }
     .card-name {
-      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700;
-      font-size: 1.5rem; color: var(--cream); line-height: 1.1;
+      font-family: var(--font-sans); letter-spacing:-0.02em; font-weight: 700;
+      /* Geist corre más ancha que la Cormorant que había acá: a 1.5rem el
+         título chocaba con el badge (WeRemoto). Fluida + min-width:0. */
+      font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.45rem);
+      color: var(--cream); line-height: 1.15; min-width: 0;
     }
     .card-tag {
-      font-family: 'Space Mono', monospace; font-size: 0.52rem; letter-spacing: 0.08em;
+      font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--navy); background: var(--olive);
-      padding: 4px 9px; border-radius: 100px; white-space: nowrap;
+      padding: 4px 9px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
     }
     .card-tag.region { background: var(--rose); }
-    .card-desc { font-size: 0.98rem; line-height: 1.65; color: rgba(237,232,218,0.62); margin-bottom: 1rem; flex: 1; }
+    .card-desc { font-size: 0.98rem; line-height: 1.65; color: rgba(238,238,238,0.62); margin-bottom: 1rem; flex: 1; }
     .card-best {
-      font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.04em;
-      color: rgba(237,232,218,0.4); margin-bottom: 1.4rem; line-height: 1.5;
+      font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.04em;
+      color: rgba(238,238,238,0.4); margin-bottom: 1.4rem; line-height: 1.5;
     }
-    .card-best b { color: rgba(247,215,148,0.85); font-weight: 400; }
+    .card-best b { color: rgba(253,85,29,0.85); font-weight: 400; }
     .card-link {
-      font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em;
+      font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em;
       text-transform: uppercase; text-decoration: none;
       color: var(--ink); background: var(--cream); padding: 9px 18px; border-radius: 100px;
       align-self: flex-start; transition: opacity 0.15s;
@@ -174,34 +183,34 @@
     .roles { background: var(--cream); border-radius: var(--radius); padding: clamp(1.5rem,4vw,2.75rem); }
     .roles table { width: 100%; border-collapse: collapse; }
     .roles th {
-      text-align: left; font-family: 'Space Mono', monospace; font-weight: 400;
+      text-align: left; font-family: var(--font-mono); font-weight: 400;
       font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
       border-bottom: 1px solid var(--border); padding: 0 1rem 0.85rem 0;
     }
     .roles td {
-      font-family: 'Lora', Georgia, serif; color: var(--ink);
-      padding: 1rem 1rem 1rem 0; border-bottom: 1px solid rgba(11,11,9,0.08);
+      font-family: var(--font-sans); color: var(--ink);
+      padding: 1rem 1rem 1rem 0; border-bottom: 1px solid rgba(20,19,20,0.08);
       line-height: 1.5; vertical-align: top; font-size: 0.98rem;
     }
     .roles tr:last-child td { border-bottom: none; }
-    .role-name { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 1.2rem; white-space: nowrap; }
-    .role-pay { font-family: 'Space Mono', monospace; font-size: 0.82rem; color: var(--navy); white-space: nowrap; }
-    .eng { font-family: 'Space Mono', monospace; font-size: 0.56rem; letter-spacing: 0.06em; text-transform: uppercase; }
-    .eng.bajo { color: #2e7d32; } .eng.medio { color: #b8860b; } .eng.alto { color: #b85c38; }
-    .roles-note { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--muted); margin-top: 1.5rem; line-height: 1.6; }
+    .role-name { font-family: var(--font-sans); letter-spacing:-0.02em; font-weight: 700; font-size: 1.2rem; white-space: nowrap; }
+    .role-pay { font-family: var(--font-mono); font-size: 0.82rem; color: var(--navy); white-space: nowrap; }
+    .eng { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .eng.bajo { color: #5cb85c; } .eng.medio { color: #e0a33e; } .eng.alto { color: #fd8d68; }
+    .roles-note { font-family: var(--font-mono); font-size: 0.62rem; color: var(--muted); margin-top: 1.5rem; line-height: 1.6; }
 
     /* ── METHOD CTA ── */
-    .method { background: var(--navy); border-radius: var(--radius); padding: clamp(2.5rem,6vw,4rem); border: 1px solid rgba(247,215,148,0.4); box-shadow: 0 0 50px -10px rgba(247,215,148,0.18); }
+    .method { background: var(--panel); border-radius: var(--radius); padding: clamp(2.5rem,6vw,4rem); border: 1px solid rgba(253,85,29,0.4); box-shadow: 0 0 50px -10px rgba(253,85,29,0.18); }
     .method .sec-num { color: var(--olive); }
     .method .sec-title { color: var(--cream); }
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1.25rem; margin: 2rem 0 2.5rem; }
     .step { }
-    .step-n { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; color: rgba(247,215,148,0.7); margin-bottom: 0.6rem; }
-    .step-t { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 1.15rem; color: var(--cream); margin-bottom: 0.4rem; }
-    .step-d { font-size: 0.92rem; line-height: 1.55; color: rgba(237,232,218,0.55); }
+    .step-n { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.1em; color: rgba(253,85,29,0.7); margin-bottom: 0.6rem; }
+    .step-t { font-family: var(--font-sans); letter-spacing:-0.02em; font-weight: 700; font-size: 1.15rem; color: var(--cream); margin-bottom: 0.4rem; }
+    .step-d { font-size: 0.92rem; line-height: 1.55; color: rgba(238,238,238,0.55); }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
       padding: 13px 26px; background: var(--olive); color: var(--navy); border: none; border-radius: 100px;
       text-decoration: none; transition: opacity 0.15s;
     }
@@ -210,20 +219,20 @@
     /* ── FOOTER ── */
     footer {
       max-width: 1180px; margin: 0 auto; padding: clamp(3rem,7vh,5rem) clamp(1.5rem,8vw,7rem);
-      border-top: 1px solid rgba(237,232,218,0.08);
+      border-top: 1px solid rgba(238,238,238,0.08);
       display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
     }
-    .foot-quote { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: clamp(1.2rem,3vw,1.7rem); color: rgba(237,232,218,0.7); max-width: 30ch; line-height: 1.3; }
-    .foot-meta { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(237,232,218,0.3); }
+    .foot-quote { font-family: var(--font-sans); letter-spacing:-0.02em; font-style: italic; font-size: clamp(1.2rem,3vw,1.7rem); color: rgba(238,238,238,0.7); max-width: 30ch; line-height: 1.3; }
+    .foot-meta { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(238,238,238,0.3); }
     .foot-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.9rem; }
     .sponsor { display: inline-flex; align-items: center; gap: 0.55rem; text-decoration: none; opacity: 0.8; transition: opacity 0.15s; }
     .sponsor:hover { opacity: 1; }
-    .sponsor-label { font-family: 'Space Mono', monospace; font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(237,232,218,0.5); }
+    .sponsor-label { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(238,238,238,0.5); }
     .sponsor-logo { width: 30px; height: 30px; border-radius: 7px; background: #fff; padding: 3px; }
-    .sponsor-name { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 1.85rem; color: var(--olive); }
+    .sponsor-name { font-family: var(--font-sans); letter-spacing:-0.02em; font-weight: 700; font-size: 1.85rem; color: var(--olive); }
     /* hero sponsor pill */
-    .pill-sponsor { text-decoration: none; border-color: rgba(247,215,148,0.4); color: rgba(247,215,148,0.9); display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; padding: 9px 18px; }
-    .pill-sponsor:hover { border-color: var(--olive); background: rgba(247,215,148,0.08); }
+    .pill-sponsor { text-decoration: none; border-color: rgba(253,85,29,0.4); color: rgba(253,85,29,0.9); display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; padding: 9px 18px; }
+    .pill-sponsor:hover { border-color: var(--olive); background: rgba(253,85,29,0.08); }
     .pill-sponsor img { width: 17px; height: 17px; border-radius: 4px; background: #fff; padding: 1px; }
 
     @media (max-width: 600px) {
@@ -236,7 +245,7 @@
 <body>
 
   <header>
-    <a href="lista.html" class="header-logo">MOI<span class="ll"> · <b>LA LISTA</b></span></a>
+    <a href="index.html" class="header-logo">MOI<span class="ll"> · <b>LA LISTA</b></span></a>
     <a class="header-sponsor" href="https://www.wallbit.io/es?gad_source=1&amp;gad_campaignid=22752697607&amp;gbraid=0AAAAA-1U6VdZcmHYGsovEas8rWyf_-uo-" target="_blank" rel="noopener">
       <span class="hs-label">Auspiciado por</span>
       <img src="https://www.google.com/s2/favicons?domain=wallbit.io&amp;sz=128" alt="Wallbit">
@@ -267,7 +276,7 @@
     <div class="sec-head">
       <div class="sec-num">01 — Dónde están</div>
       <h2 class="sec-title">Las plataformas</h2>
-      <p class="sec-desc">Páginas hechas para esto. Acá no compites contra todo Bolivia: compites contra los pocos que saben que existen. Filtra siempre por <b style="color:rgba(247,215,148,0.85);font-weight:400">remote</b>.</p>
+      <p class="sec-desc">Páginas hechas para esto. Acá no compites contra todo Bolivia: compites contra los pocos que saben que existen. Filtra siempre por <b style="color:rgba(253,85,29,0.85);font-weight:400">remote</b>.</p>
     </div>
 
     <div class="cards">
@@ -331,8 +340,8 @@
 
     <!-- Freelance: distinto a un empleo fijo, va aparte -->
     <div class="sec-head" style="margin-top:3.5rem;">
-      <div class="sec-num" style="color:rgba(247,215,148,0.7)">Y para empezar — freelance</div>
-      <p class="sec-desc">No es un empleo fijo, pero es la forma más rápida de cobrar tu primer dólar y construir <b style="color:rgba(247,215,148,0.85);font-weight:400">prueba de trabajo</b> antes de aplicar a una startup.</p>
+      <div class="sec-num" style="color:rgba(253,85,29,0.7)">Y para empezar — freelance</div>
+      <p class="sec-desc">No es un empleo fijo, pero es la forma más rápida de cobrar tu primer dólar y construir <b style="color:rgba(253,85,29,0.85);font-weight:400">prueba de trabajo</b> antes de aplicar a una startup.</p>
     </div>
     <div class="cards">
       <div class="card">
@@ -424,7 +433,7 @@
     <div class="method">
       <div class="sec-num">03 — Cómo entrar</div>
       <h2 class="sec-title">Tener la lista no basta</h2>
-      <p class="sec-desc" style="color:rgba(237,232,218,0.6)">Si subes tu CV a un portal y esperas, haces lo de todos y compites con todos. Así entras de verdad —el método PVP, en tres pasos:</p>
+      <p class="sec-desc" style="color:rgba(238,238,238,0.6)">Si subes tu CV a un portal y esperas, haces lo de todos y compites con todos. Así entras de verdad —el método PVP, en tres pasos:</p>
       <div class="steps">
         <div class="step"><div class="step-n">PASO 01</div><div class="step-t">Investiga</div><div class="step-d">Elige una startup de la lista y entiéndela a fondo. Hoy, con IA, es rápido.</div></div>
         <div class="step"><div class="step-n">PASO 02</div><div class="step-t">Encuentra un problema</div><div class="step-d">Algo concreto y roto en su producto, en un área en la que seas bueno.</div></div>
