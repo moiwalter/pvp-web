@@ -1,6 +1,72 @@
 # Estado — landing.html
 
-Última actualización: **11-ago-2026**. ⚠️ Los cambios del 11-ago están **sin commitear**.
+Última actualización: **30-ago-2026**. Todo commiteado y al día con `origin/main`.
+(El aviso de "los cambios del 11-ago están sin commitear" ya no aplica: entraron
+en `d076c6a`.)
+
+## 30-ago — SEO
+
+Detalle completo en **`SEO.md`**. Lo que cambia la forma de trabajar acá:
+
+⚠️ **`pvp.html` tenía 13 `<h1>`** (uno por parte) y 0 `<h2>`. Ahora el `h1` es el
+rótulo del header y las partes son `h2`. Se cambió en el **generador**, y el CSS
+que las seguía por etiqueta (`.parte h1` ×4) se movió con ellas. `.head__t`
+necesitó `font-weight:400` explícito: como `<span>` heredaba 400 del body, como
+`<h1>` habría salido negrita. Verificado que el header se ve idéntico.
+
+⚠️ **`lista.html` no tenía canonical** — la página del QR, la de más tráfico, y
+ahora encima recibe `?f=qr` más los `?fbclid` de las redes.
+
+**JSON-LD en las 4** (antes: cero). `Person` y `WebSite` se repiten en cada página
+a propósito: Google parsea por página y un `@id` cuyo nodo vive en otra deja al
+autor sin nombre. **No** se puso `FAQPage` ni `HowTo`: Google retiró esos rich
+results en 2023.
+
+🛡️ **`node verificar-seo.mjs`** — selftest nuevo. Existe porque el `ItemList` de
+`lista.html` lleva las 9 plataformas escritas: si agregas una tarjeta y no tocas el
+JSON-LD, miente sin síntoma visible. Probado contra esa drift exacta.
+
+**No se tocaron las imágenes**: se midió el CLS real en móvil y da 0.000 en las 4.
+El CSS ya reserva el espacio; añadir `width`/`height` era riesgo sin ganancia.
+
+Pendientes en `SEO.md`: los `<title>` son hooks de marca sin match de query
+(decisión de copy), `/en/` real con `hreflang`, y **Search Console sin verificar**
+— sin eso el SEO es a ciegas.
+
+## 30-ago — analytics (GA4)
+
+Se instaló medición en las 4 páginas. **El detalle completo vive en
+`ANALYTICS.md`** — acá sólo lo que cambia la forma de trabajar en este repo.
+
+⛔ **El snippet estándar de Google NO se puede pegar en el HTML.** El selftest de
+`content/render-pvp.mjs` (~línea 808) aborta el build ante cualquier
+`<script src>` remoto — la regla que nació de que un CDN caído dejara `pvp.html`
+en blanco. Por eso el motor es **`analytics.js`, local**, y el loader de Google
+se inyecta desde adentro. Efecto lateral bueno: se verificó que con
+googletagmanager bloqueado la página renderiza completa y sin errores.
+
+**Eventos nuevos sin tocar JS**: `data-ga="nombre"` en el elemento, y cualquier
+`data-ga-loquesea` viaja como parámetro. 18 links quedaron marcados (el embudo
+interno + las 3 posiciones de Wallbit); los 11 links de bolsas no necesitan
+marcado porque todo `<a>` externo dispara `salida` solo.
+
+⚠️ **Dos pendientes que sólo Walter puede cerrar** (están en `ANALYTICS.md`):
+pegar el Measurement ID en `analytics.js`, y **registrar las dimensiones
+personalizadas en GA4 el mismo día** — no son retroactivas.
+
+⚠️ **A verificar el día uno**: el deck llama `history.replaceState` en cada parte
+(`pvp.html:1006`). Si Enhanced Measurement tiene encendido "cambios de página por
+eventos del historial", un lector que llegue a la parte 12 contaría ~12
+pageviews y el embudo `lista → pvp` queda desfigurado. La comprobación de 60
+segundos está en `ANALYTICS.md`.
+
+Verificado con Playwright: 22 chequeos de comportamiento (embudo, salidas,
+casillas, prompts, detección de origen, resiliencia) + barrido de las 4 páginas a
+1440/1024/390 — cero errores JS, cero desborde horizontal.
+
+⚠️ **Hay dos copias del repo.** La buena es `~/Projects/pvp-web`.
+`~/Downloads/Personal/moi/pvp-web` se quedó en `d076c6a` (9-ago) y el 30-ago
+todavía tenía un `http.server` del 9-ago sirviéndola en el 8791.
 
 ## 11-ago — las cifras pasan a tener dueño
 

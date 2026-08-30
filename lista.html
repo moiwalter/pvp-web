@@ -241,17 +241,157 @@
       .roles th:nth-child(2) { display: none; }
     }
   </style>
+
+<!-- GA4. Archivo LOCAL a propósito: el loader de Google se inyecta desde
+     adentro. Ver la cabecera de analytics.js. -->
+<script defer src="analytics.js?v=1"></script>
+<link rel="canonical" href="https://moiwalter.github.io/pvp-web/lista.html">
+<meta property="og:site_name" content="Moi">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image:width" content="1248">
+<meta property="og:image:height" content="832">
+<meta property="og:image:alt" content="Moi — trabajo remoto en dólares desde Bolivia">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://moiwalter.github.io/pvp-web/#sitio",
+      "url": "https://moiwalter.github.io/pvp-web/",
+      "name": "Moi",
+      "inLanguage": "es",
+      "publisher": {
+        "@id": "https://moiwalter.github.io/pvp-web/#walter"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://moiwalter.github.io/pvp-web/#walter",
+      "name": "Walter Álvarez",
+      "alternateName": "Moi",
+      "url": "https://moiwalter.github.io/pvp-web/",
+      "image": "https://moiwalter.github.io/pvp-web/walter-foto.webp",
+      "description": "Ingeniero civil boliviano que trabaja para una startup de San Francisco sin salir de Bolivia. Escribe sobre trabajo remoto, startups e IA.",
+      "knowsAbout": [
+        "trabajo remoto",
+        "startups",
+        "inteligencia artificial",
+        "empleo en dólares",
+        "Bolivia"
+      ],
+      "sameAs": [
+        "https://www.tiktok.com/@moiwalter",
+        "https://www.linkedin.com/in/walteralvarezajata",
+        "https://www.instagram.com/moiwalter",
+        "https://github.com/moiwalter"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://moiwalter.github.io/pvp-web/lista.html#pagina",
+      "url": "https://moiwalter.github.io/pvp-web/lista.html",
+      "name": "La Lista",
+      "isPartOf": {
+        "@id": "https://moiwalter.github.io/pvp-web/#sitio"
+      },
+      "about": {
+        "@id": "https://moiwalter.github.io/pvp-web/#walter"
+      },
+      "inLanguage": "es"
+    },
+    {
+      "@type": "ItemList",
+      "name": "Plataformas de trabajo remoto en dólares",
+      "numberOfItems": 9,
+      "itemListOrder": "https://schema.org/ItemListUnordered",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Work at a Startup",
+          "url": "https://www.workatastartup.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Wellfound",
+          "url": "https://wellfound.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Get on Board",
+          "url": "https://www.getonbrd.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "We Work Remotely",
+          "url": "https://weworkremotely.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "RemoteOK",
+          "url": "https://remoteok.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Torre",
+          "url": "https://torre.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "WeRemoto",
+          "url": "https://weremoto.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Trabajito",
+          "url": "https://trabajito.com.bo/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "Workana",
+          "url": "https://www.workana.com/"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Moi",
+          "item": "https://moiwalter.github.io/pvp-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "La Lista"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
   <header>
-    <a href="index.html" class="header-logo">MOI<span class="ll"> · <b>LA LISTA</b></span></a>
-    <a class="header-sponsor" href="https://www.wallbit.io/es?gad_source=1&amp;gad_campaignid=22752697607&amp;gbraid=0AAAAA-1U6VdZcmHYGsovEas8rWyf_-uo-" target="_blank" rel="noopener">
+    <a data-ga="a_landing" data-ga-lugar="header" href="index.html" class="header-logo">MOI<span class="ll"> · <b>LA LISTA</b></span></a>
+    <a data-ga-lugar="header" class="header-sponsor" href="https://www.wallbit.io/es?gad_source=1&amp;gad_campaignid=22752697607&amp;gbraid=0AAAAA-1U6VdZcmHYGsovEas8rWyf_-uo-" target="_blank" rel="noopener">
       <span class="hs-label">Auspiciado por</span>
       <img src="https://www.google.com/s2/favicons?domain=wallbit.io&amp;sz=128" alt="Wallbit">
       <span class="hs-name">Wallbit</span>
     </a>
-    <a href="pvp.html" class="header-cta">El método PVP →</a>
+    <a data-ga="a_metodo" data-ga-lugar="header" href="pvp.html" class="header-cta">El método PVP →</a>
   </header>
 
   <!-- ── HERO ── -->
@@ -260,14 +400,14 @@
     <h1>Dónde están las startups que pagan en <em>dólares</em></h1>
     <p class="hero-sub">Esta es la lista que te prometí en el video. Las páginas donde las startups publican sus puestos remotos, qué roles buscar y cuánto pagan. Sin portafolio, sin contactos, sin inglés avanzado. Después, entras con el método PVP.</p>
     <div class="hero-cta-row">
-      <a class="btn-primary btn-glow" href="pvp.html">Ver el método PVP completo →</a>
+      <a data-ga="a_metodo" data-ga-lugar="hero" class="btn-primary btn-glow" href="pvp.html">Ver el método PVP completo →</a>
       <span class="hero-cta-note">Gratis · cómo entrar de verdad</span>
     </div>
     <div class="hero-meta">
       <span class="pill">8 plataformas + freelance</span>
       <span class="pill">9 puestos sin programar</span>
       <span class="pill">Pagan en USD</span>
-      <a class="pill pill-sponsor" href="https://www.wallbit.io/es?gad_source=1&amp;gad_campaignid=22752697607&amp;gbraid=0AAAAA-1U6VdZcmHYGsovEas8rWyf_-uo-" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=wallbit.io&amp;sz=64" alt="">Auspiciado por Wallbit</a>
+      <a data-ga-lugar="pill" class="pill pill-sponsor" href="https://www.wallbit.io/es?gad_source=1&amp;gad_campaignid=22752697607&amp;gbraid=0AAAAA-1U6VdZcmHYGsovEas8rWyf_-uo-" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=wallbit.io&amp;sz=64" alt="">Auspiciado por Wallbit</a>
     </div>
   </div>
 
@@ -439,14 +579,14 @@
         <div class="step"><div class="step-n">PASO 02</div><div class="step-t">Encuentra un problema</div><div class="step-d">Algo concreto y roto en su producto, en un área en la que seas bueno.</div></div>
         <div class="step"><div class="step-n">PASO 03</div><div class="step-t">Mándalo directo</div><div class="step-d">Resuélvelo o haz un plan, y envíalo al fundador por LinkedIn. No al portal.</div></div>
       </div>
-      <a class="btn-primary" href="pvp.html">Ver el método PVP completo →</a>
+      <a data-ga="a_metodo" data-ga-lugar="pie" class="btn-primary" href="pvp.html">Ver el método PVP completo →</a>
     </div>
   </section>
 
   <footer>
     <div class="foot-quote">"No tienes que irte de Bolivia para que te paguen como si lo hubieras hecho."</div>
     <div class="foot-right">
-      <a class="sponsor" href="https://www.wallbit.io/es?gad_source=1&amp;gad_campaignid=22752697607&amp;gbraid=0AAAAA-1U6VdZcmHYGsovEas8rWyf_-uo-" target="_blank" rel="noopener">
+      <a data-ga-lugar="pie" class="sponsor" href="https://www.wallbit.io/es?gad_source=1&amp;gad_campaignid=22752697607&amp;gbraid=0AAAAA-1U6VdZcmHYGsovEas8rWyf_-uo-" target="_blank" rel="noopener">
         <span class="sponsor-label">Auspiciado por</span>
         <img class="sponsor-logo" src="https://www.google.com/s2/favicons?domain=wallbit.io&amp;sz=128" alt="Wallbit">
         <span class="sponsor-name">Wallbit</span>

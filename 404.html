@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página no encontrada — PVP</title>
+  <title>Página no encontrada — Moi</title>
+  <!-- noindex: una 404 en el índice de Google se come clicks de las páginas
+       que sí valen. GitHub Pages la sirve con status 404 correcto. -->
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Esta página no existe. Vuelve a La Lista o al método PVP.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Space+Mono&display=swap" rel="stylesheet">
@@ -53,7 +57,7 @@
 </head>
 <body>
   <div class="num">404</div>
-  <p class="label">Esta página no existe</p>
+  <h1 class="label">Esta página no existe</h1>
   <a href="lista.html" class="back">Volver a La Lista →</a>
 </body>
 </html>

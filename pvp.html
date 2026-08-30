@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El método PVP — 12 partes, completo y abierto</title>
+<title>El método PVP — trabajo remoto sin portafolio ni contactos</title>
 
 <meta name="description" content="El método PVP completo: 12 partes para conseguir trabajo remoto desde Bolivia sin portafolio, sin contactos y sin inglés avanzado. Gratis, sin registro.">
 <link rel="canonical" href="https://moiwalter.github.io/pvp-web/pvp.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="El método PVP — 12 partes, completo y abierto">
+<meta property="og:title" content="El método PVP — trabajo remoto sin portafolio ni contactos">
 <meta property="og:description" content="Investiga una startup, encuentra un problema, resuélvelo antes de que te lo pidan. El método entero, gratis y sin registro.">
 <meta property="og:url" content="https://moiwalter.github.io/pvp-web/pvp.html">
 <meta property="og:image" content="https://moiwalter.github.io/pvp-web/hero.webp">
@@ -28,6 +28,106 @@
 <!-- ⚠️ GENERADO por content/render-pvp.mjs — no editar a mano.
      Fuente: content/pvp/*.md + content/pvp-indice.json
      El markdown se hornea en build: ya no hay marked desde CDN. -->
+<!-- GA4. Archivo LOCAL a propósito, y no es un detalle: el selftest de
+     abajo ABORTA el build si encuentra un <script src> remoto acá. El loader
+     de Google se inyecta desde adentro de analytics.js. -->
+<script defer src="analytics.js?v=1"></script>
+
+<meta property="og:site_name" content="Moi">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image:width" content="1248">
+<meta property="og:image:height" content="832">
+<meta property="og:image:alt" content="El método PVP — trabajo remoto en dólares desde Bolivia">
+<meta name="twitter:title" content="El método PVP — trabajo remoto sin portafolio ni contactos">
+<meta name="twitter:description" content="Investiga una startup, encuentra un problema, resuélvelo antes de que te lo pidan. El método entero, gratis y sin registro.">
+<meta name="twitter:image" content="https://moiwalter.github.io/pvp-web/hero.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://moiwalter.github.io/pvp-web/#walter",
+      "name": "Walter Álvarez",
+      "alternateName": "Moi",
+      "url": "https://moiwalter.github.io/pvp-web/",
+      "image": "https://moiwalter.github.io/pvp-web/walter-foto.webp",
+      "description": "Ingeniero civil boliviano que trabaja para una startup de San Francisco sin salir de Bolivia. Escribe sobre trabajo remoto, startups e IA.",
+      "knowsAbout": [
+        "trabajo remoto",
+        "startups",
+        "inteligencia artificial",
+        "empleo en dólares",
+        "Bolivia"
+      ],
+      "sameAs": [
+        "https://www.tiktok.com/@moiwalter",
+        "https://www.linkedin.com/in/walteralvarezajata",
+        "https://www.instagram.com/moiwalter",
+        "https://github.com/moiwalter"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://moiwalter.github.io/pvp-web/#sitio",
+      "url": "https://moiwalter.github.io/pvp-web/",
+      "name": "Moi",
+      "inLanguage": "es",
+      "publisher": {
+        "@id": "https://moiwalter.github.io/pvp-web/#walter"
+      }
+    },
+    {
+      "@type": "Article",
+      "@id": "https://moiwalter.github.io/pvp-web/pvp.html#articulo",
+      "headline": "El método PVP",
+      "name": "El método PVP",
+      "description": "El método completo para conseguir trabajo remoto en dolares desde Bolivia sin portafolio, sin contactos y sin ingles avanzado.",
+      "url": "https://moiwalter.github.io/pvp-web/pvp.html",
+      "mainEntityOfPage": "https://moiwalter.github.io/pvp-web/pvp.html",
+      "inLanguage": "es",
+      "isAccessibleForFree": true,
+      "image": "https://moiwalter.github.io/pvp-web/hero.webp",
+      "wordCount": 3631,
+      "timeRequired": "PT18M",
+      "articleSection": [
+        "Antes de empezar",
+        "El método PVP",
+        "Ejecutar"
+      ],
+      "datePublished": "2026-08-08",
+      "dateModified": "2026-08-27",
+      "author": {
+        "@id": "https://moiwalter.github.io/pvp-web/#walter"
+      },
+      "publisher": {
+        "@id": "https://moiwalter.github.io/pvp-web/#walter"
+      },
+      "isPartOf": {
+        "@id": "https://moiwalter.github.io/pvp-web/#sitio"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Moi",
+          "item": "https://moiwalter.github.io/pvp-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "El método PVP"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -117,7 +217,7 @@ a{color:inherit;text-decoration:none}
 }
 .head__l{display:flex;align-items:center;gap:calc(var(--spacing)*14)}
 .head__m{font-family:var(--font-sans);font-weight:700;font-size:var(--text-sm);letter-spacing:.02em;border:1px solid var(--fg);padding:calc(var(--spacing)*3) calc(var(--spacing)*8)}
-.head__t{font-family:var(--font-mono);font-size:var(--text-accent);color:var(--fg-muted);letter-spacing:.08em;text-transform:uppercase}
+.head__t{font-family:var(--font-mono);font-weight:400;font-size:var(--text-accent);color:var(--fg-muted);letter-spacing:.08em;text-transform:uppercase}
 .head__r{display:flex;align-items:center;gap:calc(var(--spacing)*16)}
 .tecla{
   font-family:var(--font-mono);font-size:var(--text-accent);letter-spacing:.06em;
@@ -179,8 +279,8 @@ a{color:inherit;text-decoration:none}
 .parte__tax{font-family:var(--font-mono);font-size:var(--text-accent);color:var(--brand);letter-spacing:.05em;margin-bottom:calc(var(--spacing)*20)}
 .parte__n{display:flex;align-items:baseline;gap:calc(var(--spacing)*8);margin-bottom:calc(var(--spacing)*10);font-family:var(--font-sans);font-weight:300;font-size:calc(var(--spacing)*52);line-height:1;letter-spacing:-.03em}
 .parte__n b{font-family:var(--font-mono);font-size:var(--text-accent);font-weight:400;color:var(--fg-muted);letter-spacing:.06em}
-.parte h1{font-size:var(--text-h1);line-height:1.05;letter-spacing:-.025em;font-weight:500;margin-bottom:calc(var(--spacing)*32)}
-.parte h1 em{font-style:normal;color:var(--brand)}
+.parte h2{font-size:var(--text-h1);line-height:1.05;letter-spacing:-.025em;font-weight:500;margin-bottom:calc(var(--spacing)*32)}
+.parte h2 em{font-style:normal;color:var(--brand)}
 
 /* ── PROSA: acá es donde se lee ── */
 .prosa{max-width:68ch}
@@ -315,8 +415,8 @@ a{color:inherit;text-decoration:none}
    una animación grande cansa y estorba. */
 .prosa>*{opacity:0;transform:translateY(calc(var(--spacing)*8));transition:opacity .5s var(--ease-out-quart),transform .5s var(--ease-out-quart)}
 .prosa>*.vis{opacity:1;transform:none}
-.parte h1,.parte__tax,.parte__n{transition:opacity .5s var(--ease-out-quart),transform .5s var(--ease-out-quart)}
-.parte.on h1,.parte.on .parte__tax,.parte.on .parte__n{opacity:1;transform:none}
+.parte h2,.parte__tax,.parte__n{transition:opacity .5s var(--ease-out-quart),transform .5s var(--ease-out-quart)}
+.parte.on h2,.parte.on .parte__tax,.parte.on .parte__n{opacity:1;transform:none}
 
 /* ── ENTRADA DE PARTE: dentro de una sección el cambio es rápido y liviano.
       El barrido naranja se reserva para cruzar de sección (2 veces en todo el
@@ -375,7 +475,7 @@ a{color:inherit;text-decoration:none}
 <header class="head">
   <div class="head__l">
     <a href="./" class="head__m">Moi</a>
-    <span class="head__t">El método PVP</span>
+    <h1 class="head__t">El método PVP</h1>
   </div>
   <div class="head__r">
     <button class="tecla head__idx" id="bidx" type="button" aria-label="Índice"><b>☰</b><span>Índice</span></button>
@@ -446,7 +546,7 @@ a{color:inherit;text-decoration:none}
     <article class="parte" data-p="0" id="parte-1">
       <div class="parte__tax">[Antes de empezar]—[1 min]</div>
       <div class="parte__n"><span class="odo" data-odo="1"></span><b>/ 12</b></div>
-      <h1>Por qué esto es diferente</h1>
+      <h2>Por qué esto es diferente</h2>
       <div class="prosa">
 <p>La mayoría de los consejos sobre trabajo remoto que encuentras en internet están escritos para personas que ya tienen:</p>
 <ul><li>Un portafolio</li><li>Experiencia comprobable</li><li>Inglés avanzado</li><li>Una red de contactos internacional</li></ul>
@@ -466,7 +566,7 @@ a{color:inherit;text-decoration:none}
     <article class="parte" data-p="1" id="parte-2">
       <div class="parte__tax">[Antes de empezar]—[1 min]</div>
       <div class="parte__n"><span class="odo" data-odo="2"></span><b>/ 12</b></div>
-      <h1>Las inseguridades reales</h1>
+      <h2>Las inseguridades reales</h2>
       <div class="prosa">
 <p>Antes de enseñarte el método, necesito responder las preguntas que probablemente tienes pero nadie está respondiendo.</p>
 <hr>
@@ -490,7 +590,7 @@ a{color:inherit;text-decoration:none}
     <article class="parte" data-p="2" id="parte-3">
       <div class="parte__tax">[Antes de empezar]—[2 min]</div>
       <div class="parte__n"><span class="odo" data-odo="3"></span><b>/ 12</b></div>
-      <h1>Portafolio, experiencia y tiempo</h1>
+      <h2>Portafolio, experiencia y tiempo</h2>
       <div class="prosa">
 <h3>"No tengo experiencia. ¿Qué portafolio muestro?"</h3>
 <p>El problema de siempre: te piden experiencia para conseguir experiencia.</p>
@@ -529,7 +629,7 @@ a{color:inherit;text-decoration:none}
     <article class="parte" data-p="3" id="parte-4">
       <div class="parte__tax">[El método PVP]—[1 min]</div>
       <div class="parte__n"><span class="odo" data-odo="4"></span><b>/ 12</b></div>
-      <h1>Qué es PVP y cómo funciona</h1>
+      <h2>Qué es PVP y cómo funciona</h2>
       <div class="prosa">
 <p><strong>PVP = Permissionless Value Proposition</strong></p>
 <p>El nombre dice todo: valor sin pedir permiso.</p>
@@ -548,7 +648,7 @@ a{color:inherit;text-decoration:none}
     <article class="parte" data-p="4" id="parte-5">
       <div class="parte__tax">[El método PVP]—[1 min]</div>
       <div class="parte__n"><span class="odo" data-odo="5"></span><b>/ 12</b></div>
-      <h1>Elegir la startup correcta</h1>
+      <h2>Elegir la startup correcta</h2>
       <div class="prosa">
 <h3>Lo que realmente estás haciendo con un PVP</h3>
 <p>Un PVP no es una táctica para colarte en empresas que no te conocen. Es una demostración de quién eres: qué ves, cómo piensas, qué puedes construir.</p>
@@ -574,7 +674,7 @@ a{color:inherit;text-decoration:none}
     <article class="parte" data-p="5" id="parte-6">
       <div class="parte__tax">[El método PVP]—[1 min]</div>
       <div class="parte__n"><span class="odo" data-odo="6"></span><b>/ 12</b></div>
-      <h1>Investigación profunda</h1>
+      <h2>Investigación profunda</h2>
       <div class="prosa">
 <p><strong>Acá es donde la mayoría falla. Acá es donde ganas.</strong></p>
 <p>La diferencia entre un PVP mediocre y uno que consigue llamadas es la profundidad de la investigación. No se trata de saber más sobre la industria — se trata de ver cosas que ellos, por estar adentro, ya no ven.</p>
@@ -598,7 +698,7 @@ a{color:inherit;text-decoration:none}
     <article class="parte" data-p="6" id="parte-7">
       <div class="parte__tax">[El método PVP]—[2 min]</div>
       <div class="parte__n"><span class="odo" data-odo="7"></span><b>/ 12</b></div>
-      <h1>Prompts de IA para el análisis</h1>
+      <h2>Prompts de IA para el análisis</h2>
       <div class="prosa">
 <p>Usa estos prompts en ChatGPT o Perplexity. Están listos para copiar y editar.</p>
 <h3>Prompt Maestro — análisis completo</h3>
@@ -666,7 +766,7 @@ fácil de entender.</code></pre>
     <article class="parte" data-p="7" id="parte-8">
       <div class="parte__tax">[El método PVP]—[2 min]</div>
       <div class="parte__n"><span class="odo" data-odo="8"></span><b>/ 12</b></div>
-      <h1>Crear la solución real</h1>
+      <h2>Crear la solución real</h2>
       <div class="prosa">
 <p><strong>Acá demuestras de qué estás hecho. Acá ganas.</strong></p>
 <h3>Cómo elegir QUÉ resolver</h3>
@@ -699,7 +799,7 @@ fácil de entender.</code></pre>
     <article class="parte" data-p="8" id="parte-9">
       <div class="parte__tax">[El método PVP]—[2 min]</div>
       <div class="parte__n"><span class="odo" data-odo="9"></span><b>/ 12</b></div>
-      <h1>El mensaje al CEO</h1>
+      <h2>El mensaje al CEO</h2>
       <div class="prosa">
 <p><strong>Estructura exacta. No improvises.</strong></p>
 <p>El mensaje tiene 5 partes. Cada parte tiene una función específica.</p>
@@ -736,7 +836,7 @@ fácil de entender.</code></pre>
     <article class="parte" data-p="9" id="parte-10">
       <div class="parte__tax">[Ejecutar]—[1 min]</div>
       <div class="parte__n"><span class="odo" data-odo="10"></span><b>/ 12</b></div>
-      <h1>La llamada</h1>
+      <h2>La llamada</h2>
       <div class="prosa">
 <p>Cuando te aceptan la llamada, significa tres cosas:</p>
 <ul><li>Ya vieron tu valor</li><li>Ya te consideran capaz</li><li><strong>Ellos necesitan más la llamada que tú</strong></li></ul>
@@ -758,7 +858,7 @@ fácil de entender.</code></pre>
     <article class="parte" data-p="10" id="parte-11">
       <div class="parte__tax">[Ejecutar]—[2 min]</div>
       <div class="parte__n"><span class="odo" data-odo="11"></span><b>/ 12</b></div>
-      <h1>Cuando no funciona + Herramientas</h1>
+      <h2>Cuando no funciona + Herramientas</h2>
       <div class="prosa">
 <h3>Si no te responden</h3>
 <p><strong>Seguimiento único</strong> (a los 3-5 días):</p>
@@ -785,7 +885,7 @@ fácil de entender.</code></pre>
     <article class="parte" data-p="11" id="parte-12">
       <div class="parte__tax">[Ejecutar]—[1 min]</div>
       <div class="parte__n"><span class="odo" data-odo="12"></span><b>/ 12</b></div>
-      <h1>El plan de 30 días para empezar</h1>
+      <h2>El plan de 30 días para empezar</h2>
       <div class="prosa">
 <p><strong>Semana 1 — Preparación</strong></p>
 <ul class="chk"><li><label><input type="checkbox"><span>Define tu área (1 área, la que mejor manejas ahora mismo)</span></label></li><li><label><input type="checkbox"><span>Crea tu cuenta de Notion (gratis)</span></label></li><li><label><input type="checkbox"><span>Aprende los prompts de análisis con una empresa que ya conozcas (práctica sin enviar)</span></label></li><li><label><input type="checkbox"><span>Abre Wallbit si aún no lo hiciste</span></label></li></ul>
@@ -807,7 +907,7 @@ fácil de entender.</code></pre>
 
     <article class="parte fin" data-p="12" id="parte-fin">
       <div class="parte__tax">[Terminaste]—[18 min de lectura]</div>
-      <h1>Ya tienes el método.<br><em>Ahora elige la empresa.</em></h1>
+      <h2>Ya tienes el método.<br><em>Ahora elige la empresa.</em></h2>
       <div class="prosa">
         <p>Eso era todo: las doce partes, completas y sin nada bloqueado. No hay un siguiente
         documento, no hay lista de espera y no hay llamada que agendar.</p>
@@ -922,6 +1022,11 @@ fácil de entender.</code></pre>
           if(c.checked) marcadas[k]=1; else delete marcadas[k];
           try{ localStorage.setItem(LSCHK, JSON.stringify(marcadas)); }catch(e){}
           pintarTotal(ul,cajas);
+          if(window.moiEv){
+            var hechas=cajas.filter(function(x){return x.checked;}).length;
+            moiEv('casilla', {parte:ul.closest('.parte').dataset.p, lista:iu+1, hechas:hechas, total:cajas.length});
+            if(hechas===cajas.length) moiEv('semana_completa', {parte:ul.closest('.parte').dataset.p, lista:iu+1});
+          }
         });
       });
       var pie=document.createElement('div'); pie.className='chk-tot';
@@ -951,6 +1056,8 @@ fácil de entender.</code></pre>
       b.type='button'; b.className='prompt__c'; b.textContent='Copiar';
       b.addEventListener('click', function(){
         var txt=pre.querySelector('code').textContent;
+        var cp=pre.closest('.parte');
+        if(window.moiEv) moiEv('prompt_copiado', {parte: cp?cp.dataset.p:''});
         function hecho(){ b.textContent='Copiado ✓'; b.classList.add('ok');
           setTimeout(function(){ b.textContent='Copiar'; b.classList.remove('ok'); },1800); }
         if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(hecho,function(){}); }

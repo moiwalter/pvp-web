@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moi — Todo lo que comparto, en un solo lugar</title>
+  <title>Todo lo que comparto: trabajo remoto, finanzas e IA</title>
 
   <!-- SEO & sharing -->
   <meta name="description" content="Las listas, las guías y las herramientas que menciono en los videos. Trabajo remoto, finanzas y sistemas con IA. Gratis, sin registro.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Moi — Todo lo que comparto, en un solo lugar">
+  <meta property="og:title" content="Todo lo que comparto: trabajo remoto, finanzas e IA">
   <meta property="og:description" content="Las listas, las guías y las herramientas que menciono en los videos. Gratis, sin registro.">
   <!-- Dejó de ser la raíz el 9-ago-2026: la landing ocupa "/" y esto vive acá.
        Sin este cambio el hub seguía declarando la raíz como su URL canónica y
@@ -17,7 +17,7 @@
   <meta property="og:url" content="https://moiwalter.github.io/pvp-web/hub.html">
   <meta property="og:image" content="https://moiwalter.github.io/pvp-web/hero.webp">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Moi — Todo lo que comparto, en un solo lugar">
+  <meta name="twitter:title" content="Todo lo que comparto: trabajo remoto, finanzas e IA">
   <meta name="twitter:description" content="Las listas, las guías y las herramientas que menciono en los videos. Gratis, sin registro.">
   <meta name="twitter:image" content="https://moiwalter.github.io/pvp-web/hero.webp">
 
@@ -462,12 +462,86 @@
       .anim { opacity: 1; }
     }
   </style>
+
+<!-- GA4. Archivo LOCAL a propósito: el loader de Google se inyecta desde
+     adentro. Ver la cabecera de analytics.js. -->
+<script defer src="analytics.js?v=1"></script>
+<meta property="og:site_name" content="Moi">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image:width" content="1248">
+<meta property="og:image:height" content="832">
+<meta property="og:image:alt" content="Moi — trabajo remoto en dólares desde Bolivia">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://moiwalter.github.io/pvp-web/#sitio",
+      "url": "https://moiwalter.github.io/pvp-web/",
+      "name": "Moi",
+      "inLanguage": "es",
+      "publisher": {
+        "@id": "https://moiwalter.github.io/pvp-web/#walter"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://moiwalter.github.io/pvp-web/#walter",
+      "name": "Walter Álvarez",
+      "alternateName": "Moi",
+      "url": "https://moiwalter.github.io/pvp-web/",
+      "image": "https://moiwalter.github.io/pvp-web/walter-foto.webp",
+      "description": "Ingeniero civil boliviano que trabaja para una startup de San Francisco sin salir de Bolivia. Escribe sobre trabajo remoto, startups e IA.",
+      "knowsAbout": [
+        "trabajo remoto",
+        "startups",
+        "inteligencia artificial",
+        "empleo en dólares",
+        "Bolivia"
+      ],
+      "sameAs": [
+        "https://www.tiktok.com/@moiwalter",
+        "https://www.linkedin.com/in/walteralvarezajata",
+        "https://www.instagram.com/moiwalter",
+        "https://github.com/moiwalter"
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://moiwalter.github.io/pvp-web/hub.html#pagina",
+      "url": "https://moiwalter.github.io/pvp-web/hub.html",
+      "name": "Todo lo que comparto",
+      "isPartOf": {
+        "@id": "https://moiwalter.github.io/pvp-web/#sitio"
+      },
+      "inLanguage": "es"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Moi",
+          "item": "https://moiwalter.github.io/pvp-web/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Recursos"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
   <header class="site-head">
     <a href="./" class="head-logo">MOI · <b>RECURSOS</b></a>
-    <a href="lista.html" class="head-cta">La Lista →</a>
+    <a data-ga="a_lista" data-ga-lugar="header" href="lista.html" class="head-cta">La Lista →</a>
   </header>
 
   <!-- ═══════════ PERFIL ═══════════ -->
@@ -495,7 +569,7 @@
 
     <div class="grid">
 
-      <a class="tile t-feature c-champagne anim" style="--d:180ms" href="pvp.html">
+      <a data-ga="a_metodo" data-ga-lugar="tile" class="tile t-feature c-champagne anim" style="--d:180ms" href="pvp.html">
         <div class="tile-top">
           <span class="tile-mark">PVP</span>
           <span class="chip-row"><span class="chip free">Gratis</span></span>
@@ -515,7 +589,7 @@
         </div>
       </a>
 
-      <a class="tile t-wide anim" style="--d:240ms" href="lista.html">
+      <a data-ga="a_lista" data-ga-lugar="tile" class="tile t-wide anim" style="--d:240ms" href="lista.html">
         <div class="tile-top">
           <span class="tile-mark">L</span>
           <span class="chip-row"><span class="chip free">Gratis</span></span>

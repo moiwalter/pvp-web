@@ -12,7 +12,7 @@
    · mata el drift entre el contenido y su presentación
    · el tiempo de lectura sale del conteo real de palabras, no a ojo             */
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, statSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { mdToHtml, htmlToText } from './md.mjs';
@@ -51,7 +51,7 @@ const partesHtml = partes.map(p => `
     <article class="parte" data-p="${p.id}" id="parte-${p.id + 1}">
       <div class="parte__tax">[${esc(p.seccion)}]—[${p.min} min]</div>
       <div class="parte__n"><span class="odo" data-odo="${p.id + 1}"></span><b>/ ${partes.length}</b></div>
-      <h1>${esc(p.titulo)}</h1>
+      <h2>${esc(p.titulo)}</h2>
       <div class="prosa">
 ${p.html}
       </div>
@@ -73,7 +73,7 @@ ${p.html}
 const finHtml = `
     <article class="parte fin" data-p="${partes.length}" id="parte-fin">
       <div class="parte__tax">[Terminaste]—[${totalMin} min de lectura]</div>
-      <h1>Ya tienes el método.<br><em>Ahora elige la empresa.</em></h1>
+      <h2>Ya tienes el método.<br><em>Ahora elige la empresa.</em></h2>
       <div class="prosa">
         <p>Eso era todo: las doce partes, completas y sin nada bloqueado. No hay un siguiente
         documento, no hay lista de espera y no hay llamada que agendar.</p>
@@ -181,7 +181,7 @@ a{color:inherit;text-decoration:none}
 }
 .head__l{display:flex;align-items:center;gap:calc(var(--spacing)*14)}
 .head__m{font-family:var(--font-sans);font-weight:700;font-size:var(--text-sm);letter-spacing:.02em;border:1px solid var(--fg);padding:calc(var(--spacing)*3) calc(var(--spacing)*8)}
-.head__t{font-family:var(--font-mono);font-size:var(--text-accent);color:var(--fg-muted);letter-spacing:.08em;text-transform:uppercase}
+.head__t{font-family:var(--font-mono);font-weight:400;font-size:var(--text-accent);color:var(--fg-muted);letter-spacing:.08em;text-transform:uppercase}
 .head__r{display:flex;align-items:center;gap:calc(var(--spacing)*16)}
 .tecla{
   font-family:var(--font-mono);font-size:var(--text-accent);letter-spacing:.06em;
@@ -243,8 +243,8 @@ a{color:inherit;text-decoration:none}
 .parte__tax{font-family:var(--font-mono);font-size:var(--text-accent);color:var(--brand);letter-spacing:.05em;margin-bottom:calc(var(--spacing)*20)}
 .parte__n{display:flex;align-items:baseline;gap:calc(var(--spacing)*8);margin-bottom:calc(var(--spacing)*10);font-family:var(--font-sans);font-weight:300;font-size:calc(var(--spacing)*52);line-height:1;letter-spacing:-.03em}
 .parte__n b{font-family:var(--font-mono);font-size:var(--text-accent);font-weight:400;color:var(--fg-muted);letter-spacing:.06em}
-.parte h1{font-size:var(--text-h1);line-height:1.05;letter-spacing:-.025em;font-weight:500;margin-bottom:calc(var(--spacing)*32)}
-.parte h1 em{font-style:normal;color:var(--brand)}
+.parte h2{font-size:var(--text-h1);line-height:1.05;letter-spacing:-.025em;font-weight:500;margin-bottom:calc(var(--spacing)*32)}
+.parte h2 em{font-style:normal;color:var(--brand)}
 
 /* ── PROSA: acá es donde se lee ── */
 .prosa{max-width:68ch}
@@ -379,8 +379,8 @@ a{color:inherit;text-decoration:none}
    una animación grande cansa y estorba. */
 .prosa>*{opacity:0;transform:translateY(calc(var(--spacing)*8));transition:opacity .5s var(--ease-out-quart),transform .5s var(--ease-out-quart)}
 .prosa>*.vis{opacity:1;transform:none}
-.parte h1,.parte__tax,.parte__n{transition:opacity .5s var(--ease-out-quart),transform .5s var(--ease-out-quart)}
-.parte.on h1,.parte.on .parte__tax,.parte.on .parte__n{opacity:1;transform:none}
+.parte h2,.parte__tax,.parte__n{transition:opacity .5s var(--ease-out-quart),transform .5s var(--ease-out-quart)}
+.parte.on h2,.parte.on .parte__tax,.parte.on .parte__n{opacity:1;transform:none}
 
 /* ── ENTRADA DE PARTE: dentro de una sección el cambio es rápido y liviano.
       El barrido naranja se reserva para cruzar de sección (2 veces en todo el
@@ -517,6 +517,11 @@ const JS = `
           if(c.checked) marcadas[k]=1; else delete marcadas[k];
           try{ localStorage.setItem(LSCHK, JSON.stringify(marcadas)); }catch(e){}
           pintarTotal(ul,cajas);
+          if(window.moiEv){
+            var hechas=cajas.filter(function(x){return x.checked;}).length;
+            moiEv('casilla', {parte:ul.closest('.parte').dataset.p, lista:iu+1, hechas:hechas, total:cajas.length});
+            if(hechas===cajas.length) moiEv('semana_completa', {parte:ul.closest('.parte').dataset.p, lista:iu+1});
+          }
         });
       });
       var pie=document.createElement('div'); pie.className='chk-tot';
@@ -546,6 +551,8 @@ const JS = `
       b.type='button'; b.className='prompt__c'; b.textContent='Copiar';
       b.addEventListener('click', function(){
         var txt=pre.querySelector('code').textContent;
+        var cp=pre.closest('.parte');
+        if(window.moiEv) moiEv('prompt_copiado', {parte: cp?cp.dataset.p:''});
         function hecho(){ b.textContent='Copiado ✓'; b.classList.add('ok');
           setTimeout(function(){ b.textContent='Copiar'; b.classList.remove('ok'); },1800); }
         if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(hecho,function(){}); }
@@ -699,17 +706,23 @@ const JS = `
 
 // ── HTML ────────────────────────────────────────────────────────────────────
 const URL_BASE = 'https://moiwalter.github.io/pvp-web/';
+/* dateModified sale del contenido REAL, no de cuándo se corrió el build:
+   regenerar sin cambiar un .md no debe decirle a Google que hay algo nuevo. */
+const PERSONA = {"@type": "Person", "@id": "https://moiwalter.github.io/pvp-web/#walter", "name": "Walter Álvarez", "alternateName": "Moi", "url": "https://moiwalter.github.io/pvp-web/", "image": "https://moiwalter.github.io/pvp-web/walter-foto.webp", "description": "Ingeniero civil boliviano que trabaja para una startup de San Francisco sin salir de Bolivia. Escribe sobre trabajo remoto, startups e IA.", "knowsAbout": ["trabajo remoto", "startups", "inteligencia artificial", "empleo en dólares", "Bolivia"], "sameAs": ["https://www.tiktok.com/@moiwalter", "https://www.linkedin.com/in/walteralvarezajata", "https://www.instagram.com/moiwalter", "https://github.com/moiwalter"]};
+const SITIO_NODO = {"@type": "WebSite", "@id": "https://moiwalter.github.io/pvp-web/#sitio", "url": "https://moiwalter.github.io/pvp-web/", "name": "Moi", "inLanguage": "es", "publisher": {"@id": "https://moiwalter.github.io/pvp-web/#walter"}};
+const ULTIMO_CAMBIO = new Date(Math.max(...partes.map(
+  p => statSync(join(RAIZ, p.archivo)).mtimeMs))).toISOString().slice(0, 10);
 const html = `<!DOCTYPE html>
 <html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El método PVP — ${partes.length} partes, completo y abierto</title>
+<title>El método PVP — trabajo remoto sin portafolio ni contactos</title>
 
 <meta name="description" content="El método PVP completo: ${partes.length} partes para conseguir trabajo remoto desde Bolivia sin portafolio, sin contactos y sin inglés avanzado. Gratis, sin registro.">
 <link rel="canonical" href="${URL_BASE}pvp.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="El método PVP — ${partes.length} partes, completo y abierto">
+<meta property="og:title" content="El método PVP — trabajo remoto sin portafolio ni contactos">
 <meta property="og:description" content="Investiga una startup, encuentra un problema, resuélvelo antes de que te lo pidan. El método entero, gratis y sin registro.">
 <meta property="og:url" content="${URL_BASE}pvp.html">
 <meta property="og:image" content="${URL_BASE}hero.webp">
@@ -729,6 +742,62 @@ const html = `<!DOCTYPE html>
 <!-- ⚠️ GENERADO por content/render-pvp.mjs — no editar a mano.
      Fuente: content/pvp/*.md + content/pvp-indice.json
      El markdown se hornea en build: ya no hay marked desde CDN. -->
+<!-- GA4. Archivo LOCAL a propósito, y no es un detalle: el selftest de
+     abajo ABORTA el build si encuentra un <script src> remoto acá. El loader
+     de Google se inyecta desde adentro de analytics.js. -->
+<script defer src="analytics.js?v=1"></script>
+
+<meta property="og:site_name" content="Moi">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image:width" content="1248">
+<meta property="og:image:height" content="832">
+<meta property="og:image:alt" content="El método PVP — trabajo remoto en dólares desde Bolivia">
+<meta name="twitter:title" content="El método PVP — trabajo remoto sin portafolio ni contactos">
+<meta name="twitter:description" content="Investiga una startup, encuentra un problema, resuélvelo antes de que te lo pidan. El método entero, gratis y sin registro.">
+<meta name="twitter:image" content="${URL_BASE}hero.webp">
+
+<script type="application/ld+json">
+${JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    /* Person y WebSite se repiten en cada página A PROPÓSITO: Google parsea el
+       structured data por página, así que un {'@id': '...#walter'} suelto acá
+       dejaría al autor sin nombre. El @id compartido es lo que le dice que es
+       la misma entidad en las 4. */
+    PERSONA,
+    SITIO_NODO,
+    {
+      '@type': 'Article',
+      '@id': URL_BASE + 'pvp.html#articulo',
+      headline: 'El método PVP',
+      name: 'El método PVP',
+      description: 'El método completo para conseguir trabajo remoto en dolares desde Bolivia sin portafolio, sin contactos y sin ingles avanzado.',
+      url: URL_BASE + 'pvp.html',
+      mainEntityOfPage: URL_BASE + 'pvp.html',
+      inLanguage: 'es',
+      isAccessibleForFree: true,
+      image: URL_BASE + 'hero.webp',
+      wordCount: partes.reduce((a, p) => a + p.palabras, 0),
+      timeRequired: 'PT' + totalMin + 'M',
+      articleSection: idx.secciones.map(sec => sec.label),
+      /* Fecha real del primer commit del contenido, no del build. */
+      datePublished: '2026-08-08',
+      dateModified: ULTIMO_CAMBIO,
+      author: { '@id': URL_BASE + '#walter' },
+      publisher: { '@id': URL_BASE + '#walter' },
+      isPartOf: { '@id': URL_BASE + '#sitio' }
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Moi', item: URL_BASE },
+        { '@type': 'ListItem', position: 2, name: 'El método PVP' }
+      ]
+    }
+  ]
+}, null, 2)}
+</script>
+
 <style>${CSS}
 </style>
 </head>
@@ -739,7 +808,7 @@ const html = `<!DOCTYPE html>
 <header class="head">
   <div class="head__l">
     <a href="./" class="head__m">Moi</a>
-    <span class="head__t">El método PVP</span>
+    <h1 class="head__t">El método PVP</h1>
   </div>
   <div class="head__r">
     <button class="tecla head__idx" id="bidx" type="button" aria-label="Índice"><b>☰</b><span>Índice</span></button>
