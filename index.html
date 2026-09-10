@@ -532,13 +532,11 @@ h3{font-size:var(--text-h3)}
   background:var(--bg-muted);
   padding:calc(var(--spacing)*22) calc(var(--spacing)*18);
 }
-/* la etiqueta va arriba: en la misma línea se comía el ancho que necesitan los 4 */
-.muro__fila{display:flex;align-items:center;justify-content:space-between;gap:calc(var(--spacing)*20);width:100%}
+/* La etiqueta va arriba para dejar todo el ancho disponible a las marcas. */
+.muro__fila{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:calc(var(--spacing)*20);width:100%}
 .muro__fila a{display:flex;align-items:center;text-decoration:none}
-/* La fila envuelve en TODO el rango donde la columna es angosta, no sólo en
-   móvil: entre 700 y 1099px la rejilla de "quién soy" es de dos columnas, así
-   que el muro vive en ~350px y los cuatro logos (el del Tribunal solo mide 302)
-   se salían de la página. Arriba de 1100 la rejilla cambia y sí entran. */
+/* Las cinco marcas pueden envolver en cualquier ancho. En columnas angostas
+   se alinean al inicio para mantener un espacio regular entre logos. */
 @media(max-width:1099px){
   .muro__fila{flex-wrap:wrap;justify-content:flex-start;gap:calc(var(--spacing)*20) calc(var(--spacing)*26)}
 }
@@ -553,12 +551,12 @@ h3{font-size:var(--text-h3)}
   font-size:calc(var(--spacing)*21);text-transform:uppercase;
   letter-spacing:-.005em;line-height:1;
   color:var(--fg);opacity:.55;transition:opacity .4s var(--ease-out-quart);
-  white-space:nowrap;   /* SIEMPRE en una línea */
+  white-space:nowrap;   /* Cada línea conserva sus palabras completas. */
 }
-/* en móvil se achica para caber en una línea, no se parte */
+/* Tamaño base de los nombres de marca en móvil. */
 @media(max-width:699px){.muro b{font-size:calc(var(--spacing)*19)}}
 .muro:hover b{opacity:.9}
-/* En reposo los cuatro van en tinta plana para que el muro se lea como una sola
+/* En reposo las marcas van en tinta plana para que el muro se lea como una sola
    fila. Al pasar el cursor SOBRE UNO, ese recupera su color real — el hover es
    individual, no del muro entero: premia mirar de cerca. */
 .muro img{
@@ -568,6 +566,8 @@ h3{font-size:var(--text-h3)}
 }
 .muro:hover img{opacity:.9}
 .muro a:hover img{filter:none;opacity:1}
+/* El asset de Wallbit es blanco: mantener tinta oscura sobre el fondo claro. */
+.muro a:hover img.l-wallbit{filter:brightness(0)}
 /* El Tribunal es un wordmark tipográfico, no un archivo: su "color real" es el
    verde de la bandera de Bolivia (#007934, el oficial). */
 .muro b.l-tribunal{transition:color .4s var(--ease-out-quart)}
@@ -580,7 +580,8 @@ h3{font-size:var(--text-h3)}
   .muro .l-stacksync{height:calc(var(--spacing)*42)}    /* letra 17px */
   .muro .l-platzi{height:calc(var(--spacing)*20)}       /* letra 17px */
   .muro .l-startupeable{height:calc(var(--spacing)*17)} /* letra 17px */
-  .muro b.l-tribunal{font-size:calc(var(--spacing)*22)}  /* cap ≈ 15px: cede un punto para que los 4 entren en una línea */
+  .muro .l-wallbit{height:calc(var(--spacing)*22)}
+  .muro b.l-tribunal{font-size:calc(var(--spacing)*18);line-height:1.12;text-align:center}
   /* wordmark: para las marcas sin archivo usable. Misma tinta y mismo peso óptico
      que los logos, compuesto en la tipografía de la página. No finge ser un logo. */
   .muro b{font-size:calc(var(--spacing)*21)}
@@ -957,7 +958,8 @@ a.pilar--tlb:hover .pilar__t{color:var(--tlb-oro)}
             <a href="https://www.stacksync.com" target="_blank" rel="noopener"><img class="l-stacksync" src="logos/stacksync.webp" alt="Stacksync" loading="lazy"></a>
             <a href="https://platzi.com" target="_blank" rel="noopener"><img class="l-platzi" src="logos/platzi.webp" alt="Platzi" loading="lazy"></a>
             <a href="https://startupeable.com" target="_blank" rel="noopener"><img class="l-startupeable" src="logos/startupeable.webp" alt="Startupeable" loading="lazy"></a>
-            <a href="https://www.tribunalagroambiental.bo/" target="_blank" rel="noopener"><b class="l-tribunal">Tribunal Agroambiental</b></a>
+            <a href="https://www.tribunalagroambiental.bo/" target="_blank" rel="noopener"><b class="l-tribunal">Tribunal<br> Agroambiental</b></a>
+            <a href="https://www.wallbit.io/es" target="_blank" rel="noopener"><img class="l-wallbit" src="logos/wallbit.avif" alt="Wallbit" loading="lazy"></a>
           </div>
         </div>
 
@@ -1232,7 +1234,7 @@ a.pilar--tlb:hover .pilar__t{color:var(--tlb-oro)}
         <a class="pilar pilar--tlb" href="https://tulibrobolivia.com" target="_blank" rel="noopener"><span class="pilar__n">[En vivo]</span><span class="pilar__t">Tu Libro Bolivia</span><span class="pilar__d">Tu propio libro impreso desde un ejemplar, sin editorial. Y 9.000 títulos de catálogo.</span></a>
         <div class="pilar"><span class="pilar__n">[Privado]</span><span class="pilar__t">El Pilot</span><span class="pilar__d">El sistema multiagente que corre mi vida: doce sistemas bajo un mismo contexto.</span></div>
         <div class="pilar"><span class="pilar__n">[Privado]</span><span class="pilar__t">Finanzas</span><span class="pilar__d">Lee mi cuenta en vivo y me dice cuánto puedo gastar hoy y qué hacer el 24.</span></div>
-        <div class="pilar"><span class="pilar__n">[Privado]</span><span class="pilar__t">Entrenamiento</span><span class="pilar__d">Decide la próxima sesión por déficit de volumen y recuperación, con cada regla citada.</span></div>
+        <a class="pilar" href="https://github.com/moiwalter/science-gym-coach" target="_blank" rel="noopener"><span class="pilar__n">[Código abierto]</span><span class="pilar__t">Entrenamiento</span><span class="pilar__d">Decide la próxima sesión por déficit de volumen y recuperación, con cada regla citada.</span></a>
       </div>
     </div>
   </div>
@@ -1620,16 +1622,19 @@ document.addEventListener('click',function(e){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var RUIDO="!<>-_\\/[]{}=+*^?#%&$@ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   function rodar(el,dur){
-    var fin=el.dataset.txt||el.textContent; el.dataset.txt=fin;
     if(el.dataset.rodando==='1')return; el.dataset.rodando='1';
+    /* Conservar el nodo que traduce el selector de idioma. */
+    var nodo=el.firstChild, fin=nodo.textContent, ultimo=fin;
     var t0=null;
     (function paso(t){
+      /* Si cambió el idioma durante el efecto, conservar la traducción. */
+      if(nodo.textContent!==ultimo){el.dataset.rodando='0';return;}
       if(!t0)t0=t;
       var p=Math.min(1,(t-t0)/dur), n=Math.floor(p*fin.length), s=fin.slice(0,n);
       for(var i=n;i<fin.length;i++) s += fin[i]===' ' ? ' ' : RUIDO[(Math.random()*RUIDO.length)|0];
-      el.textContent=s;
+      nodo.textContent=s; ultimo=s;
       if(p<1) requestAnimationFrame(paso);
-      else { el.textContent=fin; el.dataset.rodando='0'; }
+      else { nodo.textContent=fin; el.dataset.rodando='0'; }
     })(performance.now());
   }
   function armar(disparador,objetivo,dur){
@@ -1815,6 +1820,8 @@ document.addEventListener('click',function(e){
      Nada de auto-detectar navigator.language — la audiencia es boliviana y
      muchísima gente usa el teléfono en inglés: auto-traducir les serviría la
      página en un idioma que no pidieron. El inglés es la excepción explícita. */
+  /* Capturar los textos originales antes de cualquier animación de hover. */
+  recolectar();
   var guardado=null;
   try{ guardado=localStorage.getItem('moi-lang'); }catch(e){}
   if(guardado==='en') poner('en');
