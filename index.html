@@ -345,7 +345,9 @@ h3{font-size:var(--text-h3)}
 }
 .qfoto{position:relative;overflow:hidden;min-height:calc(var(--spacing)*300);background:var(--bg-muted)}
 @media(min-width:1024px){.qfoto{min-height:calc(var(--spacing)*450)}}
-.qfoto img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+/* En móvil, el marco crece con el ancho; el recorte conserva la cabeza. */
+@media(max-width:699px){.qfoto{min-height:0;aspect-ratio:4/5}}
+.qfoto img{width:100%;height:100%;object-fit:cover;object-position:60% top;display:block;position:absolute;inset:0}
 .qfoto::after{content:'';position:absolute;inset:0;background:var(--brand);opacity:.06;pointer-events:none}
 .qdato{
   display:flex;flex-direction:column;justify-content:space-between;
