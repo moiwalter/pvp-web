@@ -149,13 +149,6 @@ strong{font-weight:500}
 .need p{margin:0; max-width:58ch; font-size:15.5px; color:var(--mut)}
 .need p b{color:var(--fg); font-weight:500}
 
-.log{margin-top:2.5rem; border-top:1px solid var(--line)}
-.log__i{display:grid; grid-template-columns:5.5rem minmax(0,1fr); gap:.35rem 2rem;
-  padding-block:1.3rem; border-bottom:1px solid var(--line-soft)}
-.log__d{font-family:var(--mono); font-size:12px; color:var(--brand);
-  font-variant-numeric:tabular-nums; padding-top:.25rem}
-.log__i p{max-width:58ch}
-
 .lim{margin-top:2.5rem; display:grid; gap:1.6rem; max-width:var(--col)}
 .lim p{max-width:none}
 .lim b{color:var(--brand); font-weight:500}
@@ -404,45 +397,16 @@ footer{padding-block:2rem 3rem; border-top:1px solid var(--line); display:flex; 
       anotada. Prefiero eso antes que redibujar una pantalla, porque una interfaz inventada se nota
       y te deja mal parado.</p></div>
 
-    <div class="need"><span class="need__l">Editar a mano</span>
-      <p><b>CapCut</b> sigue en la mesa. Si el que monta eres tú o tu editor, en vez de un video
-      cerrado mando un clip transparente por escena y una tabla con el segundo exacto en que entra
-      cada uno.</p></div>
+    <div class="need"><span class="need__l">Unir todo a mano</span>
+      <p><b>CapCut.</b> En ciertos videos conviene juntar todo ahí, sobre todo para controlar las
+      transiciones: verlas una por una, correrlas unos cuadros y sentir el ritmo del corte completo.
+      Cuando el video va por ese camino, cada escena sale como clip suelto con el segundo exacto en
+      que entra, y el montaje final se arma en CapCut.</p></div>
 
     <div class="need"><span class="need__l">Quién escribe las escenas</span>
-      <p><b>Codex</b> y <b>Claude Code</b>, que son agentes de programación: reciben la instrucción,
-      escriben la escena y corrigen lo que la revisión automática marca. Hoy prefiero Codex, porque
-      lo que devuelve se acerca más a lo que le pido. Tus dos últimos videos los armó él.</p></div>
-  </div>
-</section>
-
-<section>
-  <span class="eyebrow">// La bitácora</span>
-  <h2>Cómo llegué hasta acá.</h2>
-  <div class="log">
-    <div class="log__i"><span class="log__d">19 abr</span>
-      <p>Primer plano generado dentro de un video tuyo: Valerie saliendo de la máquina. El resto lo
-      edité a mano, clip por clip, como siempre.</p></div>
-    <div class="log__i"><span class="log__d">26 may</span>
-      <p>Armé la misma escena de siete segundos en dos tecnologías distintas el mismo día, para
-      elegir con algo y no con una opinión. Me quedé con la que me dejaba ver el cambio al instante
-      en el navegador.</p></div>
-    <div class="log__i"><span class="log__d">28 jul</span>
-      <p>Descubrí por qué los brillos de mis gráficas se veían mal dentro de CapCut. Era un detalle
-      de cómo se exporta la transparencia. Desde que esa corrección vive dentro del proceso, no
-      volvió a pasar.</p></div>
-    <div class="log__i"><span class="log__d">13 ago</span>
-      <p>Metí el video grabado adentro del código. Hasta ese día la máquina hacía gráficas sueltas y
-      yo las pegaba encima; desde ese día los cortes y los acercamientos de cámara también se
-      escriben. Ese fue el salto, y no vino de una herramienta nueva.</p></div>
-    <div class="log__i"><span class="log__d">18 ago</span>
-      <p>El video con más IA que hice fue el de Maria: personaje generado, canción generada,
-      lip-sync, el chat entero animado. Te gustó y no despegó. Probablemente el problema estaba en
-      la idea, no en la producción.</p></div>
-    <div class="log__i"><span class="log__d">13 sep</span>
-      <p>Los 90 segundos del 0910 los armó un agente completos: tres capas, tú recortado delante de
-      los recursos, subtítulos, música y exportación. Yo entré sólo a dirigir escena por escena.
-      Esperaba editar la mayor parte a mano y no abrí el editor.</p></div>
+      <p><b>Codex</b> y <b>Claude Code</b>. Los mejores resultados vinieron con dos modelos: <b>Fable</b>
+      y <b>GPT-6 Astra</b>. Hoy me inclino por Codex, porque lo que devuelve se acerca más a lo que
+      pido. Tus dos últimos videos los armó él.</p></div>
   </div>
 </section>
 
@@ -452,19 +416,22 @@ footer{padding-block:2rem 3rem; border-top:1px solid var(--line); display:flex; 
   <div class="lim">
     <p><b>No ve.</b> La revisión automática mide estructura y tiempos, no calidad. Nunca me avisó de
     un recorte sucio ni de una escena que no se entiende. Eso lo encontré siempre yo, mirando.</p>
-    <p><b>No tiene la idea.</b> Si le pides una imagen para una frase, pone la palabra escrita en
-    pantalla. Llegar a la imagen de lo que la frase significa sigue siendo trabajo de dirección.</p>
-    <p><b>No sé cuánto tiempo ahorra,</b> porque nunca lo medí. Así que no te voy a dar un número.
-    Lo que sí sé es qué puedo hacer hoy que hace seis meses no podía, y está todo arriba.</p>
+    <p><b>No tiene criterio.</b> Ni editorial ni de edición. Sabe construir lo que le pido, no decidir
+    qué vale la pena mostrar, ni cuándo entra, ni cuándo se corta. Si le pides una imagen para una
+    frase, te escribe la frase en pantalla. Por eso sigue pidiendo mucho input mío en las dos puntas:
+    el corte al principio y la dirección de cada escena.</p>
   </div>
 </section>
 
 <section>
   <span class="eyebrow">// Cierre</span>
-  <h2>Las herramientas van a estar viejas en unos meses. El flujo probablemente no.</h2>
-  <p class="sub">Esto lo armé entre abril y septiembre, sobre videos míos y de clientes. Si quieres,
-  el próximo lo hacemos juntos mirando la pantalla mientras se construye, que es la única forma de
-  que se entienda de verdad.</p>
+  <h2>Dejé de ver el video como una línea de tiempo. Hoy es una colección de escenas.</h2>
+  <p class="sub">Cada escena se diseña como yo quiera y la máquina la construye. Eso es lo que
+  cambió de verdad: no tengo que aceptar lo que me da un editor de video, puedo pedir exactamente
+  la escena que tengo en la cabeza.</p>
+  <p class="sub">Y casi ningún prompt de estos videos lo escribí: los hablé. Hablando explico mucho
+  mejor lo que busco y con más libertad, así que dirigir terminó siendo eso, hablar. Si quieres, el
+  próximo lo hacemos juntos mirando la pantalla mientras se construye.</p>
   <a class="gbtn" href="https://moiwalter.github.io/pvp-web/"><i>+</i>Walter Álvarez<i>+</i></a>
 </section>
 
